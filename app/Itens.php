@@ -1,0 +1,23 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Itens extends Model
+{
+	protected $table = 'pedidos_itens';
+	protected $primaryKey = 'oit_id';
+	
+	protected $fillable = [
+			'oit_id',
+			'oit_pedido',
+			'oit_titulo',
+			'oit_tipo',
+			'oit_tipo_id',
+			'oit_quantidade',
+			'oit_valor'
+	];
+}
+
+
