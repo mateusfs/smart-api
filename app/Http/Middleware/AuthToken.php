@@ -16,11 +16,11 @@ class AuthToken
     public function handle($request, Closure $next)
     {
         $auth = $request->header('Authorization');
-        
+       
         if($auth){
         	return $next($request);
         }
         
-        return response()->json(['error' => 'Acesso não permitido entre em contato com um Aminitrador da Smart'], 403);
+        return response()->json(["error" => "Tente nvomante! Estamos com problemas entre em contato com a SmartClick."], 403);
     }
 }
