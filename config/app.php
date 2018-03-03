@@ -159,6 +159,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
+        
+        /*
+         * Documentencion Application Service Providers...
+         */
+        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
 
     ],
 

@@ -15,8 +15,9 @@ class AuthToken
      */
     public function handle($request, Closure $next)
     {
+      
         $auth = $request->header('Authorization');
-       
+        
         if($auth){
         	return $next($request);
         }
