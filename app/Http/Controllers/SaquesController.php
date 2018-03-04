@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Saques;
+use App\Iugu;
+use App\Gerencianet;
+
+
 
 /**
  * @resource Saques
@@ -50,4 +54,45 @@ class SaquesController extends Controller
 	{
 	    return Saques::destroy($prc_id);
 	}
+	
+	
+	/**
+	 * Pedido de Saque
+	 *
+	 * Pedido de Saque | Exemplo: api/v1/saques/sacar/1
+	 *
+	 * @return void
+	 */
+	public function sacar($saq_id)
+	{
+	    
+	    $saque = Saques::where('saq_id', $saq_id)->firstOrFail();
+	    
+	    if($saque)
+	    {
+	        if($saque->saq_intermediario_code ==  Iugu::$clientId){
+	            Iugu::saque($saque->saq_id, $saque->saq_valor);
+	        }
+
+	        if($saque->saq_intermediario_code ==  Gerencianet::$clientId){
+	            GerenciaNet::criarTransacao($saque->saq_id, 1, $saque->saq_valor);
+	        }
+	        
+	    }
+	    
+	    /*
+	     *  $client
+	     *
+	     *  RETORNO API EXTERNA
+	     *
+	     *  IMPLEMENTAR LOGICA
+	     *
+	     */
+	    
+	    return $client;
+	}
+	
+
+	
+	
 }

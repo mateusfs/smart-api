@@ -19,7 +19,7 @@ class CarteirasController extends Controller
      * 
      * @param number $wal_id
      * 
-     * @return Carteira
+     * @return Carteiras
      */
 	public function index($wal_id)
 	{

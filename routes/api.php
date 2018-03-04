@@ -37,8 +37,10 @@ Route::prefix('v1')->group(function () {
 	 	Route::get('recebimentos/{prc_id}', 'RecebimentosController@index');
 	 	
 	 	Route::delete('saques/delete/{saq_id}', 'SaquesController@delete');
+	 	Route::get('saques/sacar/{saq_id}', 'SaquesController@sacar');
 	 	Route::post('saques/criar', 'SaquesController@criar');
 	 	Route::get('saques/{saq_id}', 'SaquesController@index');
+	 	
  	});
  });
 
