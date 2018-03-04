@@ -8,14 +8,13 @@ use App\Pedidos;
 /**
  * @resource Pedidos
  *
- * Buscar Pedido
  */
 class PedidosController extends Controller
 {
     /**
      * Buscar Pedido
      *
-     * Buscar Pedido | Exemplo: api/v1/pedidos/1
+     * Buscar Pedido | Exemplo: smart/api/v1/pedidos/1
      *
      * @param number $ord_id
      */
@@ -40,7 +39,7 @@ class PedidosController extends Controller
 	/**
 	 * Remover Iten
 	 *
-	 * Remover Iten | Exemplo: api/v1/itens/delete/1
+	 * Remover Iten | Exemplo: smart/api/v1/itens/delete/1
 	 *
 	 * @param number $ord_id
 	 * 

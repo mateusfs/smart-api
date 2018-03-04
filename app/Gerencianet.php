@@ -7,30 +7,16 @@ use Carbon\Carbon;
 
 class Gerencianet extends Model
 {
-
-    public $clientId = "";
-
-    public $clientSecret = "";
-
     /**
      * Criar Transação GenreciaNet
      *
      * Criar Transação pelo GerenciaNet
      */
-    public function criarTransacao($nome, $quantidade, $valor)
+    public static function criarTransacao(Dividas $divida)
     {
-        
-        $body  =  [
-            'items' => [
-                'name' => $nome, // nome do item, produto ou serviço
-                'amount' => $quantidade, // quantidade
-                'value' => $valor // valor (2000 = R$ 20,00)
-            ]
-        ];
-        
         try {
-            $api = new Gerencianet($this->getOptions());
-            $charge = $api->createCharge([], $body);
+            $api = new Gerencianet(self::getOptions());
+            $charge = $api->createCharge([], self::getBody($divida));
             
             return $charge;
         } catch (GerencianetException $e) {
@@ -45,12 +31,12 @@ class Gerencianet extends Model
      *
      * Criar um boleto em GerenciaNet
      */
-    public function emetirBoleto(Dividas $divida)
+    public static function emetirBoleto(Dividas $divida)
     {
         try {
             
-            $api = new Gerencianet($this->getOptions());
-            $charge = $api->createCharge([], $this->getBody($divida));
+            $api = new Gerencianet(self::getOptions());
+            $charge = $api->createCharge([], self::getBody($divida));
             
             if ($charge["code"] == 200) {
                 
@@ -77,7 +63,7 @@ class Gerencianet extends Model
                     ]
                 ];
                 
-                $api = new Gerencianet($this->getOptions());
+                $api = new Gerencianet(self::getOptions());
                 $pay_charge = $api->payCharge($params, $body);
                 
                 return $pay_charge;
@@ -94,12 +80,12 @@ class Gerencianet extends Model
      *
      * Pagar Cartão pelo GerenciaNet
      */
-    public function pagarCartao(Dividas $divida)
+    public static function pagarCartao(Dividas $divida)
     {
         try {
             
-            $api = new Gerencianet($this->getOptions());
-            $charge = $api->createCharge([], $this->getBody($divida));
+            $api = new Gerencianet(self::getOptions());
+            $charge = $api->createCharge([], self::getBody($divida));
             
             if ($charge["code"] == 200) {
                 
@@ -137,7 +123,7 @@ class Gerencianet extends Model
                     ]
                 ];
                 
-                $api = new Gerencianet($this->getOptions());
+                $api = new Gerencianet(self::getOptions());
                 $charge = $api->payCharge($params, $body);
                 
                 return $charge;
@@ -154,11 +140,11 @@ class Gerencianet extends Model
     /**
      * Get Options
      */
-    public function getOptions()
+    private static function getOptions()
     {
         return [
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
+            'client_id' => Parametros::getClienteIdGerenciaNet(),
+            'client_secret' => Parametros::getSecretGerenciaNet(),
             'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = produção)
         ];
     }
@@ -166,7 +152,7 @@ class Gerencianet extends Model
     /**
      * Get Body
      */
-    public function getBody(Dividas $divida)
+    private static function getBody(Dividas $divida)
     {
         return [
             'items' => [

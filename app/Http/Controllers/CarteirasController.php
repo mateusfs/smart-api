@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 /**
  * @resource Carteiras
  *
- * Controller Carteira
  */
 
 class CarteirasController extends Controller
@@ -15,7 +14,7 @@ class CarteirasController extends Controller
     /**
      * Buscar Carteira
      *
-     * Buscar Carteira | Exemplo: api/v1/carteiras/1
+     * Buscar Carteira | Exemplo: smart/api/v1/carteiras/1
      * 
      * @param number $wal_id
      * 
@@ -30,7 +29,7 @@ class CarteirasController extends Controller
 	/**
 	 * Criar Carteira
 	 *
-	 * Criar Carteira | Exemplo: api/v1/carteiras/criar
+	 * Criar Carteira | Exemplo: smart/api/v1/carteiras/criar
 	 * 
 	 * @return void
 	 */
@@ -43,7 +42,7 @@ class CarteirasController extends Controller
 	/**
 	 * Remover Carteira
 	 *
-	 * Remover Carteira | Exemplo: api/v1/carteiras/delete/1
+	 * Remover Carteira | Exemplo: smart/api/v1/carteiras/delete/1
 	 * 
 	 * @param number $wal_id
 	 * 

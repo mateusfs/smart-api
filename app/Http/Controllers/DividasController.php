@@ -8,14 +8,13 @@ use App\Dividas;
 /**
  * @resource Dividas
  *
- * Buscar Divida
  */
 class DividasController extends Controller
 {
     /**
      * Buscar Divida
      *
-     * Buscar Divida | Exemplo: api/v1/dividas/1
+     * Buscar Divida | Exemplo: smart/api/v1/dividas/1
      * 
      * @param number $pgm_id
      */
@@ -27,7 +26,7 @@ class DividasController extends Controller
 	/**
 	 * Criar Divida
 	 *
-	 * Criar Divida | Exemplo: api/v1/dividas/criar
+	 * Criar Divida | Exemplo: smart/api/v1/dividas/criar
 	 *
 	 * @return void
 	 */
@@ -40,7 +39,7 @@ class DividasController extends Controller
 	/**
 	 * Remover Divida
 	 *
-	 * Remover Divida | Exemplo: api/v1/dividas/delete/1
+	 * Remover Divida | Exemplo: smart/api/v1/dividas/delete/1
 	 *
 	 * @param number $pgm_id
 	 * 

@@ -41,6 +41,9 @@ Route::prefix('v1')->group(function () {
 	 	Route::post('saques/criar', 'SaquesController@criar');
 	 	Route::get('saques/{saq_id}', 'SaquesController@index');
 	 	
+	 	
+	 	Route::get('pagamento/boleto/{pgm_id}', 'PagamentoController@gerarBoleto');
+	 	
  	});
  });
 

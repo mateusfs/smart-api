@@ -18,7 +18,7 @@ class AuthToken
       
         $auth = $request->header('Authorization');
         
-        if($auth){
+        if($auth == sha1('smart')){
         	return $next($request);
         }
         
