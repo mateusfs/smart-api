@@ -5,7 +5,6 @@ use App\Dividas;
 use App\Parametros;
 use App\Iugu;
 use App\Gerencianet;
-use App\Carteiras;
 
 /**
  * @resource Pagamento
@@ -23,6 +22,11 @@ class PagamentoController extends Controller
         
         $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();
         
+        /*
+         *  IMPLEMENTAR LOGICA DE COBRANCA DE BOLETO
+         *
+         */
+        
         if ($divida) {
             if (Parametros::getIsIugu()) {
                 Iugu::cobrancaDireta($divida);
@@ -32,7 +36,5 @@ class PagamentoController extends Controller
                 Gerencianet::emetirBoleto($divida);
             }
         }
-        
-        dd(oi);
     }
 }

@@ -63,7 +63,9 @@ class Dividas extends Model
 			'pgm_disponivel_liberado',
 			'pgm_disponivel_intermediario',
 			'pgm_disponivel_empresa',
-			'pgm_disponivel_cliente'
+			'pgm_disponivel_cliente',
+	        'pgm_id_cliente_iugu',
+	        'pgm_id_cliente_gerencia_net'
 	];
 }
 

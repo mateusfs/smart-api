@@ -7,6 +7,8 @@ class Parametros extends Model
 {
 
     const CLIENTE_ID_IUGU = "";
+    
+    const TOKEN_IUGU = "";
 
     const IS_IUGU = true;
 
@@ -19,6 +21,11 @@ class Parametros extends Model
     public static function getIsIugu()
     {
         return self::IS_IUGU;
+    }
+    
+    public static function getTokenIugu()
+    {
+        return base64_encode(self::TOKEN_IUGU);
     }
 
     public static function getClienteIdIugu()

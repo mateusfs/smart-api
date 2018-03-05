@@ -12,17 +12,21 @@ class Iugu extends Model
      *
      * Faz um pedido de Saque de um valor
      */
-    public static function saque($id, $valor)
+    public static function saque($idClienteIugu, $valor)
     {
-        $client = new Client();
-        $request = $client->post('https://api.iugu.com/v1/accounts/' . self::clientId . '/request_withdraw', [
-            'body' => [
-                'id' => $id,
-                'amount' => $valor
-            ]
-        ]);
-        
-        return $client;
+        try {
+            $client = new Client();
+            $request = $client->post('https://api.iugu.com/v1/accounts/' . $idClienteIugu . '/request_withdraw', [
+                'form_params' => [
+                    'id' => $idClienteIugu,
+                    'amount' => $valor
+                ]
+            ]);
+            
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -30,21 +34,24 @@ class Iugu extends Model
      *
      * Cria uma Forma de Pagamento de Cliente.
      */
-    public static function criarFormaPagamento($idCliente, $description)
+    public static function criarFormaPagamento($idClienteIugu)
     {
-        $client = new Client(self::getHeaders());
-        $request = $client->post('https://api.iugu.com/v1/accounts/' . $idCliente . '/request_withdraw', [
-            'body' => [
-                'description' => $description,
-                'token' => self::getToken(),
-                'set_as_default' => false
-            ]
-        ]);
-        
-        return $client;
+        try {
+            $client = new Client(self::getHeaders());
+            $request = $client->post('https://api.iugu.com/v1/customers/' . $idClienteIugu . '/payment_methods', [
+                'form_params' => [
+                    'description' => 'SmartClic',
+                    'token' => self::getToken(),
+                    'set_as_default' => false
+                ]
+            ]);
+            
+            return json_decode($request->getBody()->getContents());
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
-    
-    
+
     /**
      * Cobrança Direta IUGU
      *
@@ -52,51 +59,103 @@ class Iugu extends Model
      */
     public static function cobrancaDireta(Dividas $divida)
     {
-        
-        dd(self::getToken());
-        
-        $clienteIugu = self::buscarCliente(Parametros::getClienteIdIugu());
-        
-        dd($clienteIugu);
-        
-        $formPagmaneto = self::criarFormaPagamento($idCliente, $description);
-        
-        
-        $client = new Client(self::getHeaders());
-        $request = $client->post('https://api.iugu.com/v1/charge', [
-            'body' => [
-                'method' => 'bank_slip',
-                'customer_payment_method_id' => $formPagmaneto['id'],
-                'restrict_payment_method' => true,
-                'customer_id' => '',
-                'invoice_id' => '',
-                'email' => '',
-                'months' => '',
-                'discount_cents' => '',
-                'bank_slip_extra_days' => '',
-                'keep_dunning' => '',
-                'items' => [
-                    'description' => '',
-                    'quantity' => 0,
-                    'price_cents' => 0,
-                ],
-                'payer' => getPayer($clienteIugu)
-            ]
-        ]);
-        
-        return $client;
+        try {
+            
+            $clienteIugu = null;
+            
+            if ($divida->pgm_id_cliente_iugu) {
+                $clienteIugu = self::buscarCliente($divida->pgm_id_cliente_iugu);
+            }
+            
+            if (! $clienteIugu) {
+                $clienteIugu = self::criarCliente($divida);
+            }
+            
+            if ($clienteIugu->getStatusCode() == 200) {
+                
+                $clienteIugu = json_decode($clienteIugu->getBody()->getContents());
+                
+                $formPagmaneto = self::criarFormaPagamento($clienteIugu->id);
+                
+                dd($formPagmaneto);
+                
+                $client = new Client(self::getHeaders());
+                $request = $client->post('https://api.iugu.com/v1/charge', [
+                    'form_params' => [
+                        'method' => 'bank_slip',
+                        'customer_payment_method_id' => $formPagmaneto->id,
+                        'restrict_payment_method' => true,
+                        'customer_id' => $clienteIugu->id,
+                        'invoice_id' => $clienteIugu,
+                        'email' => $clienteIugu->email,
+                        'months' => $clienteIugu,
+                        'discount_cents' => $clienteIugu,
+                        'bank_slip_extra_days' => $clienteIugu,
+                        'keep_dunning' => $clienteIugu,
+                        'items' => [
+                            'description' => $clienteIugu,
+                            'quantity' => 0,
+                            'price_cents' => 0
+                        ],
+                        'payer' => self::getPayer($clienteIugu)
+                    ]
+                ]);
+                
+                return $request;
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
-        
+
     /**
      * Buscar Cliente IUGU
      *
      * Retorna os dados de um cliente
      */
-    public static function buscarCliente($idCliente)
+    public static function buscarCliente($idClienteIugu)
     {
-        $client = new Client(self::getHeaders());
-        $request = $client->get('https://api.iugu.com/v1/customers/'.$idCliente);
-        return $client;
+        try {
+            $client = new Client(self::getHeaders());
+            $request = $client->get('https://api.iugu.com/v1/customers/' . $idClienteIugu);
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Criar Cliente IUGU
+     *
+     * Cria um objeto cliente
+     */
+    public static function criarCliente(Dividas $divida)
+    {
+        try {
+            
+            $client = new Client(self::getHeaders());
+            
+            $request = $client->post('https://api.iugu.com/v1/customers', [
+                'form_params' => [
+                    'email' => $divida->pgm_pagador_email,
+                    'name' => $divida->pgm_pagador_nome,
+                    'phone' => $divida->pgm_pagador_celular,
+                    'phone_prefix' => '47',
+                    'cpf_cnpj' => ($divida->pgm_pagador_cpf) ? $divida->pgm_pagador_cpf : $divida->pgm_pagador_cnpj,
+                    'cc_emails' => $divida->pgm_pagador_email,
+                    'zip_code' => $divida->pgm_endereco_cep,
+                    'number' => $divida->pgm_endereco_numero,
+                    'street' => $divida->pgm_endereco_logradouro,
+                    'city' => $divida->pgm_endereco_cidade,
+                    'state' => 'SC',
+                    'district' => $divida->pgm_endereco_bairro,
+                    'complement' => $divida->pgm_endereco_complemento
+                ]
+            ]);
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -106,19 +165,23 @@ class Iugu extends Model
      */
     public static function transferirValor($receiver_id, $amount_cents, $name, $value)
     {
-        $client = new Client(self::getHeaders());
-        $request = $client->post('https://api.iugu.com/v1/transfers', [
-            'body' => [
-                'receiver_id' => $receiver_id,
-                'amount_cents' => $amount_cents,
-                'custom_variables' => [
-                    'name' => $name,
-                    'value' => $value
+        try {
+            $client = new Client(self::getHeaders());
+            $request = $client->post('https://api.iugu.com/v1/transfers', [
+                'form_params' => [
+                    'receiver_id' => $receiver_id,
+                    'amount_cents' => $amount_cents,
+                    'custom_variables' => [
+                        'name' => $name,
+                        'value' => $value
+                    ]
                 ]
-            ]
-        ]);
-        
-        return $client;
+            ]);
+            
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -128,9 +191,13 @@ class Iugu extends Model
      */
     public static function buscaTransferencia($id)
     {
-        $client = new Client(self::getHeaders());
-        $request = $client->get('https://api.iugu.com/v1/transfers/' . $id);
-        return $client;
+        try {
+            $client = new Client(self::getHeaders());
+            $request = $client->get('https://api.iugu.com/v1/transfers/' . $id);
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -140,19 +207,21 @@ class Iugu extends Model
      */
     public static function disputarContestacao($id, $files)
     {
-        $body = array();
-        if (is_array($files)) {
-            foreach ($files as $key => $file) {
-                $body['file' . $key] = $file;
+        try {
+            $body = array();
+            if (is_array($files)) {
+                foreach ($files as $key => $file) {
+                    $body['file' . $key] = $file;
+                }
             }
+            
+            $client = new Client(self::getHeaders());
+            $request = $client->put('https://api.iugu.com/v1/chargebacks/' . $id . '/contest', $body);
+            
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
-        
-        $client = new Client(self::getHeaders());
-        $request = $client->put('https://api.iugu.com/v1/chargebacks/' . $id . '/contest', [
-            'body' => $body
-        ]);
-        
-        return $client;
     }
 
     /**
@@ -162,9 +231,13 @@ class Iugu extends Model
      */
     public static function buscarContestacao($id)
     {
-        $client = new Client(self::getHeaders());
-        $request = $client->get('https://api.iugu.com/v1/chargebacks/' . $id);
-        return $client;
+        try {
+            $client = new Client(self::getHeaders());
+            $request = $client->get('https://api.iugu.com/v1/chargebacks/' . $id);
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -174,9 +247,13 @@ class Iugu extends Model
      */
     public static function aceitarContestacao($id)
     {
-        $client = new Client(self::getHeaders());
-        $request = $client->put('https://api.iugu.com/v1/chargebacks/' . $id . '/accept');
-        return $client;
+        try {
+            $client = new Client(self::getHeaders());
+            $request = $client->put('https://api.iugu.com/v1/chargebacks/' . $id . '/accept');
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -186,9 +263,13 @@ class Iugu extends Model
      */
     public static function extratoFinanceiro()
     {
-        $client = new Client(self::getHeaders());
-        $request = $client->get('https://api.iugu.com/v1/accounts/financial');
-        return $client;
+        try {
+            $client = new Client(self::getHeaders());
+            $request = $client->get('https://api.iugu.com/v1/accounts/financial');
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -198,48 +279,47 @@ class Iugu extends Model
      */
     public static function extratoFaturas()
     {
-        $client = new Client(self::getHeaders());
-        $request = $client->get('https://api.iugu.com/v1/accounts/invoices');
-        return $client;
+        try {
+            $client = new Client(self::getHeaders());
+            $request = $client->get('https://api.iugu.com/v1/accounts/invoices');
+            return $request;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
-    
+
     /**
      * Criar Pagador IUGU
-     *
      */
-    private static function getPayer($clienteIugu){
-        
+    private static function getPayer($clienteIugu)
+    {
         $payer = new PayerIugu();
-        $payer->cpf_cnpj = $clienteIugu['cpf_cnpj'];
-        $payer->name = $clienteIugu['cpf_cnpj'];
-        $payer->phone_prefix = $clienteIugu['cpf_cnpj'];
-        $payer->phone = $clienteIugu['cpf_cnpj'];
-        $payer->email = $clienteIugu['cpf_cnpj'];
+        $payer->cpf_cnpj = $clienteIugu->cpf_cnpj;
+        $payer->name = $clienteIugu->name;
+        $payer->phone_prefix = $clienteIugu->phone_prefix;
+        $payer->phone = $clienteIugu->phone;
+        $payer->email = $clienteIugu->email;
         $payer->address = self::getPayerAddress($clienteIugu);
         
         return $payer;
     }
-    
+
     /**
      * Criar Endereco do Pagador IUGU
-     *
      */
-    private static function getPayerAddress($clienteIugu){
-        
+    private static function getPayerAddress($clienteIugu)
+    {
         $address = new PayerAddressIugu();
-        $address->street = $clienteIugu['street'];
-        $address->number = $clienteIugu['number'];
-        $address->district = $clienteIugu['district'];
-        $address->city = $clienteIugu['city'];
-        $address->state = $clienteIugu['state'];
-        $address->zip_code = $clienteIugu['zip_code'];
-        $address->complement = $clienteIugu['complement'];
+        $address->street = $clienteIugu->street;
+        $address->number = $clienteIugu->number;
+        $address->district = $clienteIugu->district;
+        $address->city = $clienteIugu->city;
+        $address->state = $clienteIugu->state;
+        $address->zip_code = $clienteIugu->zip_code;
+        $address->complement = $clienteIugu->complement;
         
         return $address;
     }
-    
-    
-    
 
     /**
      * Get Headers
@@ -248,7 +328,7 @@ class Iugu extends Model
     {
         return [
             'headers' => [
-                'Authorization' => 'Basic ' . self::getToken()
+                'Authorization' => 'Basic ' . Parametros::getTokenIugu()
             ]
         ];
     }
@@ -258,22 +338,15 @@ class Iugu extends Model
      */
     private static function getToken()
     {
-        if (! session('token_iugu')) {
-            $client = new Client();
-
-            $request = $client->post('https://api.iugu.com/v1/' . Parametros::getClienteIdIugu() . '/api_tokens', [
-                'body' => [
-                    'api_type' => 'TEST', // altere conforme o ambiente ('TEST' = desenvolvimento e 'LIVE' = produção)
-                    'description' => 'SmartClick' // Descrição do consumidor da API
-                ]
-            ]);
-            
-            dd($request);
-            if ($request['token']) {
-                session('token_iugu', $request['token']);
-            }
-        }
-        return session('token_iugu');
+        $client = new Client();
+        $request = $client->post('https://api.iugu.com/v1/' . Parametros::CLIENTE_ID_IUGU . '/api_tokens', [
+            'form_params' => [
+                'api_type' => 'TEST', // altere conforme o ambiente ('TEST' = desenvolvimento e 'LIVE' = produção)
+                'description' => 'SmartClick' // Descrição do consumidor da API
+            ]
+        ]);
+        
+        return $request;
     }
 }
 
