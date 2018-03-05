@@ -40,6 +40,18 @@ class SaquesController extends Controller
 	    return Saques::created($request);
 	}
 	
+	/**
+	 * Atualizar Saque
+	 *
+	 * Atualizar Saque | Exemplo: smart/api/v1/saques/atualizar
+	 *
+	 * @return void
+	 */
+	public function atualizar(Request $request)
+	{
+		return Saques::updated($request);
+	}
+	
 	
 	/**
 	 * Remover Saque

@@ -36,6 +36,18 @@ class RecebimentosController extends Controller
 	    return Recebimentos::created($request);
 	}
 	
+	/**
+	 * Atualizar Recebimento
+	 *
+	 * Atualizar Recebimento | Exemplo: smart/api/v1/recebimentos/atualizar
+	 *
+	 * @return void
+	 */
+	public function atualizar(Request $request)
+	{
+		return Recebimentos::updated($request);
+	}
+	
 	
 	/**
 	 * Remover Recebimento

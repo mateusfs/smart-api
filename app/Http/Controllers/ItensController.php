@@ -35,6 +35,18 @@ class ItensController extends Controller
 	    return Itens::created($request);
 	}
 	
+	/**
+	 * Atualizar Iten
+	 *
+	 * Atualizar Iten | Exemplo: smart/api/v1/itens/atualizar
+	 *
+	 * @return void
+	 */
+	public function atualizar(Request $request)
+	{
+		return Itens::updated($request);
+	}
+	
 	
 	/**
 	 * Remover Iten

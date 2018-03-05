@@ -24,15 +24,27 @@ class PedidosController extends Controller
 	}
 	
 	/**
-	 * Criar Iten
+	 * Criar Pedido
 	 *
-	 * Criar Iten | Exemplo: api/v1/itens/criar
+	 * Criar Pedido | Exemplo: api/v1/itens/criar
 	 *
 	 * @return void
 	 */
 	public function criar(Request $request)
 	{
 	    return Pedidos::created($request);
+	}
+	
+	/**
+	 * Atualizar Pedido
+	 *
+	 * Atualizar Pedido | Exemplo: smart/api/v1/pedidos/atualizar
+	 *
+	 * @return void
+	 */
+	public function atualizar(Request $request)
+	{
+		return Pedidos::updated($request);
 	}
 	
 	

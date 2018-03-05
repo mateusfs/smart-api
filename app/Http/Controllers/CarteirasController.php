@@ -38,6 +38,18 @@ class CarteirasController extends Controller
 	    return Carteiras::created($request);
 	}
 	
+	/**
+	 * Atualizar Carteira
+	 *
+	 * Atualizar Carteira | Exemplo: smart/api/v1/carteiras/atualizar
+	 *
+	 * @return void
+	 */
+	public function atualizar(Request $request)
+	{
+		return Carteiras::updated($request);
+	}
+	
 	
 	/**
 	 * Remover Carteira

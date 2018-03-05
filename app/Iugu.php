@@ -75,31 +75,38 @@ class Iugu extends Model
                 
                 $clienteIugu = json_decode($clienteIugu->getBody()->getContents());
                 
-                $formPagmaneto = self::criarFormaPagamento($clienteIugu->id);
-                
+                if($clienteIugu->id){
+        	        $divida->pgm_id_cliente_iugu = $clienteIugu->id;
+    	            Dividas::updated($divida);
+    	            
+	                $formPagmaneto = self::criarFormaPagamento($clienteIugu->id);
+                }
+
                 dd($formPagmaneto);
                 
-                $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/charge', [
-                    'form_params' => [
-                        'method' => 'bank_slip',
-                        'customer_payment_method_id' => $formPagmaneto->id,
-                        'restrict_payment_method' => true,
-                        'customer_id' => $clienteIugu->id,
-                        'invoice_id' => $clienteIugu,
-                        'email' => $clienteIugu->email,
-                        'months' => $clienteIugu,
-                        'discount_cents' => $clienteIugu,
-                        'bank_slip_extra_days' => $clienteIugu,
-                        'keep_dunning' => $clienteIugu,
-                        'items' => [
-                            'description' => $clienteIugu,
-                            'quantity' => 0,
-                            'price_cents' => 0
-                        ],
-                        'payer' => self::getPayer($clienteIugu)
-                    ]
-                ]);
+                if($formPagmaneto){
+	                $client = new Client(self::getHeaders());
+	                $request = $client->post('https://api.iugu.com/v1/charge', [
+	                    'form_params' => [
+	                        'method' => 'bank_slip',
+	                        'customer_payment_method_id' => $formPagmaneto->id,
+	                        'restrict_payment_method' => true,
+	                        'customer_id' => $clienteIugu->id,
+	                        'invoice_id' => $clienteIugu,
+	                        'email' => $clienteIugu->email,
+	                        'months' => $clienteIugu,
+	                        'discount_cents' => $clienteIugu,
+	                        'bank_slip_extra_days' => $clienteIugu,
+	                        'keep_dunning' => $clienteIugu,
+	                        'items' => [
+	                            'description' => $clienteIugu,
+	                            'quantity' => 0,
+	                            'price_cents' => 0
+	                        ],
+	                        'payer' => self::getPayer($clienteIugu)
+	                    ]
+	                ]);
+                }
                 
                 return $request;
             }

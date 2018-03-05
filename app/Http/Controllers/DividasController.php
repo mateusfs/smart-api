@@ -37,6 +37,19 @@ class DividasController extends Controller
 	
 	
 	/**
+	 * Atualizar Divida
+	 *
+	 * Atualizar Divida | Exemplo: smart/api/v1/dividas/criar
+	 *
+	 * @return void
+	 */
+	public function atualizar(Request $request)
+	{
+		return Dividas::updated($request);
+	}
+	
+	
+	/**
 	 * Remover Divida
 	 *
 	 * Remover Divida | Exemplo: smart/api/v1/dividas/delete/1
