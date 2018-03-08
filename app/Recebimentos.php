@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recebimentos extends Model
 {
-	protected $table = 'recebimentos';
+	protected $table = 'payments_availability';
 	protected $primaryKey = 'prc_id';
 	
 	protected $fillable = [

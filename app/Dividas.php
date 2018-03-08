@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dividas extends Model
 {
-	protected $table = 'dividas_pagamentps';
+	protected $table = 'payments';
 	protected $primaryKey = 'pgm_id';
 	
 	protected $fillable = [

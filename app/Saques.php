@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Saques extends Model
 {
-	protected $table = 'saques';
+	protected $table = 'withdrawals';
 	protected $primaryKey = 'saq_id';
 	
 	protected $fillable = [

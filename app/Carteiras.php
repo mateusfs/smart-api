@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carteiras extends Model
 {
-	protected $table = 'carteiras';
+	protected $table = 'wallets';
 	protected $primaryKey = 'wal_id';
 	
 	protected $fillable = [
