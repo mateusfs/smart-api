@@ -45,6 +45,7 @@ class Dividas extends Model
 			'pgm_cartao_recobrancas',
 			'pgm_endereco_cep',
 			'pgm_endereco_cidade',
+			'pgm_endereco_estado',
 			'pgm_endereco_logradouro',
 			'pgm_endereco_numero',
 			'pgm_endereco_bairro',

@@ -16,12 +16,12 @@ class AuthToken
     public function handle($request, Closure $next)
     {
       
-        $auth = $request->header('Authorization');
-        
-        if($auth == sha1('smart')){
-        	return $next($request);
-        }
-        
-        return response()->json(["error" => "Tente nvomante! Estamos com problemas entre em contato com a SmartClick."], 403);
+    	return $next($request);
+    	
+//         $auth = $request->header('Authorization');
+//         if($auth == sha1('smart')){
+//         	return $next($request);
+//         }
+//         return response()->json(["error" => "Tente nvomante! Estamos com problemas entre em contato com a SmartClick."], 403);
     }
 }
