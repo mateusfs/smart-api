@@ -413,10 +413,26 @@ class Iugu extends Model {
 	 *
 	 * Retorna os dados de uma Forma de Pagamento de um Cliente
 	 */
-	public static function removerFormaPagamento($customerId, $id) {
+	public static function buscarFormaPagamento($customerId, $id) {
 	    try {
 	        $client = new Client ( self::getHeaders () );
 	        $request = $client->get ( 'https://api.iugu.com/v1/customers/' . $customerId . '/payment_methods'.$id);
+	        return json_decode ( $request->getBody ()->getContents () );
+	    } catch ( \Exception $e ) {
+	        return $e->getMessage ();
+	    }
+	}
+	
+	
+	/**
+	 * Listar Formas de Pagamento IUGU
+	 *
+	 * Retorna uma lista com todas as formas de pagamento de determinado cliente.
+	 */
+	public static function buscarFormaPagamento($customerId) {
+	    try {
+	        $client = new Client ( self::getHeaders () );
+	        $request = $client->get ( 'https://api.iugu.com/v1/customers/' . $customerId . '/payment_methods');
 	        return json_decode ( $request->getBody ()->getContents () );
 	    } catch ( \Exception $e ) {
 	        return $e->getMessage ();
