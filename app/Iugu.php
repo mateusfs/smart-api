@@ -6,7 +6,71 @@ use Illuminate\Database\Eloquent\Model;
 
 class Iugu extends Model
 {
-
+    /**
+     * Emetir Boleto IUGU
+     *
+     */
+    public static function emetirBoleto(Dividas $divida)
+    {
+        try {
+            if ($divida) {
+                $idCliente = Parametros::CLIENTE_ID_IUGU;
+                
+                $token = Iugu::criarToken($idCliente);
+                
+                $formaDePamanto = Iugu::criarFormaPagamento($idCliente);
+                
+                $items = Iugu::getItems($divida->pgm_pagador_nome, 1, $divida->pgm_valor);
+                
+                if($formaDePamanto && $items){
+                    $result = self::cobrancaDireta($divida, 'bank_slip', $token, $formaDePamanto['id'], true, $idCliente, '', $divida->pgm_pagador_email, $divida->pgm_parcelas, null, 5, $items);
+                }
+                
+                return $result;
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    
+    
+    /**
+     * Emetir Cartao IUGU
+     *
+     */
+    public static function emetirCartao(Dividas $divida)
+    {
+        try {
+            if ($divida) {
+                $idCliente = Parametros::CLIENTE_ID_IUGU;
+                
+                $token = Iugu::criarToken($idCliente);
+                
+                $formaDePamanto = Iugu::criarFormaPagamento($idCliente);
+                
+                $returnUrl = 'http://smartclic.com.br/';
+                
+                $expiredUrl = 'http://smartclic.com.br/';
+                
+                $emails = $divida->pgm_pagador_email.',smart@smartclic.com.br';
+                
+                $fatura = Iugu::criarFatura($divida->pgm_pagador_email, $emails, $dataVencimento, $items, $returnUrl, $expiredUrl, false, '', '', $idCliente, false, null, 'credit_card');
+                
+                $items = Iugu::getItems($divida->pgm_pagador_razao, 1, $divida->pgm_valor);
+                
+                if($formaDePamanto && $items){
+                    $result = self::cobrancaDireta($divida, '', $token, $formaDePamanto['id'], true, $idCliente, $fatura['id'], $divida->pgm_pagador_email, $divida->pgm_parcelas, null, 5, $items);
+                }
+                
+                return $result;
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    
+    
+    
     /**
      * Criar Fatura IUGU
      *
@@ -22,7 +86,7 @@ class Iugu extends Model
                     'form_params' => [
                         'email' => $email,
                         'cc_emails' => $emails,
-                        'due_date' => ($dataVencimento) ? $dataVencimento : date('YY-M-D') + 3,
+                        'due_date' => ($dataVencimento) ? $dataVencimento : date('Y-m-d') + 3,
                         'ensure_workday_due_date' => true,
                         $items, // OBRIGATÓRIO - Itens da fatura. "price_cents" valor mínimo 100
                         'return_url' => $returnUrl,
@@ -57,14 +121,14 @@ class Iugu extends Model
      *
      * Captura uma fatura com estado "Em Análise" / "in_analysis".
      */
-    public static function capturarFatura(Dividas $divida)
+    public static function capturarFatura($idFatura)
     {
         try {
-            if ($divida) {
+            if ($idFatura) {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/invoices/' . $divida->pgm_id_fatura_iugu . '/capture', [
+                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idFatura . '/capture', [
                     'form_params' => [
-                        'id' => $divida->pgm_id_fatura_iugu
+                        'id' => $idFatura
                     ]
                 ]);
                 
@@ -384,7 +448,7 @@ class Iugu extends Model
      *
      * Cria uma Forma de Pagamento de Cliente.
      */
-    public static function criarFormaPagamento($idCustomer)
+    public static function criarFormaPagamento($idCustomer, $token)
     {
         try {
             
@@ -393,7 +457,7 @@ class Iugu extends Model
                 $request = $client->post('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods', [
                     'form_params' => [
                         'description' => 'SmartClic',
-                        'token' => self::criarToken(Parametros::CLIENTE_ID_IUGU),
+                        'token' => $token,
                         'set_as_default' => false
                     ]
                 ]);
@@ -866,16 +930,16 @@ class Iugu extends Model
      *
      * Transfere um determinado valor de sua conta para a conta destino
      */
-    public static function transferirValor(Dividas $divida, $idConta, $customVariables = null)
+    public static function transferirValor($idConta, $valor, $customVariables = null)
     {
         try {
             
-            if ($divida && $idConta) {
+            if ($idConta && $valor) {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/transfers', [
                     'form_params' => [
                         'receiver_id' => $idConta,
-                        'amount_cents' => $divida->pgm_valor,
+                        'amount_cents' => $valor,
                         $customVariables
                     ]
                 ]);
@@ -1541,7 +1605,7 @@ class Iugu extends Model
      *
      * Retorna a lista de todas as transferências bancárias
      */
-    public static function listarTransferenciaBancaria()
+    public static function listarTransferenciasBancarias()
     {
         try {
             $client = new Client(self::getHeaders());
@@ -1583,7 +1647,7 @@ class Iugu extends Model
     }
 
     /**
-     * Antecipar Recebíveis
+     * Antecipar Recebíveis IUGU
      */
     public static function anteciparRecebiveis($transactions)
     {

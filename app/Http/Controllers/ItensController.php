@@ -14,7 +14,7 @@ class ItensController extends Controller
     /**
      * Buscar Iten
      *
-     * Buscar Iten | Exemplo: smart/api/v1/itens/1
+     * Buscar Iten | Exemplo: api/v1/itens/1
      *
      * @param number $oit_id
      */
@@ -26,7 +26,7 @@ class ItensController extends Controller
 	/**
 	 * Criar Iten
 	 *
-	 * Criar Iten | Exemplo: smart/api/v1/itens/criar
+	 * Criar Iten | Exemplo: api/v1/itens/criar
 	 *
 	 * @return void
 	 */
@@ -38,7 +38,7 @@ class ItensController extends Controller
 	/**
 	 * Atualizar Iten
 	 *
-	 * Atualizar Iten | Exemplo: smart/api/v1/itens/atualizar
+	 * Atualizar Iten | Exemplo: api/v1/itens/atualizar
 	 *
 	 * @return void
 	 */
@@ -51,7 +51,7 @@ class ItensController extends Controller
 	/**
 	 * Remover Iten
 	 *
-	 * Remover Iten | Exemplo: smart/api/v1/itens/delete/1
+	 * Remover Iten | Exemplo: api/v1/itens/delete/1
 	 *
 	 * @param number $oit_id
 	 * 

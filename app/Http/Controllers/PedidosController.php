@@ -14,7 +14,7 @@ class PedidosController extends Controller
     /**
      * Buscar Pedido
      *
-     * Buscar Pedido | Exemplo: smart/api/v1/pedidos/1
+     * Buscar Pedido | Exemplo: api/v1/pedidos/1
      *
      * @param number $ord_id
      */
@@ -38,7 +38,7 @@ class PedidosController extends Controller
 	/**
 	 * Atualizar Pedido
 	 *
-	 * Atualizar Pedido | Exemplo: smart/api/v1/pedidos/atualizar
+	 * Atualizar Pedido | Exemplo: api/v1/pedidos/atualizar
 	 *
 	 * @return void
 	 */
@@ -51,7 +51,7 @@ class PedidosController extends Controller
 	/**
 	 * Remover Iten
 	 *
-	 * Remover Iten | Exemplo: smart/api/v1/itens/delete/1
+	 * Remover Iten | Exemplo: api/v1/itens/delete/1
 	 *
 	 * @param number $ord_id
 	 * 

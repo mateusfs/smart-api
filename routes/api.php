@@ -47,8 +47,41 @@ Route::prefix('v1')->group(function () {
 	 	Route::post('saques/criar', 'SaquesController@criar');
 	 	Route::get('saques/{saq_id}', 'SaquesController@index');
 	 	
+	 	Route::get('pagamento/boleto/{pgm_id}', 'PagamentoController@gerarPagamentoBoleto');
+	 	Route::get('pagamento/cartao/{pgm_id}', 'PagamentoController@gerarPagamentoCartao');
+	 	Route::get('pagamento/transferir/{idConta}/{valor}', 'PagamentoController@transferirValor');
+	 	Route::get('pagamento/boleto/pessoaJuridica/{pgm_id}', 'PagamentoController@gerarPagamentoBoletoPessoaJuridica');
+	 	Route::get('pagamento/boleto/definirEndereco/{pgm_id}/{idTransacao}', 'PagamentoController@definirEnderecoBoleto');
 	 	
-	 	Route::get('pagamento/boleto/{pgm_id}', 'PagamentoController@gerarBoleto');
+	 	
+	 	Route::get('fatura/criar/', 'FaturaController@criarFatura');
+	 	Route::get('fatura/listar/', 'FaturaController@listarFaturas');
+	 	Route::get('fatura/capturar/{idFatura}', 'FaturaController@capturarFatura');
+	 	Route::get('fatura/reembolsar/{idFatura}', 'FaturaController@reembolsarFatura');
+	 	Route::get('fatura/cancelar/{idFatura}', 'FaturaController@cancelarFatura');
+	 	Route::get('fatura/gerarSegundaVia/{idFatura}', 'FaturaController@gerarSegundaViaFatura');
+	 	Route::get('fatura/buscar/{idFatura}', 'FaturaController@buscarFatura');
+	 	Route::get('fatura/enviarEmail/{idFatura}', 'FaturaController@enviarEmail');
+	 	
+	 	Route::get('transferencia/listar/', 'TransferenciaController@listar');
+	 	Route::get('transferencia/listarTransferenciasBancarias/', 'TransferenciaController@listarTransferenciasBancarias');
+	 	Route::get('transferencia/buscarTransferenciaBancaria/', 'TransferenciaController@buscarTransferenciaBancaria');
+	 	Route::get('transferencia/transferir/{idConta}/{valor}', 'TransferenciaController@transferir');
+	 	Route::get('transferencia/buscar/{idTranferencia}', 'TransferenciaController@buscar');
+	 	
+	 	Route::post('transacao/criar/', 'TransacaoController@criar');
+	 	Route::get('transacao/consultar/', 'TransacaoController@consultar');
+	 	Route::get('transacao/atualizar/{pgm_id}', 'TransacaoController@atualizar');
+	 	Route::get('transacao/detalhar/{idTransacao}', 'TransacaoController@detalhar');
+	 	Route::get('transacao/cancelar/{idTransacao}', 'TransacaoController@cancelar');
+	 	
+	 	Route::post('contestar/disputar/', 'ContestarController@disputar');
+	 	Route::get('contestar/listar/', 'ContestarController@listar');
+	 	Route::get('contestar/acatar/{idContestacao}', 'ContestarController@acatar');
+	 	Route::get('contestar/buscar/{idContestacao}', 'ContestarController@buscar');
+	 	
+	 	Route::get('financeiro/extratoFinanceiro', 'FinanceiroController@extratoFinanceiro');
+	 	Route::get('financeiro/extratoFaturas', 'FinanceiroController@extratoFaturas');
 	 	
  	});
  });

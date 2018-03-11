@@ -15,6 +15,8 @@ class Parametros extends Model
     const CLIENTE_ID_GERENCIA_NET = "";
 
     const CLIENTE_SECRET_GERENCIA_NET = "";
+    
+    const PAYMENT_TOKEN_GERENCIA_NET = "";
 
     const IS_GERENCIA_NET = false;
 

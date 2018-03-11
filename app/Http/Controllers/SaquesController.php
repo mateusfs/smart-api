@@ -19,7 +19,7 @@ class SaquesController extends Controller
     /**
      * Buscar Saque
      *
-     * Buscar Saque | Exemplo: smart/api/v1/saques/1
+     * Buscar Saque | Exemplo: api/v1/saques/1
      *
      * @param number $saq_id
      */
@@ -31,7 +31,7 @@ class SaquesController extends Controller
 	/**
 	 * Criar Saque
 	 *
-	 * Criar Saque | Exemplo: smart/api/v1/saques/criar
+	 * Criar Saque | Exemplo: api/v1/saques/criar
 	 *
 	 * @return void
 	 */
@@ -43,7 +43,7 @@ class SaquesController extends Controller
 	/**
 	 * Atualizar Saque
 	 *
-	 * Atualizar Saque | Exemplo: smart/api/v1/saques/atualizar
+	 * Atualizar Saque | Exemplo: api/v1/saques/atualizar
 	 *
 	 * @return void
 	 */
@@ -56,7 +56,7 @@ class SaquesController extends Controller
 	/**
 	 * Remover Saque
 	 *
-	 * Remover Saque | Exemplo: smart/api/v1/saques/delete/1
+	 * Remover Saque | Exemplo: api/v1/saques/delete/1
 	 *
 	 * @param number $prc_id
 	 *
@@ -71,7 +71,7 @@ class SaquesController extends Controller
 	/**
 	 * Pedido de Saque
 	 *
-	 * Pedido de Saque | Exemplo: smart/api/v1/saques/sacar/1
+	 * Pedido de Saque | Exemplo: api/v1/saques/sacar/1
 	 *
 	 * @return void
 	 */
@@ -86,25 +86,26 @@ class SaquesController extends Controller
 	    if($saque)
 	    {
 	        if(Parametros::getIsIugu()){
-	            $result = Iugu::pedidoDeSaque($saque->saq_id, $saque->saq_valor);
+	            $customVariables = Iugu::getCustonVariables($saque->saq_intermediario, $saque->saq_valor);
+	            
+	            $subConta = Iugu::criarSubconta($saque->saq_intermediario, null);
+	            
+	            if($subConta){
+	                $result = Iugu::pedidoDeSaque($subConta['account_id'], $saque->saq_valor, $customVariables);
+	            }
 	        }
 
 	        if(Parametros::getIsGerenciaNet()){
-	            $result = GerenciaNet::criarTransacao($saque->saq_id, 1, $saque->saq_valor);
+	            $result = GerenciaNet::criarTransacao($saque->saq_intermediario, 1, $saque->saq_valor);
 	        }
 	        
 	    }
 	    
-	    /*
-	     *  $client
-	     *
-	     *  RETORNO API EXTERNA
-	     *
-	     *  IMPLEMENTAR LOGICA
-	     *
-	     */
-	    
-	    return $client;
+	    if($result){
+	        return $result;
+        }
+        
+        return response()->json(["error" => "Id do Saque é obrigatório"], 403);
 	}
 	
 

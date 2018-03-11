@@ -14,7 +14,7 @@ class RecebimentosController extends Controller
     /**
      * Buscar Recebimento
      *
-     * Buscar Recebimento | Exemplo: smart/api/v1/recebimentos/1
+     * Buscar Recebimento | Exemplo: api/v1/recebimentos/1
      *
      * @param number $prc_id
      */
@@ -27,7 +27,7 @@ class RecebimentosController extends Controller
 	/**
 	 * Criar Recebimento
 	 *
-	 * Criar Recebimento | Exemplo: smart/api/v1/recebimentos/criar
+	 * Criar Recebimento | Exemplo: api/v1/recebimentos/criar
 	 *
 	 * @return void
 	 */
@@ -39,7 +39,7 @@ class RecebimentosController extends Controller
 	/**
 	 * Atualizar Recebimento
 	 *
-	 * Atualizar Recebimento | Exemplo: smart/api/v1/recebimentos/atualizar
+	 * Atualizar Recebimento | Exemplo: api/v1/recebimentos/atualizar
 	 *
 	 * @return void
 	 */
@@ -52,7 +52,7 @@ class RecebimentosController extends Controller
 	/**
 	 * Remover Recebimento
 	 *
-	 * Remover Recebimento | Exemplo: smart/api/v1/recebimentos/delete/1
+	 * Remover Recebimento | Exemplo: api/v1/recebimentos/delete/1
 	 *
 	 * @param number $prc_id
 	 *

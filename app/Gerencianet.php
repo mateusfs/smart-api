@@ -13,11 +13,11 @@ class Gerencianet extends Model
      *
      * Criar Transação pelo GerenciaNet
      */
-    public static function criarTransacao(Dividas $divida)
+    public static function criarTransacao($nome, $quantidade, $valor)
     {
         try {
             $api = new Gerencianet(self::getOptions());
-            $charge = $api->createCharge([], self::getBody($divida));
+            $charge = $api->createCharge([], self::getBody($nome, $quantidade, $valor));
             
             return $charge;
         } catch (GerencianetException $e) {
@@ -607,12 +607,12 @@ class Gerencianet extends Model
     /**
      * Consultando detalhes de uma notificação
      */
-    public static function consultarNotificacao($token)
+    public static function consultarNotificacao()
     {
         try {
             
             $params = [
-                'token' => $token
+                'token' => Parametros::PAYMENT_TOKEN_GERENCIA_NET
             ];
             
             $api = new Gerencianet(self::getOptions());
@@ -636,7 +636,7 @@ class Gerencianet extends Model
         try {
             
             $api = new Gerencianet(self::getOptions());
-            $charge = $api->createCharge([], self::getBody($divida));
+            $charge = $api->createCharge([], self::getBody($divida->pgm_pagador_nome, 1, $divida->pgm_valor));
             
             if ($charge["code"] == 200) {
                 
@@ -686,7 +686,7 @@ class Gerencianet extends Model
         try {
             
             $api = new Gerencianet(self::getOptions());
-            $charge = $api->createCharge([], self::getBody($divida));
+            $charge = $api->createCharge([], self::getBody($divida->pgm_pagador_nome, 1, $divida->pgm_valor));
             
             if ($charge["code"] == 200) {
                 
@@ -737,14 +737,14 @@ class Gerencianet extends Model
      *
      * Você está em: "Outros Recursos da API > Definir Endereços"
      */
-    public static function definirEnderecoDoBoleto($idTrasacao, Dividas $divida, $paymentToken)
+    public static function definirEnderecoDoBoleto($idTransacao, Dividas $divida)
     {
         try {
             
             $api = new Gerencianet(self::getOptions());
             
             $params = [
-                'id' => $idTrasacao
+                'id' => $idTransacao
             ];
             
             $customer = [
@@ -765,7 +765,7 @@ class Gerencianet extends Model
             $creditCard = [
                 'installments' => $divida->pgm_parcelas, // número de parcelas em que o pagamento deve ser dividido
                 'billing_address' => $billingAddress,
-                'payment_token' => $paymentToken,
+                'payment_token' => Parametros::PAYMENT_TOKEN_GERENCIA_NET,
                 'customer' => $customer
             ];
             
@@ -798,7 +798,7 @@ class Gerencianet extends Model
         try {
             
             $api = new Gerencianet(self::getOptions());
-            $charge = $api->createCharge([], self::getBody($divida));
+            $charge = $api->createCharge([], self::getBody($divida->pgm_pagador_nome, 1, $divida->pgm_valor));
             
             if ($charge["code"] == 200) {
                 
@@ -826,7 +826,7 @@ class Gerencianet extends Model
                 $creditCard = [
                     'installments' => $divida->pgm_cartao_codigo, // Verificar installments do cliente
                     'billing_address' => $billingAddress,
-                    'payment_token' => $divida->pgm_intermediario_code, // Verificar paymentToken do cliente
+                    'payment_token' => Parametros::PAYMENT_TOKEN_GERENCIA_NET,
                     'customer' => $customer
                 ];
                 
@@ -876,7 +876,7 @@ class Gerencianet extends Model
     /**
      * Marketplace GenreciaNet
      */
-    public static function pagarMarketplace(Dividas $divida, $idUsuario, $porcentagem, $nomeProduto, $quantidade, $valor, $token)
+    public static function pagarMarketplace(Dividas $divida, $idUsuario, $porcentagem, $nomeProduto, $quantidade, $valor)
     {
         try {
             
@@ -931,7 +931,7 @@ class Gerencianet extends Model
                 $creditCard = [
                     'installments' => (int) $_POST["installments"],
                     'billing_address' => $billingAddress,
-                    'payment_token' => $token,
+                    'payment_token' => Parametros::PAYMENT_TOKEN_GERENCIA_NET,
                     'customer' => $customer
                 ];
                 
@@ -968,7 +968,7 @@ class Gerencianet extends Model
      *
      * Você está em: "Marketplace > Dividindo recebimentos"
      */
-    public static function dividirRecebimentoMarketplace(Dividas $divida, $repasses = array(), $quantidade, $valor, $token)
+    public static function dividirRecebimentoMarketplace(Dividas $divida, $repasses = array(), $quantidade, $valor)
     {
         try {
             
@@ -1150,7 +1150,7 @@ class Gerencianet extends Model
     /**
      * Get Body
      */
-    private static function getBody(Dividas $divida)
+    private static function getBody($nome, $quantidade, $valor)
     {
         return [
             'items' => [
