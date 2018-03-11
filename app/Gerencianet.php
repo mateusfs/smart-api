@@ -26,7 +26,7 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
      * Atualizar Transações GenreciaNet
      *
@@ -54,7 +54,7 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
      * Detalhar Transações GenreciaNet
      *
@@ -78,7 +78,7 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
      * Cancelar Transações GenreciaNet
      *
@@ -101,7 +101,7 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
      * Criando assinaturas
      *
@@ -126,11 +126,9 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
      * Crie inscrições (assinaturas) para vincular ao plano
-     *
      */
     public static function criarInscricaoAssinatura($idPlano, $nome, $quantidade, $valor)
     {
@@ -142,7 +140,11 @@ class Gerencianet extends Model
                 'value' => $valor // valor (1000 = R$ 10,00)
             ];
             
-            $body  =  ['items' => [$item]];
+            $body = [
+                'items' => [
+                    $item
+                ]
+            ];
             
             $params = [
                 'id' => $idPlano
@@ -158,11 +160,9 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
      * Alterando notification_url e/ou custom_id de assinaturas
-     *
      */
     public static function alterarAssinatura($idAssinatura, $url, $isTransacao)
     {
@@ -187,16 +187,17 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
      * Defienir a forma de pagamento da assinatura e os dados do cliente
-     *
      */
     public static function pagarAssinatura($idAssinatura, $nome, $cpf, $celular, $vencimento = 5)
     {
         try {
             
-            $params = ['id' => $idAssinatura];
+            $params = [
+                'id' => $idAssinatura
+            ];
             
             $customer = [
                 'name' => $nome,
@@ -226,16 +227,18 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
      * Listar os planos de assinatura existentes
-     *
      */
     public static function listarAssinatura($limit, $offset)
     {
         try {
             
-            $params = ['limit' => $limit, 'offset' => $offset];
+            $params = [
+                'limit' => $limit,
+                'offset' => $offset
+            ];
             
             $api = new Gerencianet(self::getOptions());
             $charge = $api->getPlans($params, $body);
@@ -247,7 +250,7 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
      * Detalhar informações de assinaturas
      *
@@ -271,17 +274,17 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
      * Cancela um plano de assinatura
-     *
      */
     public static function deletarAssinatura($idAssinatura)
     {
         try {
             
-            $params = ['id' => $idAssinatura];
+            $params = [
+                'id' => $idAssinatura
+            ];
             
             $api = new Gerencianet(self::getOptions());
             $charge = $api->deletePlan($params, []);
@@ -293,17 +296,17 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
      * Cancelar assinaturas ativas em um plano
-     *
      */
     public static function cancelarAssinaturas($idAssinatura)
     {
         try {
             
-            $params = ['id' => $idAssinatura];
+            $params = [
+                'id' => $idAssinatura
+            ];
             
             $api = new Gerencianet(self::getOptions());
             $charge = $api->cancelSubscription($params, []);
@@ -315,13 +318,11 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
      * Criando carnês
      *
      * Você está em: "Carnês > Criando carnês"
-     *
      */
     public static function criarCarne(Dividas $divida, $nome, $quantidade, $valor, $vencimento = 5, $repeats = 5)
     {
@@ -343,7 +344,9 @@ class Gerencianet extends Model
             $vencimento = $current->addDays($vencimento);
             
             $body = [
-                'items' => [$item],
+                'items' => [
+                    $item
+                ],
                 'customer' => $customer,
                 'expire_at' => $vencimento->format('Y-m-d'), // data de vencimento da primeira parcela do carnê
                 'repeats' => $repeats, // número de parcelas do carnê
@@ -360,12 +363,11 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
      * Retorna informações sobre um carnê criado
      *
      * Você está em: "Carnês > Criando carnês"
-     *
      */
     public static function buscarCarne($idCarne)
     {
@@ -385,12 +387,9 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
-     * 
      * Alterando notification_url e/ou custom_id de carnês
-     *
      */
     public static function aleterarCarne($idCarne, $idTransacao, $url)
     {
@@ -415,18 +414,18 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
-     *
      * Alterando notification_url e/ou custom_id de carnês
-     *
      */
     public static function alterarVencimentoCarne($idCarne, $parcela, $vencimento = 1)
     {
         try {
             
-            $params = ['id' => $idCarne, 'parcel' => $parcela];
+            $params = [
+                'id' => $idCarne,
+                'parcel' => $parcela
+            ];
             
             $current = Carbon::now();
             $vencimento = $current->addDays($vencimento);
@@ -445,18 +444,17 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
-     *
      * Cancelar um determinado carnê
-     *
      */
     public static function cancelarCarne($idCarne, $vencimento = 1)
     {
         try {
             
-            $params = ['id' => $idCarne];
+            $params = [
+                'id' => $idCarne
+            ];
             
             $api = new Gerencianet(self::getOptions());
             $charge = $api->cancelCarnet($params, []);
@@ -468,17 +466,18 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
+
     /**
-     *
      * Cancelar parcela específica de um carnê existente
-     *
      */
     public static function cancelarParcelaCarne($idCarne, $parcela)
     {
         try {
             
-            $params = ['id' => $idCarne, 'parcel' => $parcela];
+            $params = [
+                'id' => $idCarne,
+                'parcel' => $parcela
+            ];
             
             $api = new Gerencianet(self::getOptions());
             $charge = $api->cancelParcel($params, []);
@@ -490,18 +489,17 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
-     *
      * Reenviar carnê por email
-     *
      */
     public static function reenviarCarnePorEmail($idCarne, $email)
     {
         try {
             
-            $params = ['id' => $idCarne];
+            $params = [
+                'id' => $idCarne
+            ];
             
             $body = [
                 'email' => $email
@@ -517,18 +515,18 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
-     *
      * Reenviar parcela específica de carnê por email
-     *
      */
     public static function reenviarParcelaPorEmail($idCarne, $parcela, $email)
     {
         try {
             
-            $params = ['id' => $idCarne, 'parcel' => $parcela];
+            $params = [
+                'id' => $idCarne,
+                'parcel' => $parcela
+            ];
             
             $body = [
                 'email' => $email
@@ -544,18 +542,17 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
-     *
      * Acrescentar informações ao histórico do carnê
-     *
      */
     public static function adicionarInformacoesAoCarne($idCarne, $descricao)
     {
         try {
             
-            $params = ['id' => $idCarne];
+            $params = [
+                'id' => $idCarne
+            ];
             
             $body = [
                 'description' => $descricao
@@ -571,12 +568,9 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
-     *
      * Definindo a URL para recebimento de notificações
-     *
      */
     public static function defenirMetadata($nome, $quantidade, $valor, $url)
     {
@@ -588,10 +582,14 @@ class Gerencianet extends Model
                 'value' => $valor // valor (1000 = R$ 10,00)
             ];
             
-            $metadata = array('notification_url' => $url);
+            $metadata = array(
+                'notification_url' => $url
+            );
             
             $body = [
-                'items' => [$item],
+                'items' => [
+                    $item
+                ],
                 'metadata' => $metadata
             ];
             
@@ -605,12 +603,9 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
-    
+
     /**
-     *
      * Consultando detalhes de uma notificação
-     *
      */
     public static function consultarNotificacao($token)
     {
@@ -630,7 +625,6 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-    
 
     /**
      * Emetir Boleto GenreciaNet
@@ -787,7 +781,6 @@ class Gerencianet extends Model
             $pay_charge = $api->payCharge($params, $body);
             
             return $pay_charge;
-            
         } catch (GerencianetException $e) {
             return $e;
         } catch (\Exception $e) {
@@ -827,7 +820,7 @@ class Gerencianet extends Model
                     'neighborhood' => $divida->pgm_endereco_bairro,
                     'zipcode' => $divida->pgm_endereco_cep,
                     'city' => $divida->pgm_endereco_cidade,
-                    'state' => 'Santa Caratina' // Verificar o estado do cliente
+                    'state' => $divida->pgm_endereco_estado // Verificar o estado do cliente
                 ];
                 
                 $creditCard = [
@@ -880,7 +873,215 @@ class Gerencianet extends Model
         }
     }
 
-    
+    /**
+     * Marketplace GenreciaNet
+     */
+    public static function pagarMarketplace(Dividas $divida, $idUsuario, $porcentagem, $nomeProduto, $quantidade, $valor, $token)
+    {
+        try {
+            
+            $repasses = [
+                [
+                    'payee_code' => $idUsuario, // identificador da conta Gerencianet (repasse 1)
+                    'percentage' => $porcentagem // porcentagem de repasse (2500 = 25%)
+                ]
+            ];
+            
+            $items = [
+                [
+                    'name' => $nomeProduto,
+                    'amount' => $quantidade,
+                    'value' => $valor,
+                    'marketplace' => array(
+                        'repasses' => $repasses
+                    )
+                ]
+            ];
+            
+            $body = [
+                'items' => $items
+            ];
+            
+            $api = new Gerencianet(self::getOptions());
+            $charge = $api->createCharge([], $body);
+            
+            if ($charge["code"] == 200) {
+                
+                $params = [
+                    'id' => $charge["data"]["charge_id"]
+                ];
+                
+                $customer = [
+                    'name' => $divida->pgm_pagador_nome,
+                    'cpf' => ($divida->pgm_pagador_cpf) ? $divida->pgm_pagador_cpf : $divida->pgm_pagador_cnpj,
+                    'phone_number' => $divida->pgm_pagador_celular,
+                    'email' => $divida->pgm_pagador_email,
+                    'birth' => $divida->pgm_pagador_nascimento
+                ];
+                
+                $billingAddress = [
+                    'street' => $divida->pgm_endereco_logradouro,
+                    'number' => $divida->pgm_endereco_numero,
+                    'neighborhood' => $divida->pgm_endereco_bairro,
+                    'zipcode' => $divida->pgm_endereco_cep,
+                    'city' => $divida->pgm_endereco_cidade,
+                    'state' => $divida->pgm_endereco_estado
+                ];
+                
+                $creditCard = [
+                    'installments' => (int) $_POST["installments"],
+                    'billing_address' => $billingAddress,
+                    'payment_token' => $token,
+                    'customer' => $customer
+                ];
+                
+                $payment = [
+                    'credit_card' => $creditCard
+                ];
+                
+                $body = [
+                    'payment' => $payment
+                ];
+                
+                try {
+                    $api = new Gerencianet(self::getOptions());
+                    $charge = $api->payCharge($params, $body);
+                    
+                    return $charge;
+                } catch (GerencianetException $e) {
+                    return $e;
+                } catch (\Exception $e) {
+                    return $e->getMessage();
+                }
+            }
+            
+            return $charge;
+        } catch (GerencianetException $e) {
+            return $e;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Dividindo recebimentos GenreciaNet
+     *
+     * Você está em: "Marketplace > Dividindo recebimentos"
+     */
+    public static function dividirRecebimentoMarketplace(Dividas $divida, $repasses = array(), $quantidade, $valor, $token)
+    {
+        try {
+            
+            $items = [
+                [
+                    'name' => $nomeProduto,
+                    'amount' => $quantidade,
+                    'value' => $valor,
+                    'marketplace' => array(
+                        'repasses' => $repasses
+                    )
+                ]
+            ];
+            
+            $body = [
+                'items' => $items
+            ];
+            
+            try {
+                $api = new Gerencianet(self::getOptions());
+                $charge = $api->createCharge([], $body);
+                
+                return $charge;
+            } catch (GerencianetException $e) {
+                return $e;
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+            
+            return $charge;
+        } catch (GerencianetException $e) {
+            return $e;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Criando link de pagamento GenreciaNet
+     *
+     * Você está em: "Link de Pagamento > Criando link de pagamento"
+     */
+    public static function emetirLink($nomeProduto, $quantidade, $valor, $menssagem, $vencimento, $entregarEmail = true, $metodoPagamento)
+    {
+        try {
+            
+            $items = [
+                [
+                    'name' => $nomeProduto,
+                    'amount' => $quantidade,
+                    'value' => $valor
+                ]
+            ];
+            
+            $body = [
+                'items' => $items
+            ];
+            
+            $api = new Gerencianet(self::getOptions());
+            $charge = $api->createCharge([], $body);
+            
+            if ($charge["code"] == 200) {
+                
+                $params = [
+                    'id' => $charge["data"]["charge_id"]
+                ];
+                
+                $body = [
+                    // 'billet_discount' => 1,
+                    // 'card_discount' => 1,
+                    'message' => $menssagem,
+                    'expire_at' => $vencimento,
+                    // 'request_delivery_address' => (boolean) $_POST["request"],
+                    'request_delivery_address' => $entregarEmail,
+                    'payment_method' => $metodoPagamento
+                ];
+                
+                $api = new Gerencianet(self::getOptions());
+                $response = $api->linkCharge($params, $body);
+                
+                return $response;
+            }
+        } catch (GerencianetException $e) {
+            return $e;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * 
+     * Retorma repasses
+     *
+     */
+    public static function getRepasses($idUsuario1, $porcentagem1, $idUsuario2, $porcentagem2)
+    {
+        $repass_1 = [
+            'payee_code' => $idUsuario1, // identificador da conta Gerencianet (repasse 1)
+            'percentage' => $porcentagem1 // porcentagem de repasse (2500 = 25%)
+        ];
+        
+        $repass_2 = [
+            'payee_code' => $idUsuario2, // identificador da conta Gerencianet (repasse 2)
+            'percentage' => $porcentagem2 // porcentagem de repasse (1500 = 15%)
+        ];
+        
+        $repasses = [
+            $repass_1,
+            $repass_2
+        ];
+        
+        return $repasses;
+    }
 
     /**
      * Detalhar informações de carnê
@@ -905,8 +1106,6 @@ class Gerencianet extends Model
             return $e->getMessage();
         }
     }
-
-    
 
     /**
      * Reenviando um boleto bancário por email GenreciaNet
