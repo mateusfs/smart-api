@@ -80,14 +80,17 @@ class SaquesController extends Controller
 	    
 	    $saque = Saques::where('saq_id', $saq_id)->firstOrFail();
 	    
+	    
+	    dd('Realizar Saque');
+	    
 	    if($saque)
 	    {
 	        if(Parametros::getIsIugu()){
-	            Iugu::saque($saque->saq_id, $saque->saq_valor);
+	            $result = Iugu::pedidoDeSaque($saque->saq_id, $saque->saq_valor);
 	        }
 
 	        if(Parametros::getIsGerenciaNet()){
-	            GerenciaNet::criarTransacao($saque->saq_id, 1, $saque->saq_valor);
+	            $result = GerenciaNet::criarTransacao($saque->saq_id, 1, $saque->saq_valor);
 	        }
 	        
 	    }
