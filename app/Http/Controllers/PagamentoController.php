@@ -72,7 +72,7 @@ class PagamentoController extends Controller
      *
      * Gerar um boleto | Exemplo: api/v1/pagamento/cartao/$pgm_id
      */
-    public function gerarPagamementoCartao($pgm_id)
+    public function gerarPagamentoCartao($pgm_id)
     {
         
         $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();

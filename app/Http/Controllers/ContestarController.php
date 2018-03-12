@@ -19,8 +19,8 @@ class ContestarController extends Controller
     public function disputar(Request $request)
     {
         
-        $idContestacao = $request->__get('idContestacao');
-        $files = $request->__get('files');
+        $idContestacao = $request->idContestacao;
+        $files = $request->files;
      
         if ($idContestacao && $files) {
             if (Parametros::getIsIugu()) {

@@ -19,9 +19,9 @@ class TransacaoController extends Controller
     public function criar(Request $resquest)
     {
         
-        $nome = $resquest->__get('nome');
-        $quantidade = $resquest->__get('quantidade');
-        $valor = $resquest->__get('valor');
+        $nome = $resquest->nome;
+        $quantidade = $resquest->quantidade;
+        $valor = $resquest->valor;
         
         if ($nome && $quantidade && $valor) {
             if (Parametros::getIsGerenciaNet()) {
@@ -47,8 +47,8 @@ class TransacaoController extends Controller
     public function atualizar(Request $resquest)
     {
         
-        $idTransacao = $resquest->__get('idTransacao');
-        $url = $resquest->__get('url');
+        $idTransacao = $resquest->idTransacao;
+        $url = $resquest->url;
         
         if ($idTransacao && $url) {
             if (Parametros::getIsGerenciaNet()) {

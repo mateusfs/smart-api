@@ -16,7 +16,7 @@ class TransferenciaController extends Controller
      *
      * Gerar um transferencia | Exemplo: api/v1/transferencia/tranferir/$idConta/$valor
      */
-    public function transferir($idConta, $idConta)
+	public function transferir($idConta, $valor)
     {
         
         $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();

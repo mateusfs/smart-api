@@ -49,7 +49,6 @@ Route::prefix('v1')->group(function () {
 	 	
 	 	Route::get('pagamento/boleto/{pgm_id}', 'PagamentoController@gerarPagamentoBoleto');
 	 	Route::get('pagamento/cartao/{pgm_id}', 'PagamentoController@gerarPagamentoCartao');
-	 	Route::get('pagamento/transferir/{idConta}/{valor}', 'PagamentoController@transferirValor');
 	 	Route::get('pagamento/boleto/pessoaJuridica/{pgm_id}', 'PagamentoController@gerarPagamentoBoletoPessoaJuridica');
 	 	Route::get('pagamento/boleto/definirEndereco/{pgm_id}/{idTransacao}', 'PagamentoController@definirEnderecoBoleto');
 	 	

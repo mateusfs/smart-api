@@ -362,7 +362,7 @@ class Iugu extends Model
             if ($divida) {
                 $client = new Client(self::getHeaders());
                 
-                $request = $client->put('https://api.iugu.com/v1/customers/' . $divida->pgm_id_cliente_iugu, [
+                $request = $client->put('https://api.iugu.com/v1/customers/' . Parametros::CLIENTE_ID_IUGU, [
                     'form_params' => [
                         'email' => $divida->pgm_pagador_email,
                         'name' => $divida->pgm_pagador_nome,
@@ -394,7 +394,7 @@ class Iugu extends Model
      *
      * Remove permanentemente um cliente. Porém, não permite remover clientes com assinaturas ou faturas vinculadas.
      */
-    public static function alterarCliente($idCustomer)
+    public static function removerCliente($idCustomer)
     {
         try {
             if ($idCustomer) {
@@ -538,7 +538,7 @@ class Iugu extends Model
      *
      * Retorna uma lista com todas as formas de pagamento de determinado cliente
      */
-    public static function buscarFormaPagamento($idCustomer)
+    public static function listarFormaPagamento($idCustomer)
     {
         try {
             if ($idCustomer) {
@@ -851,7 +851,7 @@ class Iugu extends Model
      *
      * Remover créditos a uma assinatura
      */
-    public static function adiconarCreditoNaAssinatura($idAssinatura, $quantidade)
+    public static function removerCreditoNaAssinatura($idAssinatura, $quantidade)
     {
         try {
             
