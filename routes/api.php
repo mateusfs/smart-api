@@ -16,30 +16,30 @@ use Illuminate\Http\Request;
 Route::prefix('v1')->group(function () {
  	Route::group(['middleware' => 'AuthToken'], function () {
  	    
- 	    Route::delete('carteiras/delete/{wal_id}', 'CarteirasController@delete');
- 	    Route::post('carteiras/criar', 'CarteirasController@criar');
- 	    Route::post('carteiras/atualizar', 'CarteirasController@atualizar');
- 	    Route::get('carteiras/{wal_id}', 'CarteirasController@index');
+ 	    Route::delete('wallets/delete/{wal_id}', 'WalletsController@delete');
+ 	    Route::post('wallets/criar', 'WalletsController@criar');
+ 	    Route::post('wallets/atualizar', 'WalletsController@atualizar');
+ 	    Route::get('wallets/{wal_id}', 'WalletsController@index');
 	 	
- 	    Route::delete('dividas/delete/{pgm_id}', 'DividasController@delete');
- 	    Route::post('dividas/criar', 'DividasController@criar');
- 	    Route::post('dividas/atualizar', 'DividasController@atualizar');
-     	Route::get('dividas/{pgm_id}', 'DividasController@index');
+ 	    Route::delete('debets/delete/{pgm_id}', 'DebetsController@delete');
+ 	    Route::post('debets/criar', 'DebetsController@criar');
+ 	    Route::post('debets/atualizar', 'DebetsController@atualizar');
+     	Route::get('debets/{pgm_id}', 'DebetsController@index');
      	
-     	Route::delete('itens/delete/{oit_id}', 'ItensController@delete');
-     	Route::post('itens/criar', 'ItensController@criar');
-     	Route::post('itens/atualizar', 'ItensController@atualizar');
-     	Route::get('itens/{oit_id}', 'ItensController@index');
+     	Route::delete('itens/delete/{oit_id}', 'OrdersItemsController@delete');
+     	Route::post('itens/criar', 'OrdersItemsController@criar');
+     	Route::post('itens/atualizar', 'OrdersItemsController@atualizar');
+     	Route::get('itens/{oit_id}', 'OrdersItemsController@index');
 	 	
-     	Route::delete('pedidos/delete/{ord_id}', 'PedidosController@delete');
-     	Route::post('pedidos/criar', 'PedidosController@criar');
-     	Route::post('pedidos/atualizar', 'PedidosController@atualizar');
-     	Route::get('pedidos/{ord_id}', 'PedidosController@index');
+     	Route::delete('orders/delete/{ord_id}', 'OrdersController@delete');
+     	Route::post('orders/criar', 'OrdersController@criar');
+     	Route::post('orders/atualizar', 'OrdersController@atualizar');
+     	Route::get('orders/{ord_id}', 'OrdersController@index');
 	 	
-     	Route::delete('recebimentos/delete/{prc_id}', 'RecebimentosController@delete');
-     	Route::post('recebimentos/criar', 'RecebimentosController@criar');
-     	Route::post('recebimentos/atualizar', 'RecebimentosController@atualizar');
-	 	Route::get('recebimentos/{prc_id}', 'RecebimentosController@index');
+     	Route::delete('payments/delete/{prc_id}', 'PaymentsAvailabilityController@delete');
+     	Route::post('payments/criar', 'PaymentsAvailabilityController@criar');
+     	Route::post('payments/atualizar', 'PaymentsAvailabilityController@atualizar');
+	 	Route::get('payments/{prc_id}', 'PaymentsAvailabilityController@index');
 	 	
 	 	Route::delete('saques/delete/{saq_id}', 'SaquesController@delete');
 	 	Route::get('saques/sacar/{saq_id}', 'SaquesController@sacar');
@@ -47,10 +47,10 @@ Route::prefix('v1')->group(function () {
 	 	Route::post('saques/criar', 'SaquesController@criar');
 	 	Route::get('saques/{saq_id}', 'SaquesController@index');
 	 	
-	 	Route::get('pagamento/boleto/{pgm_id}', 'PagamentoController@gerarPagamentoBoleto');
-	 	Route::get('pagamento/cartao/{pgm_id}', 'PagamentoController@gerarPagamentoCartao');
-	 	Route::get('pagamento/boleto/pessoaJuridica/{pgm_id}', 'PagamentoController@gerarPagamentoBoletoPessoaJuridica');
-	 	Route::get('pagamento/boleto/definirEndereco/{pgm_id}/{idTransacao}', 'PagamentoController@definirEnderecoBoleto');
+	 	Route::get('pagament/boleto/{pgm_id}', 'PagamentController@gerarPagamentBoleto');
+	 	Route::get('pagament/cartao/{pgm_id}', 'PagamentController@gerarPagamentCartao');
+	 	Route::get('pagament/boleto/pessoaJuridica/{pgm_id}', 'PagamentController@gerarPagamentBoletoPessoaJuridica');
+	 	Route::get('pagament/boleto/definirEndereco/{pgm_id}/{idTransacao}', 'PagamentController@definirEnderecoBoleto');
 	 	
 	 	
 	 	Route::get('fatura/criar/', 'FaturaController@criarFatura');

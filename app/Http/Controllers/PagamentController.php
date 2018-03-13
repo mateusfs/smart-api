@@ -7,17 +7,17 @@ use App\Iugu;
 use App\Gerencianet;
 
 /**
- * @resource Pagamento
+ * @resource Pagament
  */
-class PagamentoController extends Controller
+class PagamentController extends Controller
 {
 
     /**
-     * Gerar pagamento por Boleto
+     * Gerar Pagament por Boleto
      *
-     * Gerar um boleto | Exemplo: api/v1/pagamento/boleto/$pgm_id
+     * Gerar um boleto | Exemplo: api/v1/pagament/boleto/$pgm_id
      */
-    public function gerarPagamentoBoleto($pgm_id)
+    public function gerarPagamentBoleto($pgm_id)
     {
         
         $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();
@@ -44,11 +44,11 @@ class PagamentoController extends Controller
     
     
     /**
-     * Gerar pagamento por boleto pessoa juridica
+     * Gerar Pagament por boleto pessoa juridica
      *
-     * Gerar um boleto | Exemplo: api/v1/pagamento/boleto/pessoaJuridica/$pgm_id
+     * Gerar um boleto | Exemplo: api/v1/pagament/boleto/pessoaJuridica/$pgm_id
      */
-    public function gerarPagamentoBoletoPessoaJuridica($pgm_id)
+    public function gerarPagamentBoletoPessoaJuridica($pgm_id)
     {
         
         $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();
@@ -70,9 +70,9 @@ class PagamentoController extends Controller
     /**
      * Gerar pagamento por Cartao
      *
-     * Gerar um boleto | Exemplo: api/v1/pagamento/cartao/$pgm_id
+     * Gerar um boleto | Exemplo: api/v1/pagament/cartao/$pgm_id
      */
-    public function gerarPagamentoCartao($pgm_id)
+    public function gerarPagamentCartao($pgm_id)
     {
         
         $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();
@@ -100,7 +100,7 @@ class PagamentoController extends Controller
     /**
      * Definir Endereco por boleto pessoa juridica
      *
-     * Definir um Endereco para o boleto | Exemplo: api/v1/pagamento/boleto/definirEndereco/$pgm_id/$idTransacao
+     * Definir um Endereco para o boleto | Exemplo: api/v1/pagament/boleto/definirEndereco/$pgm_id/$idTransacao
      */
     public function definirEnderecoBoleto($pgm_id, $idTransacao)
     {

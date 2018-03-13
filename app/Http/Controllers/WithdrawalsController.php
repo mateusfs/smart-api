@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Saques;
+use App\Withdrawals;
 use App\Iugu;
 use App\Gerencianet;
 use App\Parametros;
@@ -11,52 +11,52 @@ use App\Parametros;
 
 
 /**
- * @resource Saques
+ * @resource Withdrawals
  *
  */
-class SaquesController extends Controller
+class WithdrawalsController extends Controller
 {
     /**
-     * Buscar Saque
+     * Buscar Withdrawal
      *
-     * Buscar Saque | Exemplo: api/v1/saques/1
+     * Buscar Withdrawal | Exemplo: api/v1/withdrawals/1
      *
      * @param number $saq_id
      */
 	public function index($saq_id)
 	{
-		return Saques::where('saq_id', $saq_id)->firstOrFail();
+		return Withdrawal::where('saq_id', $saq_id)->firstOrFail();
 	}
 	
 	/**
-	 * Criar Saque
+	 * Criar Withdrawal
 	 *
-	 * Criar Saque | Exemplo: api/v1/saques/criar
+	 * Criar Withdrawal | Exemplo: api/v1/withdrawals/criar
 	 *
 	 * @return void
 	 */
 	public function criar(Request $request)
 	{
-	    return Saques::created($request);
+		return Withdrawal::created($request);
 	}
 	
 	/**
-	 * Atualizar Saque
+	 * Atualizar Withdrawal
 	 *
-	 * Atualizar Saque | Exemplo: api/v1/saques/atualizar
+	 * Atualizar Withdrawal | Exemplo: api/v1/withdrawals/atualizar
 	 *
 	 * @return void
 	 */
 	public function atualizar(Request $request)
 	{
-		return Saques::updated($request);
+		return Withdrawal::updated($request);
 	}
 	
 	
 	/**
-	 * Remover Saque
+	 * Remover Withdrawal
 	 *
-	 * Remover Saque | Exemplo: api/v1/saques/delete/1
+	 * Remover Withdrawal | Exemplo: api/v1/withdrawals/delete/1
 	 *
 	 * @param number $prc_id
 	 *
@@ -64,21 +64,24 @@ class SaquesController extends Controller
 	 */
 	public function delete($prc_id)
 	{
-	    return Saques::destroy($prc_id);
+		$withdrawal = Withdrawal::where('saq_id', $saq_id)->firstOrFail();
+	    if($withdrawal){
+	    	$withdrawal->delete();
+	    }
 	}
 	
 	
 	/**
-	 * Pedido de Saque
+	 * Pedido de Withdrawal
 	 *
-	 * Pedido de Saque | Exemplo: api/v1/saques/sacar/1
+	 * Pedido de Withdrawal | Exemplo: api/v1/withdrawals/sacar/1
 	 *
 	 * @return void
 	 */
 	public function sacar($saq_id)
 	{
 	    
-	    $saque = Saques::where('saq_id', $saq_id)->firstOrFail();
+		$saque = Withdrawal::where('saq_id', $saq_id)->firstOrFail();
 	    
 	    
 	    dd('Realizar Saque');

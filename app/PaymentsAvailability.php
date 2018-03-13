@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Recebimentos extends Model
+class PaymentsAvailability extends Model
 {
 	protected $table = 'payments_availability';
 	protected $primaryKey = 'prc_id';

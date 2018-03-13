@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Itens;
+use App\OrdersItems;
 
 /**
  * @resource Itens
  *
  */
-class ItensController extends Controller
+class OrdersItemsController extends Controller
 {
     /**
      * Buscar Iten
      *
-     * Buscar Iten | Exemplo: api/v1/itens/1
+     * Buscar Iten | Exemplo: api/v1/items/1
      *
      * @param number $oit_id
      */
 	public function index($oit_id)
 	{
-		return Itens::where('oit_id', $oit_id)->firstOrFail();
+		return OrdersItems::where('oit_id', $oit_id)->firstOrFail();
 	}
 	
 	/**
@@ -32,7 +32,7 @@ class ItensController extends Controller
 	 */
 	public function criar(Request $request)
 	{
-	    return Itens::created($request);
+		return OrdersItems::created($request);
 	}
 	
 	/**
@@ -44,7 +44,7 @@ class ItensController extends Controller
 	 */
 	public function atualizar(Request $request)
 	{
-		return Itens::updated($request);
+		return OrdersItems::updated($request);
 	}
 	
 	
@@ -59,6 +59,9 @@ class ItensController extends Controller
 	 */
 	public function delete($oit_id)
 	{
-	    return Itens::destroy($oit_id);
+		$iten = OrdersItems::where('oit_id', $oit_id)->firstOrFail();
+		if($iten){
+			$iten->delete();
+		}
 	}
 }

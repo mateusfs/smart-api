@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Dividas extends Model
+class Debets extends Model
 {
 	protected $table = 'payments';
 	protected $primaryKey = 'pgm_id';

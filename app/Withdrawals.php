@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Saques extends Model
+class Withdrawals extends Model
 {
 	protected $table = 'withdrawals';
 	protected $primaryKey = 'saq_id';
