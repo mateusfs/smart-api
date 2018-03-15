@@ -17,46 +17,46 @@ use App\Parametros;
 class WithdrawalsController extends Controller
 {
     /**
-     * Buscar Withdrawal
+     * Search Withdrawal
      *
-     * Buscar Withdrawal | Exemplo: api/v1/withdrawals/1
+     * Search a withdrawal | Exemplo: api/v1/withdrawals/$saq_id
      *
      * @param number $saq_id
      */
 	public function index($saq_id)
 	{
-		return Withdrawal::where('saq_id', $saq_id)->firstOrFail();
+	    return Withdrawals::where('saq_id', $saq_id)->firstOrFail();
 	}
 	
 	/**
-	 * Criar Withdrawal
+	 * Create Withdrawal
 	 *
-	 * Criar Withdrawal | Exemplo: api/v1/withdrawals/criar
+	 * Create a withdrawal | Exemplo: api/v1/withdrawals/create
 	 *
 	 * @return void
 	 */
 	public function criar(Request $request)
 	{
-		return Withdrawal::created($request);
+	    return Withdrawals::created($request);
 	}
 	
 	/**
-	 * Atualizar Withdrawal
+	 * Update Withdrawal
 	 *
-	 * Atualizar Withdrawal | Exemplo: api/v1/withdrawals/atualizar
+	 * Update a withdrawal | Exemplo: api/v1/withdrawals/atualizar
 	 *
 	 * @return void
 	 */
-	public function atualizar(Request $request)
+	public function update(Request $request)
 	{
-		return Withdrawal::updated($request);
+	    return Withdrawals::updated($request);
 	}
 	
 	
 	/**
 	 * Remover Withdrawal
 	 *
-	 * Remover Withdrawal | Exemplo: api/v1/withdrawals/delete/1
+	 * Remover a withdrawal | Exemplo: api/v1/withdrawals/delete/$prc_id
 	 *
 	 * @param number $prc_id
 	 *
@@ -64,7 +64,7 @@ class WithdrawalsController extends Controller
 	 */
 	public function delete($prc_id)
 	{
-		$withdrawal = Withdrawal::where('saq_id', $saq_id)->firstOrFail();
+	    $withdrawal = Withdrawals::where('saq_id', $saq_id)->firstOrFail();
 	    if($withdrawal){
 	    	$withdrawal->delete();
 	    }
@@ -72,43 +72,47 @@ class WithdrawalsController extends Controller
 	
 	
 	/**
-	 * Pedido de Withdrawal
+	 * Order de Withdrawal
 	 *
-	 * Pedido de Withdrawal | Exemplo: api/v1/withdrawals/sacar/1
+	 * Order of withdrawal | Exemplo: api/v1/withdrawals/withdraw/$saq_id
 	 *
 	 * @return void
 	 */
-	public function sacar($saq_id)
+	public function withdraw($saq_id)
 	{
 	    
-		$saque = Withdrawal::where('saq_id', $saq_id)->firstOrFail();
+	    $withdraw = Withdrawals::where('saq_id', $saq_id)->firstOrFail();
 	    
 	    
 	    dd('Realizar Saque');
 	    
-	    if($saque)
+	    if($withdraw)
 	    {
-	        if(Parametros::getIsIugu()){
-	            $customVariables = Iugu::getCustonVariables($saque->saq_intermediario, $saque->saq_valor);
+	        if(Parametros::getIsIugu())
+	        {
+	            $customVariables = Iugu::getCustonVariables($withdraw->saq_intermediario, $withdraw->saq_valor);
 	            
-	            $subConta = Iugu::criarSubconta($saque->saq_intermediario, null);
+	            $subAccount = Iugu::orderOfWithdrawal($withdraw->saq_intermediario, null);
 	            
-	            if($subConta){
-	                $result = Iugu::pedidoDeSaque($subConta['account_id'], $saque->saq_valor, $customVariables);
+	            if($subAccount)
+	            {
+	                $result = Iugu::requestWithdrawal($subAccount['account_id'], $withdraw->saq_valor, $customVariables);
 	            }
 	        }
 
-	        if(Parametros::getIsGerenciaNet()){
-	            $result = GerenciaNet::criarTransacao($saque->saq_intermediario, 1, $saque->saq_valor);
+	        if(Parametros::getIsGerenciaNet())
+	        {
+	            $result = GerenciaNet::createTransaction($withdraw->saq_intermediario, 1, $withdraw->saq_valor);
 	        }
 	        
 	    }
 	    
-	    if($result){
+	    if($result)
+	    {
 	        return $result;
         }
         
-        return response()->json(["error" => "Id do Saque é obrigatório"], 403);
+        return response()->json(["error" => "Serving ID is required"], 403);
 	}
 	
 

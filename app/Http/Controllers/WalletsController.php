@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 class WalletsController extends Controller
 {
     /**
-     * Buscar Wallet
+     * Search Wallet
      *
-     * Buscar Wallet | Exemplo: api/v1/wallets/1
+     * Search a wallet | Exemplo: api/v1/wallets/1
      * 
      * @param number $wal_id
      * 
@@ -27,9 +27,9 @@ class WalletsController extends Controller
 	
 	
 	/**
-	 * Criar Wallet
+	 * Create Wallet
 	 *
-	 * Criar Wallet | Exemplo: api/v1/wallets/criar
+	 * Create a wallet | Exemplo: api/v1/wallets/create
 	 * 
 	 * @return void
 	 */
@@ -39,22 +39,27 @@ class WalletsController extends Controller
 	}
 	
 	/**
-	 * Atualizar Wallet
+	 * Update Wallet
 	 *
-	 * Atualizar Wallet | Exemplo: api/v1/wallets/atualizar
+	 * Update a wallet | Exemplo: api/v1/wallets/update
 	 *
 	 * @return void
 	 */
-	public function atualizar(Request $request)
+	public function update(Request $request)
 	{
-		return Wallets::updated($request);
+	    $wallet = Wallets::where('wal_id', $request->wal_id)->firstOrFail();
+    	
+		if($wallet)
+		{
+		    $wallet->save();
+		}
 	}
 	
 	
 	/**
-	 * Remover Wallet
+	 * Remove Wallet
 	 *
-	 * Remover Wallet | Exemplo: api/v1/wallets/delete/1
+	 * Remove Wallet | Exemplo: api/v1/wallets/delete/1
 	 * 
 	 * @param number $wal_id
 	 * 
@@ -63,7 +68,9 @@ class WalletsController extends Controller
 	public function delete($wal_id)
 	{
 		$wallet = Wallets::where('wal_id', $wal_id)->firstOrFail();
-		if($wallet){
+		
+		if($wallet)
+		{
 			$wallet->delete();
 		}
 	}

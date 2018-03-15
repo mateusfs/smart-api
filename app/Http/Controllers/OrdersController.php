@@ -12,9 +12,9 @@ use App\Orders;
 class OrdersController extends Controller
 {
     /**
-     * Buscar Order
+     * Search Order
      *
-     * Buscar Order | Exemplo: api/v1/orders/1
+     * Search a order | Exemplo: api/v1/orders/1
      *
      * @param number $ord_id
      */
@@ -24,9 +24,9 @@ class OrdersController extends Controller
 	}
 	
 	/**
-	 * Criar Order
+	 * Create Order
 	 *
-	 * Criar Order | Exemplo: api/v1/itens/criar
+	 * Create a order | Exemplo: api/v1/itens/create
 	 *
 	 * @return void
 	 */
@@ -36,22 +36,27 @@ class OrdersController extends Controller
 	}
 	
 	/**
-	 * Atualizar Order
+	 * Update Order
 	 *
-	 * Atualizar Order | Exemplo: api/v1/orders/atualizar
+	 * Update a Order | Exemplo: api/v1/orders/update
 	 *
 	 * @return void
 	 */
-	public function atualizar(Request $request)
+	public function update(Request $request)
 	{
-		return Orders::updated($request);
+    	$order = Orders::where('ord_id', $request->ord_id)->firstOrFail();
+    	
+		if($order)
+		{
+		    $order->save();
+		}
 	}
 	
 	
 	/**
-	 * Remover Order
+	 * Remove Order
 	 *
-	 * Remover Order | Exemplo: api/v1/orders/delete/1
+	 * Remove Order | Exemplo: api/v1/orders/delete/1
 	 *
 	 * @param number $ord_id
 	 * 

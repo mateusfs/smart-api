@@ -3,57 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Payments;
+use App\PaymentsAvailability;
 
 /**
- * @resource payments
+ * @resource PaymentsAvailability
  */
 class PaymentsAvailabilityController extends Controller {
 	/**
-	 * Buscar Recebimento
+	 * Search Receiving
 	 *
-	 * Buscar Recebimento | Exemplo: api/v1/payments/1
+	 * Search Receiving | Example: api/v1/payments/1
 	 *
 	 * @param number $prc_id        	
 	 */
-	public function index($prc_id) {
-		return Payments::where ( 'prc_id', $prc_id )->firstOrFail ();
+	public function index($prc_id) 
+	{
+	    return PaymentsAvailability::where ( 'prc_id', $prc_id )->firstOrFail ();
 	}
 	
 	/**
-	 * Criar Recebimento
+	 * Create Receipt
 	 *
-	 * Criar Recebimento | Exemplo: api/v1/payments/criar
+	 * Create Receipt | Example: api/v1/payments/criar
 	 *
 	 * @return void
 	 */
-	public function criar(Request $request) {
-		return Payments::created ( $request );
+	public function criar(Request $request) 
+	{
+	    return PaymentsAvailability::created ( $request );
 	}
 	
 	/**
-	 * Atualizar Recebimento
+	 * Update Receiving
 	 *
-	 * Atualizar Recebimento | Exemplo: api/v1/payments/atualizar
+	 * Update Receiving | Example: api/v1/payments/update
 	 *
 	 * @return void
 	 */
-	public function atualizar(Request $request) {
-		return Payments::updated ( $request );
+	public function update(Request $request) 
+	{
+	    $payment = PaymentsAvailability::where ( 'prc_id', $request->prc_id )->firstOrFail ();
+	    
+	    if ($payment) 
+	    {
+	        $payment->save ();
+	    }
 	}
 	
 	/**
-	 * Remover Recebimento
+	 * Remove Receiving
 	 *
-	 * Remover Recebimento | Exemplo: api/v1/payments/delete/1
+	 * Remove Receiving | Example: api/v1/payments/delete/1
 	 *
 	 * @param number $prc_id        	
 	 *
 	 * @return int
 	 */
-	public function delete($prc_id) {
-		$payment = Payments::where ( 'prc_id', $prc_id )->firstOrFail ();
-		if ($payment) {
+	public function delete($prc_id) 
+	{
+	    $payment = PaymentsAvailability::where ( 'prc_id', $prc_id )->firstOrFail ();
+	    
+		if ($payment) 
+		{
 			$payment->delete ();
 		}
 	}

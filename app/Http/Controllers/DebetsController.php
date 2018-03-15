@@ -10,20 +10,20 @@ use App\Debets;
  */
 class DebetsController extends Controller {
 	/**
-	 * Buscar Debet
+	 * Search Debet
 	 *
-	 * Buscar Debet | Exemplo: api/v1/debets/1
+	 * Search Debet | Exemplo: api/v1/debets/1
 	 *
-	 * @param number $pgm_id        	
+	 * @param number $idPgm        	
 	 */
-	public function index($pgm_id) {
-		return Debets::where ( 'pgm_id', $pgm_id )->firstOrFail ();
+	public function index($idPgm) {
+		return Debets::where ( 'pgm_id', $idPgm )->firstOrFail ();
 	}
 	
 	/**
-	 * Criar Debet
+	 * Create Debet
 	 *
-	 * Criar Debet | Exemplo: api/v1/debets/criar
+	 * Create Debet | Exemplo: api/v1/debets/create
 	 *
 	 * @return void
 	 */
@@ -32,27 +32,36 @@ class DebetsController extends Controller {
 	}
 	
 	/**
-	 * Atualizar Debet
+	 * Update Debet
 	 *
-	 * Atualizar Debet | Exemplo: api/v1/debets/criar
+	 * Update Debet | Exemplo: api/v1/debets/create
 	 *
 	 * @return void
 	 */
-	public function atualizar(Request $request) {
-		return Debets::updated ( $request );
+	public function update(Request $request) 
+	{
+		$debet = Debets::where ( 'pgm_id', $request->id_pgm )->firstOrFail ();
+		
+		if ($debet)
+		{
+		    $debet->save();
+		}
 	}
 	
 	/**
-	 * Remover Debet
+	 * Remove Debet
 	 *
-	 * Remover Debet | Exemplo: api/v1/debets/delete/1
+	 * Remove Debet | Exemplo: api/v1/debets/delete/1
 	 *
-	 * @param number $pgm_id        	
+	 * @param number $idPgm        	
 	 *
 	 * @return int
 	 */
-	public function delete($pgm_id) {
-		$debet = Debets::where ( 'pgm_id', $pgm_id )->firstOrFail ();
+	public function delete($idPgm) 
+	{
+	    
+		$debet = Debets::where ( 'pgm_id', $idPgm )->firstOrFail ();
+		
 		if ($debet) 
 		{
 			$debet->delete();

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Dividas;
+use App\Debets;
 use App\Parametros;
 use App\Iugu;
 use App\Gerencianet;
@@ -13,30 +13,34 @@ class PagamentController extends Controller
 {
 
     /**
-     * Gerar Pagament por Boleto
+     * Generate Pay per Ticket
      *
-     * Gerar um boleto | Exemplo: api/v1/pagament/boleto/$pgm_id
+     * Generate a ticket | Example: api/v1/pagament/ticket/$pgm_id
      */
-    public function gerarPagamentBoleto($pgm_id)
+    public function generatePagamentTicket($pgm_id)
     {
         
-        $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();
+        $debet = Debets::where('pgm_id', $pgm_id)->firstOrFail();
         
-        if ($divida) {
-            if (Parametros::getIsIugu()) {
-                $result = Iugu::emetirBoleto($divida);
+        if ($debet) 
+        {
+            if (Parametros::getIsIugu()) 
+            {
+                $result = Iugu::issueTicket($debet);
             }
             
-            if (Parametros::getIsGerenciaNet()) {
-                $result = Gerencianet::emetirBoleto($divida);
+            if (Parametros::getIsGerenciaNet()) 
+            {
+                $result = Gerencianet::issueTicket($debet);
             }
         }
         
-        if($result){
+        if($result)
+        {
             return $result;
         }
         
-        return response()->json(["error" => "Id da divida é obrigatório"], 403);
+        return response()->json(["error" => "Debt ID is required"], 403);
     }
     
     
@@ -44,18 +48,20 @@ class PagamentController extends Controller
     
     
     /**
-     * Gerar Pagament por boleto pessoa juridica
+     * Generate Pagament per ticket legal person
      *
-     * Gerar um boleto | Exemplo: api/v1/pagament/boleto/pessoaJuridica/$pgm_id
+     * Generate a pagament | Example: api/v1/pagament/ticket/legalPerson/$idPgm
      */
-    public function gerarPagamentBoletoPessoaJuridica($pgm_id)
+    public function generatePaymentLegalPerson($idPgm)
     {
         
-        $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();
+        $debet = Debets::where('pgm_id', $idPgm)->firstOrFail();
         
-        if ($divida) {
-            if (Parametros::getIsGerenciaNet()) {
-                $result = Gerencianet::emetirBoletoPessoaJuridica($divida, 5);
+        if ($debet) 
+        {
+            if (Parametros::getIsGerenciaNet()) 
+            {
+                $result = Gerencianet::issueOfCorporateTaxes($debet, 5);
             }
         }
         
@@ -63,61 +69,68 @@ class PagamentController extends Controller
             return $result;
         }
         
-        return response()->json(["error" => "Id da divida é obrigatório"], 403);
+        return response()->json(["error" => "Debt ID is required"], 403);
     }
     
     
     /**
-     * Gerar pagamento por Cartao
+     * Generate payment by Card
      *
-     * Gerar um boleto | Exemplo: api/v1/pagament/cartao/$pgm_id
+     * Generate a ticket | Example: api/v1/pagament/card/$idPgm
      */
-    public function gerarPagamentCartao($pgm_id)
+    public function gerarPagamentCartao($idPgm)
     {
         
-        $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();
+        $debet = Debets::where('pgm_id', $idPgm)->firstOrFail();
 
         
-        if ($divida) {
-            if (Parametros::getIsIugu()) {
-                $result = Iugu::emetirCartao($divida);
+        if ($debet) 
+        {
+            if (Parametros::getIsIugu()) 
+            {
+                $result = Iugu::emetirCartao($debet);
             }
             
-            if (Parametros::getIsGerenciaNet()) {
-                $result = Gerencianet::pagarCartao($divida);
+            if (Parametros::getIsGerenciaNet()) 
+            {
+                $result = Gerencianet::pagarCartao($debet);
             }
         }
         
         
-        if($result){
+        if($result)
+        {
             return $result;
         }
         
-        return response()->json(["error" => "Id da divida é obrigatório"], 403);
+        return response()->json(["error" => "Debt ID is required"], 403);
     }
     
     
     /**
-     * Definir Endereco por boleto pessoa juridica
+     * Set address per ticket legal person
      *
-     * Definir um Endereco para o boleto | Exemplo: api/v1/pagament/boleto/definirEndereco/$pgm_id/$idTransacao
+     * Set a address for ticket | Example: api/v1/pagament/ticket/setAddress/$idPgm/$idTransaction
      */
-    public function definirEnderecoBoleto($pgm_id, $idTransacao)
+    public function setTicketAddress($idPgm, $idTransaction)
     {
         
-        $divida = Dividas::where('pgm_id', $pgm_id)->firstOrFail();
+        $debet = Debets::where('pgm_id', $pgm_id)->firstOrFail();
         
-        if ($divida) {
-            if (Parametros::getIsGerenciaNet()) {
-                $result = Gerencianet::definirEnderecoDoBoleto($idTrasacao, $divida);
+        if ($debet) 
+        {
+            if (Parametros::getIsGerenciaNet()) 
+            {
+                $result = Gerencianet::setTicketAddress($idTransaction, $debet);
             }
         }
         
-        if($result){
+        if($result)
+        {
             return $result;
         }
         
-        return response()->json(["error" => "Id da divida é obrigatório"], 403);
+        return response()->json(["error" => "Debt ID is required"], 403);
     }
 
 }

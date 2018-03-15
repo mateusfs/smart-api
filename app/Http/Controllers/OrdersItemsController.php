@@ -12,9 +12,9 @@ use App\OrdersItems;
 class OrdersItemsController extends Controller
 {
     /**
-     * Buscar Iten
+     * Search Iten
      *
-     * Buscar Iten | Exemplo: api/v1/items/1
+     * Search Iten | Exemplo: api/v1/itens/1
      *
      * @param number $oit_id
      */
@@ -24,27 +24,32 @@ class OrdersItemsController extends Controller
 	}
 	
 	/**
-	 * Criar Iten
+	 * Create Iten
 	 *
-	 * Criar Iten | Exemplo: api/v1/itens/criar
+	 * Create Iten | Exemplo: api/v1/itens/create
 	 *
 	 * @return void
 	 */
-	public function criar(Request $request)
+	public function create(Request $request)
 	{
 		return OrdersItems::created($request);
 	}
 	
 	/**
-	 * Atualizar Iten
+	 * Update Iten
 	 *
-	 * Atualizar Iten | Exemplo: api/v1/itens/atualizar
+	 * Update Iten | Exemplo: api/v1/itens/update
 	 *
 	 * @return void
 	 */
-	public function atualizar(Request $request)
+	public function update(Request $request)
 	{
-		return OrdersItems::updated($request);
+		$iten = OrdersItems::where('oit_id', $request->oit_id)->firstOrFail();
+		
+		if($iten)
+		{
+		    $iten->save();
+		}
 	}
 	
 	
@@ -60,7 +65,9 @@ class OrdersItemsController extends Controller
 	public function delete($oit_id)
 	{
 		$iten = OrdersItems::where('oit_id', $oit_id)->firstOrFail();
-		if($iten){
+		
+		if($iten)
+		{
 			$iten->delete();
 		}
 	}
