@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Iugu extends Model
 {
     /**
-     * Emetir Boleto IUGU
+     * Issue Ticket IUGU
      *
      */
     public static function issueTicket(Debets $divida)
@@ -35,18 +35,20 @@ class Iugu extends Model
     
     
     /**
-     * Emetir Cartao IUGU
+     * Issue Card IUGU
      *
      */
-    public static function emetirCartao(Debets $divida)
+    public static function issueCard(Debets $divida)
     {
-        try {
-            if ($divida) {
-                $idCliente = Parametros::CLIENTE_ID_IUGU;
+        try 
+        {
+            if ($divida) 
+            {
+                $idClient = Parametros::CLIENTE_ID_IUGU;
                 
                 $token = Iugu::criarToken($idCliente);
                 
-                $formaDePamanto = Iugu::criarFormaPagamento($idCliente);
+                $formaDePamanto = Iugu::criarFormaPagamento($idClient);
                 
                 $returnUrl = 'http://smartclic.com.br/';
                 
@@ -54,17 +56,19 @@ class Iugu extends Model
                 
                 $emails = $debet->pgm_pagador_email.',smart@smartclic.com.br';
                 
-                $fatura = Iugu::criarFatura($debet->pgm_pagador_email, $emails, $dataVencimento, $items, $returnUrl, $expiredUrl, false, '', '', $idCliente, false, null, 'credit_card');
+                $fatura = Iugu::criarFatura($debet->pgm_pagador_email, $emails, $dataVencimento, $items, $returnUrl, $expiredUrl, false, '', '', $idClient, false, null, 'credit_card');
                 
                 $items = Iugu::getItems($debet->pgm_pagador_razao, 1, $debet->pgm_valor);
                 
                 if($formaDePamanto && $items){
-                    $result = self::cobrancaDireta($debets, '', $token, $formaDePamanto['id'], true, $idCliente, $fatura['id'], $debet->pgm_pagador_email, $debet->pgm_parcelas, null, 5, $items);
+                    $result = self::cobrancaDireta($debets, '', $token, $formaDePamanto['id'], true, $idClient, $fatura['id'], $debet->pgm_pagador_email, $debet->pgm_parcelas, null, 5, $items);
                 }
                 
                 return $result;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
@@ -72,14 +76,16 @@ class Iugu extends Model
     
     
     /**
-     * Criar Fatura IUGU
+     * Create Invoice IUGU
      *
-     * Cria uma Fatura para um Cliente (Podendo ser um objeto cliente ou apenas um e-mail).
+     * Create an Invoice for a Customer (Can be a client object or just an email).
      */
-    public static function criarFatura($email, $emails, $dataVencimento, $items, $returnUrl, $expiredUrl, $temMulta, $multa, $cobrarJuros = true, $desconto, $idCliente, $ignoreEmail = false, $idAssinatura = null, $metodoDePagamento = 'all', $creditoDaAssinatura = null, $temDesconto = false, $logs = null, $paymenDiscounts = null, $custonVariables = null)
+    public static function createInvoice($email, $emails, $dataVencimento, $items, $returnUrl, $expiredUrl, $temMulta, $multa, $cobrarJuros = true, $desconto, $idCliente, $ignoreEmail = false, $idSubscription = null, $metodoDePagamento = 'all', $creditoDaAssinatura = null, $temDesconto = false, $logs = null, $paymenDiscounts = null, $custonVariables = null)
     {
-        try {
-            if ($divida) {
+        try 
+        {
+            if ($divida) 
+            {
                 
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/invoices', [
@@ -88,16 +94,16 @@ class Iugu extends Model
                         'cc_emails' => $emails,
                         'due_date' => ($dataVencimento) ? $dataVencimento : date('Y-m-d') + 3,
                         'ensure_workday_due_date' => true,
-                        $items, // OBRIGATÓRIO - Itens da fatura. "price_cents" valor mínimo 100
+                        $items, // Required - Invoice items. "price cents" minimum value 100
                         'return_url' => $returnUrl,
                         'expired_url' => $expiredUrl,
-                        'fines' => $temMulta, // Booleano para Habilitar ou Desabilitar multa por atraso de pagamento
+                        'fines' => $temMulta, // Boolean to Enable or Disable Late Payment Penalty
                         'late_payment_fine' => $multa,
                         'per_day_interest' => $cobrarJuros,
                         'discount_cents' => $desconto,
                         'customer_id' => $idCliente,
                         'ignore_due_email' => $ignoreEmail,
-                        'subscription_id' => $idAssinatura,
+                        'subscription_id' => $idSubscription,
                         'payable_with' => $metodoDePagamento,
                         'credits' => $creditoDaAssinatura,
                         'early_payment_discount' => $temDesconto,
@@ -111,94 +117,111 @@ class Iugu extends Model
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Capturar Fatura IUGU
+     * Capture Invoice IUGU
      *
-     * Captura uma fatura com estado "Em Análise" / "in_analysis".
+     * Captures an invoice with status "In Analysis" / "in analysis".
      */
-    public static function capturarFatura($idFatura)
+    public static function captureInvoice($idInvoice)
     {
-        try {
-            if ($idFatura) {
+        try 
+        {
+            if ($idInvoice) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idFatura . '/capture', [
+                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . '/capture', [
                     'form_params' => [
-                        'id' => $idFatura
+                        'id' => $idInvoice
                     ]
                 ]);
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Reembolsar Fatura IUGU
+     * Refund Invoice IUGU
      *
-     * Efetua o reembolso de uma Fatura. Somente alguns meios de pagamento permitem o reembolso, como por exemplo o
-     * Cartão de Crédito. Após o reembolso, a Fatura fica com o status de "reembolsada" / "refunded".
+     * Refund an Invoice. Only some means of payment allow the refund, as for example the Credit Card. 
+     * After the refund, the invoice has the status of "refunded" / "refunded".
+     * 
      */
-    public static function reembolsarFatura($idFatura)
+    public static function refundInvoice($idInvoice)
     {
-        try {
-            if ($idFatura) {
+        try 
+        {
+            if ($idInvoice) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idFatura . '/refund', [
+                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . '/refund', [
                     'form_params' => [
-                        'id' => $idFatura
+                        'id' => $idInvoice
                     ]
                 ]);
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Cancelar Fatura IUGU
+     * Cancel Invoice IUGU
      *
-     * Cancela uma Fatura
+     * Cancel a invoice
      */
-    public static function cancelarFatura($idFatura)
+    public static function cancelInvoice($idInvoice)
     {
-        try {
-            if ($idFatura) {
+        try 
+        {
+            if ($idInvoice) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idFatura . '/cancel', [
+                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . '/cancel', [
                     'form_params' => [
-                        'id' => $idFatura
+                        'id' => $idInvoice
                     ]
                 ]);
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Gerar 2ª via de fatura IUGU
+     * Generate second invoice path IUGU
      *
-     * Gera a segunda via de uma fatura com o status "pendente". A fatura atual é cancelada e uma nova é criada com o mesmo status.
+     * Generates the second copy of an invoice with the status "pending". The current invoice is canceled and a new one is created with the same status.
      */
-    public static function gerarSegundaViaFatura(Debets $debets, $idFatura, $items = nulkl)
+    public static function gerarateSecondInvoicePath($idInvoice, $items = nulkl)
     {
-        try {
-            if ($divida && $idFatura) {
+        try 
+        {
+            if ($idInvoice) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idFatura . '/duplicate', [
+                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . '/duplicate', [
                     'form_params' => [
-                        'id' => $idFatura,
+                        'id' => $idInvoice,
                         'due_date' => date('YY-M-D'),
                         'ignore_due_email' => false,
                         'ignore_canceled_email' => true,
@@ -210,121 +233,139 @@ class Iugu extends Model
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Buscar Fatura IUGU
+     * Search Invoice IUGU
      *
-     * Retorna os dados de uma Fatura.
+     * Returns the data of an Invoice.
      */
-    public static function buscarFatura($idFatura)
+    public static function searchInvoice($idInvoice)
     {
-        try {
-            if ($idFatura) {
+        try 
+        {
+            if ($idInvoice) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idFatura, [
+                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice, [
                     'form_params' => [
-                        'id' => $debet->pgm_id_fatura_iugu
+                        'id' => $idInvoice
                     ]
                 ]);
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Listar Faturas IUGU
+     * List Invoices IUGU
      *
-     * Retorna uma lista das faturas em sua conta ordenadas pela data de criação, da mais à menos recente. Por padrão, este
-     * endpoint retorna no máximo 100 registros. O campo "totalItems" contém sempre a quantidade total de faturas cadastradas,
-     * independentemente dos parâmetros de pesquisa utilizados, e o resultado da pesquisa fica sempre dentro de "items".
+     * Returns a list of invoices in your account sorted by the creation date, from the most recent to the latest. 
+     * By default, this endpoint returns a maximum of 100 records. The "totalItems" field always contains the total 
+     * number of invoices registered, regardless of the search parameters used, and the search result is always within "items".
+     * 
      */
-    public static function listarFaturas()
+    public static function listInvoices()
     {
-        try {
+        try 
+        {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/invoices/');
             
             return $request;
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Enviar por email IUGU
+     * Send by email IUGU
      *
-     * Envia a fatura iugu para o email vinculado a ela.
+     * Send the iugu invoice to the email linked to it.
      */
-    public static function enviarEmailFatura($idFatura)
+    public static function sendEmailInvoice($idInvoice)
     {
-        try {
-            if ($idFatura) {
+        try 
+        {
+            if ($idInvoice) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idFatura . 'send_email', [
+                $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . 'send_email', [
                     'form_params' => [
-                        'id' => $debet->pgm_id_fatura_iugu
+                        'id' => $idInvoice
                     ]
                 ]);
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Cobrança Direta IUGU
+     * Direct Collection IUGU
      *
-     * Cobrança simples via boleto ou cartão de crédito.
+     * Simple collection via ticket or credit card.
      */
-    public static function cobrancaDireta($debets, $metodoDePagamento = 'bank_slip', $token = null, $idFormaDePamanto = null, $restrigirMetodo = true, $idCliente = null, $idFatura = null, $email = null, $numeroDeParcelas, $valorDoDesconto = null, $prazoEmDias = 3, $items = null)
+    public static function directBilling($debet, $method = 'bank_slip', $token = null, $customerPaymentMethodId = null, $restrictPaymentMethod = true, $idCliente = null, $idFatura = null, $email = null, $months, $discountCents = null, $bankSlipExtraDays = 3, $items = null)
     {
-        try {
+        try 
+        {
             
-            if ($divida) {
+            if ($debet) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/charge', [
                     'form_params' => [
-                        'method' => $metodoDePagamento,
+                        'method' => $method,
                         'token' => $token,
-                        'customer_payment_method_id' => $idFormaDePamanto,
-                        'restrict_payment_method' => $restrigirMetodo, // Se true, restringe o método de pagamento da cobrança para o definido em method.
-                        'customer_id' => $idCliente,
-                        'invoice_id' => $idFatura,
-                        'email' => $email, // E-mail do Cliente (não é preenchido caso seja enviado um "invoice_id")
-                        'months' => $numeroDeParcelas,
-                        'discount_cents' => $valorDoDesconto,
-                        'bank_slip_extra_days' => $prazoEmDias,
+                        'customer_payment_method_id' => $customerPaymentMethodId,
+                        'restrict_payment_method' => $restrictPaymentMethod, // If true, it restricts the billing method of payment to that defined in method.
+                        'customer_id' => $idClient,
+                        'invoice_id' => $idInvoice,
+                        'email' => $email, // Customer email (not filled in if an "invoice_id" is sent)
+                        'months' => $months,
+                        'discount_cents' => $discountCents,
+                        'bank_slip_extra_days' => $bankSlipExtraDays,
                         'keep_dunning' => true,
-                        'payer' => self::getPayer($divida),
+                        'payer' => self::getPayer($debet),
                         $items
                     ]
                 ]);
             }
             
             return $request;
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Criar Cliente IUGU
+     * Create Client IUGU
      *
-     * Cria um objeto cliente
+     * Create a client object
      */
-    public static function criarCliente(Debets $debets, $customVariables = null)
+    public static function createCustomer(Debets $debet, $customVariables = null)
     {
         try {
-            if ($divida) {
+            if ($debet) {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/customers', [
                     'form_params' => [
@@ -352,14 +393,16 @@ class Iugu extends Model
     }
 
     /**
-     * Alterar Cliente IUGU
+     * Update Client IUGU
      *
-     * Alterar os dados de um Cliente. Quaisquer parâmetros não informados não serão alterados.
+     * Update the data of a Customer. Any parameters not entered will not be changed.
      */
-    public static function alterarCliente(Debets $debets, $idFormaPagamento = null, $customVariables = null)
+    public static function updateClient(Debets $debet, $defaultPaymentMethodId = null, $customVariables = null)
     {
-        try {
-            if ($divida) {
+        try 
+        {
+            if ($debet) 
+            {
                 $client = new Client(self::getHeaders());
                 
                 $request = $client->put('https://api.iugu.com/v1/customers/' . Parametros::CLIENTE_ID_IUGU, [
@@ -378,81 +421,97 @@ class Iugu extends Model
                         'state' => $debet->pgm_endereco_estado,
                         'district' => $debet->pgm_endereco_bairro,
                         'complement' => $debet->pgm_endereco_complemento,
-                        'default_payment_method_id' => $idFormaPagamento,
+                        'default_payment_method_id' => $defaultPaymentMethodId,
                         $customVariables
                     ]
                 ]);
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Remover Cliente IUGU
+     * Remove Client IUGU
      *
-     * Remove permanentemente um cliente. Porém, não permite remover clientes com assinaturas ou faturas vinculadas.
+     * Permanently remove a client. However, it does not allow you to remove clients with linked signatures or invoices.
      */
-    public static function removerCliente($idCustomer)
+    public static function removeClient($idCustomer)
     {
-        try {
-            if ($idCustomer) {
+        try 
+        {
+            if ($idCustomer) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->delte('https://api.iugu.com/v1/customers/' . $idCustomer);
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Buscar Cliente IUGU
+     * Search Client IUGU
      *
-     * Retorna os dados de um cliente
+     * Returns the data of a client
      */
-    public static function buscarCliente($idCustomer)
+    public static function searchCliente($idCustomer)
     {
-        try {
-            if ($idCustomer) {
+        try 
+        {
+            if ($idCustomer) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/customers/' . $idCustomer);
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Listar Clientes IUGU
-     *
-     * Retorna uma lista com todos os clientes cadastrados em sua conta ordenados pela data de Criação, sendo o primeiro o
-     * que foi criado mais recentemente. O campo "totalItems" contém sempre a quantidade de clientes cadastrados,
-     * independente dos parâmetros de pesquisa utilizados e o resultado da pesquisa fica sempre dentro de "items".
+     * List Clients IUGU
+     * 
+     * Returns a list of all customers registered to your account sorted by Creation date, the first being the most recently created. 
+     * The "totalItems" field always contains the number of customers registered, regardless of the search parameters 
+     * used and the search result is always within "items".
+     * 
      */
-    public static function listarClientes()
+    public static function listClients()
     {
-        try {
+        try 
+        {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/customers/');
             return $request;
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Criar Forma de Pagamento IUGU
+     * Create Payment Method IUGU
      *
-     * Cria uma Forma de Pagamento de Cliente.
+     * Creates a Customer Payment Form.
      */
-    public static function criarFormaPagamento($idCustomer, $token)
+    public static function createPaymentMethod($idCustomer, $token)
     {
-        try {
+        try 
+        {
             
-            if ($idCustomer) {
+            if ($idCustomer) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods', [
                     'form_params' => [
@@ -464,20 +523,24 @@ class Iugu extends Model
                 
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Alterar Forma de Pagamento IUGU
+     * Change Payment Method IUGU
      *
-     * Cria uma Forma de Pagamento de Cliente.
+     * Creates a Customer Payment Form.
      */
-    public static function alterarFormaPagamento($idCustomer, $idPayment)
+    public static function changePaymentMethod($idCustomer, $idPayment)
     {
-        try {
-            if ($idCustomer && $idPayment) {
+        try 
+        {
+            if ($idCustomer && $idPayment) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods/' . $idPayment, [
                     'form_params' => [
@@ -487,20 +550,24 @@ class Iugu extends Model
                 
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Remover Forma de Pagamento IUGU
+     * Remove Payment Method IUGU
      *
-     * Remove permanentemente uma forma de pagamento de um cliente.
+     * Permanently removes a form of payment from a customer.
      */
-    public static function removerFormaPagamento($idCustomer, $idPayment)
+    public static function removeFormPayment($idCustomer, $idPayment)
     {
-        try {
-            if ($idCustomer && $idPayment) {
+        try 
+        {
+            if ($idCustomer && $idPayment) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->delete('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods/' . $idPayment, [
                     'form_params' => [
@@ -510,197 +577,237 @@ class Iugu extends Model
                 
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Buscar Forma de Pagamento IUGU
+     * Search Form of Payment IUGU
      *
-     * Retorna os dados de uma Forma de Pagamento de um Cliente
+     * Returns the data of a Customer Payment Form
      */
-    public static function buscarFormaPagamento($idCustomer, $idPayment)
+    public static function searchFormPayment($idCustomer, $idPayment)
     {
-        try {
-            if ($idCustomer && $idPayment) {
+        try 
+        {
+            if ($idCustomer && $idPayment) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods/' . $idPayment);
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Listar Formas de Pagamento IUGU
+     * List of Forms of Payment IUGU
      *
-     * Retorna uma lista com todas as formas de pagamento de determinado cliente
+     * Returns a list of all forms of payment for a given customer
+     * 
      */
-    public static function listarFormaPagamento($idCustomer)
+    public static function listFormPayment($idCustomer)
     {
-        try {
-            if ($idCustomer) {
+        try 
+        {
+            if ($idCustomer) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods');
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Criar Plano IUGU
+     * Create Plan IUGU
      *
-     * Cria um plano
+     * Create a plan
      */
-    public static function criarPlano($identificador, $nome, $intervalo, $tipoIntervalo = 'months', $valor, $metodo = 'bank_slip', $features = null)
+    public static function createPlan($identifier, $name, $intervalType, $intervalType = 'months', $valueCents, $payableWith = 'bank_slip', $features = null)
     {
-        try {
-            if ($identificador) {
+        try 
+        {
+            if ($identifier) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/plans', [
                     'form_params' => [
-                        'name' => $nome,
-                        'identifier' => $identificador,
-                        'interval' => $intervalo, // Ciclo do plano (Número inteiro maior que 0)
-                        'interval_type' => $tipoIntervalo, // Tipo de interval ("weeks" ou "months")
-                        'value_cents' => $valor,
-                        'payable_with' => $metodoPlano,
+                        'name' => $name,
+                        'identifier' => $identifier,
+                        'interval' => $interval, // Plan cycle (Integer greater than 0)
+                        'interval_type' => $intervalType, // Type of interval ("weeks" or "months")
+                        'value_cents' => $valueCents,
+                        'payable_with' => $payableWith,
                         $features
                     ]
                 ]);
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Alterar Plano IUGU
+     * Change Plan IUGU
      *
-     * Altera os dados de um Plano, quaisquer parâmetros não informados não serão alterados. As alterações não irão mudar as Assinaturas que já utilizam o Plano, mas só as novas.
+     * Changes the data of a Plan, is not informed by anything. 
+     * The changes will not change the Subscriptions that already use the Plan, but only the new ones.
+     * 
      */
-    public static function alterarPlano($idPlano, $nome, $intervalo, $tipoIntervalo = 'months', $valor, $metodo = 'bank_slip', $features = null)
+    public static function changePlan($idPlano, $name, $interval, $intervalType = 'months', $valueCents, $payableWith = 'bank_slip', $features = null)
     {
-        try {
-            if ($idPlano) {
+        try 
+        {
+            if ($idPlan) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->put('https://api.iugu.com/v1/plans/' . $idPlano, [
+                $request = $client->put('https://api.iugu.com/v1/plans/' . $idPlan, [
                     'form_params' => [
-                        'name' => $nome,
-                        'interval' => $intervalo, // Ciclo do plano (Número inteiro maior que 0)
-                        'interval_type' => $tipoIntervalo, // Tipo de interval ("weeks" ou "months")
-                        'value_cents' => $valor,
-                        'payable_with' => $metodoPlano,
+                        'name' => $name,
+                        'interval' => $interval, // Plan cycle (Integer greater than 0)
+                        'interval_type' => $intervalType, // Type of interval ("weeks" or "months")
+                        'value_cents' => $valueCents,
+                        'payable_with' => $payableWith,
                         $features
                     ]
                 ]);
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Remover Plano IUGU
+     * Remove Plan IUGU
      *
-     * Remove os dados de um Plano
+     * Removes data from a Plan
+     * 
      */
-    public static function removerPlano($idPlano)
+    public static function removePlan($idPlan)
     {
-        try {
-            if ($idPlano) {
+        try 
+        {
+            if ($idPlan) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->delete('https://api.iugu.com/v1/plans/' . $idPlano);
+                $request = $client->delete('https://api.iugu.com/v1/plans/' . $idPlan);
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Buscar Plano IUGU
+     * Search Plan IUGU
      *
-     * Retorna os dados de um Plano
+     * Returns the data of a Plane
      */
-    public static function buscarPlano($idPlano)
+    public static function searchPlan($idPlan)
     {
-        try {
-            if ($idPlano) {
+        try 
+        {
+            if ($idPlan) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->get('https://api.iugu.com/v1/plans/' . $idPlano);
+                $request = $client->get('https://api.iugu.com/v1/plans/' . $idPlan);
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Buscar Plano pelo Identificador IUGU
+     * Search for plan by Identifier IUGU
      *
-     * Retorna os dados de um plano utilizando um identificador.
+     * Returns the data in a plan using an identifier.
      */
-    public static function buscarPlanoPeloIdentificador($identificador)
+    public static function searcForPlansByIdentifier($identifier)
     {
-        try {
-            if ($identificador) {
+        try 
+        {
+            if ($identifier) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->get('https://api.iugu.com/v1/plans/identifier/' . $identificador);
+                $request = $client->get('https://api.iugu.com/v1/plans/identifier/' . $identifier);
                 return json_decode($request->getBody()->getContents());
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Listar Planos IUGU
+     * List Plans IUGU
      *
-     * Retorna uma lista com todos os planos em sua conta ordenadas pela data de Criação, sendo o primeiro o criado mais
-     * recentemente. O campo totalItems contém sempre a quantidade de planos cadastrados, independente dos parâmetros
-     * de pesquisa utilizados e o resultado da pesquisa fica sempre dentro de items.
+     * Returns a list of all plans in your account sorted by Creation date, the first being the most recently created. 
+     * The totalItems field always contains the number of plans registered, regardless of the search parameters used 
+     * and the search result is always within items.
+     * 
      */
-    public static function listarPlanos()
+    public static function listPlans()
     {
-        try {
+        try 
+        {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/plans');
             return json_decode($request->getBody()->getContents());
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Criar Assinatura IUGU
+     * Create Subscription IUGU
      *
-     * Cria uma Assinatura
+     * Create a subscription
      */
-    public static function criarAssinatura($idCliente, $identificadorPlano = '', $dataExpiracao, $metodoDePagamento = 'bank_slip', $isCredito = false, $preco, $creditoAdiconal, $creditoMinimo, $subitems = null, $customerVariables = null)
+    public static function createSubscription($idClient, $planIdentifier = '', $expiresAt, $payablWith = 'bank_slip', $creditsBased = false, $priceCents, $creditsCycle, $creditsMin, $subitems = null, $customerVariables = null)
     {
-        try {
+        try 
+        {
             
-            if ($idCliente) {
+            if ($idClient) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/subscriptions', [
                     'form_params' => [
-                        'plan_identifier' => $identificadorPlano, // Identificador do Plano. Só é enviado para assinaturas que não são credits_based
-                        'customer_id' => $idCliente,
-                        'expires_at' => ($dataExpiracao) ? $dataExpiracao : date('d/m/Y') + 3,
+                        'plan_identifier' => $planIdentifier, // Identifier of the Plan. Only sent to signatures that are not credits_based
+                        'customer_id' => $idClient,
+                        'expires_at' => ($expiresAt) ? $expiresAt : date('d/m/Y') + 3,
                         'only_on_charge_success' => true,
                         'ignore_due_email' => false,
-                        'payable_with' => $metodoDePagamento,
-                        'credits_based' => $isCredito, // É uma assinatura baseada em créditos? booleano
-                        'price_cents' => $preco, // Preço em centavos da recarga para assinaturas baseadas em crédito
-                        'credits_cycle' => $creditoAdiconal, // Quantidade de créditos adicionados a cada ciclo, só enviado para assinaturas credits_based
-                        'credits_min' => $creditoMinimo, // Quantidade de créditos que ativa o ciclo, por ex: Efetuar cobrança cada vez que a assinatura tenha apenas 1 crédito sobrando. Esse 1 crédito é o credits_min
+                        'payable_with' => $payablWith,
+                        'credits_based' => $creditsBased, // Is it a subscription based on credits? boolean
+                        'price_cents' => $priceCents, // Recharge cents price for credit-based signatures
+                        'credits_cycle' => $creditsCycle, // Number of credits added to each cycle, only sent to credits_based signatures
+                        'credits_min' => $creditsMin, // Amount of credits that activates the cycle, for example: Make a charge every time the subscription has only 1 credit remaining. This first credit is credits_min
                         $subitems,
                         $customerVariables
                     ]
@@ -708,72 +815,82 @@ class Iugu extends Model
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Ativar Assinatura IUGU
+     * Enable Subscription IUGU
      *
-     * Ativa uma Assinatura. Uma Fatura poderá ser gerada para o cliente
+     * Activates a Signature. An Invoice can be generated for the customer
      */
-    public static function ativarAssinatura($idAssinatura)
+    public static function enableSignature($idSubscription)
     {
-        try {
+        try 
+        {
             
-            if ($idAssinatura) {
+            if ($idSubscription) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $idAssinatura . '/activate');
+                $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/activate');
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Suspender Assinatura IUGU
+     * Suspend Subscription IUGU
      *
-     * Suspende uma Assinatura
+     * Suspends a Subscription
      */
-    public static function suspenderAssinatura($idAssinatura)
+    public static function suspendSubscription($idSubscription)
     {
-        try {
-            if ($idAssinatura) {
+        try 
+        {
+            if ($idSubscription) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $idAssinatura . '/suspend');
+                $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/suspend');
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Alterar Assinatura IUGU
+     * Change Subscription IUGU
      *
-     * Altera os dados de uma Assinatura, quaisquer parâmetros não informados não serão alterados
+     * Change the data of a Signature, any parameters not informed will not be changed
      */
-    public static function alterarAssinatura($idAssinatura, $identificadorDoPlano, $dataExpiracao, $metodoDePagamento, $ignoreEmail, $isCredito, $preco, $creditoAdiconal, $creditoMinimo, $suspender = false, $cobrar = true, $subitems = null)
+    public static function changeSubscription($idSubscription, $planIdentifier, $expiresAt, $ignoreDueEmail, $payableWith, $creditsBased, $priceCents, $creditsCycle, $creditsMin, $suspended = false, $skipCharge = true, $subitems = null)
     {
         try {
             
-            if ($idAssinatura && $identificadorDoPlano) {
+            if ($idSubscription && $identificadorDoPlano) {
                 $client = new Client(self::getHeaders());
-                $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idAssinatura, [
+                $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idSubscription, [
                     'form_params' => [
-                        'plan_identifier' => $identificadorDoPlano, // Identificador do Plano. Só é enviado para assinaturas que não são credits_based
-                        'expires_at' => ($dataExpiracao) ? $dataExpiracao : date('d/m/Y') + 3,
-                        'ignore_due_email' => $ignoreEmail,
-                        'payable_with' => $metodoDePagamento,
-                        'credits_based' => $isCredito, // É uma assinatura baseada em créditos? booleano
-                        'price_cents' => $preco, // Preço em centavos da recarga para assinaturas baseadas em crédito
-                        'credits_cycle' => $creditoAdiconal, // Quantidade de créditos adicionados a cada ciclo, só enviado para assinaturas credits_based
-                        'credits_min' => $creditoMinimo, // Quantidade de créditos que ativa o ciclo, por ex: Efetuar cobrança cada vez que a assinatura tenha apenas 1 crédito sobrando. Esse 1 crédito é o credits_min
-                        'suspended' => $suspender, // Assinatura suspensa? booleano
-                        'skip_charge' => $cobrar, // Ignorar Cobrança? booleano
+                        'plan_identifier' => $planIdentifier, // Identifier of the Plan. Only sent to signatures that are not credits_based
+                        'expires_at' => ($expiresAt) ? $expiresAt : date('d/m/Y') + 3,
+                        'ignore_due_email' => $ignoreDueEmail,
+                        'payable_with' => $payableWith,
+                        'credits_based' => $creditsBased, // Is it a subscription based on credits? boolean
+                        'price_cents' => $priceCents, // Recharge cents price for credit-based signatures
+                        'credits_cycle' => $creditsCycle, // Number of credits added to each cycle, only sent to credits_based signatures
+                        'credits_min' => $creditsMin, // Amount of credits that activates the cycle, for example: Make a charge every time the subscription has only 1 credit remaining. This first credit is credits_min
+                        'suspended' => $suspended, // Suspended subscription? boolean
+                        'skip_charge' => $skipCharge, // Ignore Billing? boolean
                         $subitems,
                         $customerVariables
                     ]
@@ -787,56 +904,89 @@ class Iugu extends Model
     }
 
     /**
-     * Simular Alteração de Plano de Assinatura IUGU
+     * Simulate Change of Signature Plan IUGU
      *
-     * Simula a alteração de plano de uma assinatura
+     * Simulates a signature plan change
      */
-    public static function simularAlteracaoDePlanoAssitura($idAssinatura, $identificadorDoPlano)
+    public static function simulateChangePlanCheck($idSubscription, $changePlanSimulation)
     {
-        try {
-            if ($idAssinatura && $identificadorDoPlano) {
+        try 
+        {
+            if ($idSubscription && $changePlanSimulation) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->get('https://api.iugu.com/v1/subscriptions/' . $idAssinatura . '/change_plan_simulation/' . $identificadorDoPlano);
+                $request = $client->get('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/change_plan_simulation/' . $changePlanSimulation);
                 return $request;
             }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Alterar Plano da Assinatura IUGU
+     * Change Subscription Plan IUGU
      *
-     * Altera o Plano de uma Assinatura. Uma Fatura cobrando a mudança de plano poderá ser gerada para o cliente
+     * Change the Plan for a Subscription. An Invoice charging change of plan may be generated for the customer
      */
-    public static function alterarPlanoDaAssinatura($idAssinatura, $identificadorDoPlano)
+    public static function changeSubscriptionPlan($idSubscription, $changePlan)
     {
-        try {
+        try 
+        {
             
-            if ($idAssinatura && $identificadorDoPlano) {
+            if ($idSubscription && $changePlan) {
                 $client = new Client(self::getHeaders());
-                $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $idAssinatura . '/change_plan/' . $identificadorDoPlano);
+                $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $changePlanSimulation . '/change_plan/' . $changePlan);
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Adicionar Créditos a Assinatura IUGU
+     * Add Credits to Subscription IUGU
      *
-     * Adiciona créditos a uma assinatura
+     * Add credits to a subscription
      */
-    public static function adiconarCreditoNaAssinatura($idAssinatura, $quantidade)
+    public static function addCreditOnSignature($idSubscription, $quantity)
     {
         try {
             
-            if ($idAssinatura && $quantidade) {
+            if ($idSubscription && $quantity) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idAssinatura . '/add_credits', [
+                $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/add_credits', [
                     'form_params' => [
-                        'quantity' => $quantidade
+                        'quantity' => $quantity
+                    ]
+                ]);
+                return $request;
+            }
+        } 
+        catch (\Exception $e) 
+        {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Remove Subscription Credits
+     *
+     * Remove credits to a subscription
+     */
+    public static function removeCreditOnSignature($idSubscription, $quantity)
+    {
+        try {
+            
+            if ($idSubscription && $quantity) {
+                $client = new Client(self::getHeaders());
+                $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/remove_credits', [
+                    'form_params' => [
+                        'quantity' => $quantity
                     ]
                 ]);
                 return $request;
@@ -847,153 +997,153 @@ class Iugu extends Model
     }
 
     /**
-     * Remover Créditos da Assinatura
+     * Remove signature
      *
-     * Remover créditos a uma assinatura
+     * Permanently Removes a Subscription
      */
-    public static function removerCreditoNaAssinatura($idAssinatura, $quantidade)
+    public static function removeSignature($idSubscription)
     {
         try {
             
-            if ($idAssinatura && $quantidade) {
+            if ($idSubscription) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idAssinatura . '/remove_credits', [
-                    'form_params' => [
-                        'quantity' => $quantidade
-                    ]
-                ]);
+                $request = $client->delete('https://api.iugu.com/v1/subscriptions/' . $idSubscription);
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Remover Assinatura
+     * Search Subscription
      *
-     * Remove uma Assinatura permanentemente
+     * Returns the data of a Signature
      */
-    public static function removerAssinatura($idAssinatura)
+    public static function searchSignature($idSubscription)
     {
-        try {
+        try 
+        {
             
-            if ($idAssinatura) {
+            if ($idSubscription) 
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->delete('https://api.iugu.com/v1/subscriptions/' . $idAssinatura);
+                $request = $client->get('https://api.iugu.com/v1/subscriptions/' . $idSubscription);
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Buscar Assinatura
+     * List Subscriptions
      *
-     * Retorna os dados de uma Assinatura
+     * Returns a list of all signatures in your account sorted by Creation date, the first being the most recently created. 
+     * The totalItems field always contains the number of signatures registered, regardless of the search parameters used 
+     * and the search result is always within items.
      */
-    public static function buscarAssinatura($idAssinatura)
+    public static function listSubscriptions()
     {
-        try {
-            
-            if ($idAssinatura) {
-                $client = new Client(self::getHeaders());
-                $request = $client->get('https://api.iugu.com/v1/subscriptions/' . $idAssinatura);
-                return $request;
-            }
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    /**
-     * Listar Assinaturas
-     *
-     * Retorna uma lista com todas as assinaturas em sua conta ordenadas pela data de Criação, sendo a primeira a que foi
-     * criada mais recentemente. O campo totalItems contém sempre a quantidade de assinaturas cadastradas, independente
-     * dos parâmetros de pesquisa utilizados e o resultado da pesquisa fica sempre dentro de items.
-     */
-    public static function listarAssinatura()
-    {
-        try {
+        try 
+        {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/subscriptions');
             return $request;
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Transferir Valor IUGU
+     * Transfer Value IUGU
      *
-     * Transfere um determinado valor de sua conta para a conta destino
+     * Transfer a certain amount from your account to the target account
      */
-    public static function transferirValor($idConta, $valor, $customVariables = null)
+    public static function transferValue($idReceiver, $amountCents, $customVariables = null)
     {
-        try {
+        try 
+        {
             
-            if ($idConta && $valor) {
+            if ($idReceiver && $amountCents) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/transfers', [
                     'form_params' => [
-                        'receiver_id' => $idConta,
-                        'amount_cents' => $valor,
+                        'receiver_id' => $idReceiver,
+                        'amount_cents' => $amountCents,
                         $customVariables
                     ]
                 ]);
             }
             
             return $request;
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Buscar Transferência IUGU
+     * Search Transfer IUGU
      *
-     * Retorna as informações de uma transferência de valores.
+     * Returns the information of a transfer of values.
      */
-    public static function buscarTransferencia($idTranferencia)
+    public static function searchTransfer($idTransfer)
     {
-        try {
-            if ($idTranferencia) {
+        try 
+        {
+            if ($idTransfer)
+            {
                 $client = new Client(self::getHeaders());
-                $request = $client->get('https://api.iugu.com/v1/transfers/' . $idTranferencia);
+                $request = $client->get('https://api.iugu.com/v1/transfers/' . $idTransfer);
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Listar Transferências IUGU
+     * List Transfer IUGU
      *
-     * Retorna uma lista com todas as transferências efetuadas.
+     * Returns a list of all transfers made.
      */
-    public static function listarTransferencia()
+    public static function listTransfer()
     {
-        try {
+        try 
+        {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/transfers');
             return $request;
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Criar subconta IUGU
+     * Create subaccount IUGU
      *
-     * Permite a criação de subcontas (contas de pagamento) para contas com permissão de marketplace ou parceiro de negócios
+     * Allows creation of subaccounts (payment accounts) for accounts with marketplace or business partner permission
      */
-    public static function criarSubconta($name, $commissionPercent)
+    public static function createSubaccount($name, $commissionPercent)
     {
-        try {
-            if ($name && $commissionPercent) {
+        try 
+        {
+            if ($name && $commissionPercent) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/marketplace/create_account', [
                     'form_params' => [
@@ -1004,20 +1154,24 @@ class Iugu extends Model
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Enviar verificação de subconta IUGU
+     * Submit Subaccount Verification IUGU
      *
-     * Permite enviar documentos para verificação de subcontas. Todas as subcontas devem ter sua documentação verificada para emitir faturas no modo de produção
+     * Allows you to send documents for sub-account verification. All sub-accounts must have their documentation verified to issue invoices in prodc mode
      */
-    public static function enviarVerificacaoDeSubconta($idAccount, Debets $debets, Wallets $Wallets, $file)
+    public static function sendSubAccountVerification($idAccount, Debets $debet, Wallets $wallet, $file)
     {
-        try {
-            if ($idAccount && $Wallets && $file) {
+        try 
+        {
+            if ($idAccount && $debet && $Wallet && $file) 
+            {
                 
                 $fileBody = null;
                 if ($file) {
@@ -1034,11 +1188,11 @@ class Iugu extends Model
                 $request = $client->post('https://api.iugu.com/v1/accounts/' . $idAccount . '/request_verification', [
                     'form_params' => [
                         'data' => [
-                            'price_range' => $Wallets->wal_title,
+                            'price_range' => $wallet->wal_title,
                             'physical_products' => false,
-                            'business_type' => $Wallets->wal_title,
-                            'person_type' => ($debet->pgm_pagador_cnpj) ? 'Pessoa Jurídica' : 'Pessoa Física',
-                            'automatic_transfer' => $Wallets->wal_saque_automatico,
+                            'business_type' => $wallet->wal_title,
+                            'person_type' => ($debet->pgm_pagador_cnpj) ? 'Pessoa Jurï¿½dica' : 'Pessoa Fï¿½sica',
+                            'automatic_transfer' => $wallet->wal_saque_automatico,
                             'cnpj' => $debet->pgm_pagador_cnpj,
                             'cpf' => $debet->pgm_pagador_cpf,
                             'company_name' => $debet->pgm_pagador_razao,
@@ -1049,10 +1203,10 @@ class Iugu extends Model
                             'state' => $debet->pgm_endereco_estado,
                             'telephone' => $debet->pgm_pagador_celular,
                             'resp_name' => $debet->pgm_pagador_razao,
-                            'bank' => $Wallets->wal_banco,
-                            'bank_ag' => $Wallets->wal_agencia,
-                            'account_type' => $Wallets,
-                            'bank_cc' => $Wallets->wal_conta
+                            'bank' => $wallet->wal_banco,
+                            'bank_ag' => $wallet->wal_agencia,
+                            'account_type' => $wallet,
+                            'bank_cc' => $wallet->wal_conta
                         ],
                         $fileBody
                     ]
@@ -1060,7 +1214,9 @@ class Iugu extends Model
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
@@ -1092,29 +1248,31 @@ class Iugu extends Model
      *
      * Set up parameters for a payment account
      */
-    public static function setUpAccount(Debets $debets, Wallets $Wallets)
+    public static function setUpAccount(Debets $debet, Wallets $wallet)
     {
-        try {
-            if ($divida && $Wallets) {
+        try 
+        {
+            if ($debet && $wallet) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/accounts/configuration', [
                     'form_params' => [
                         'commission_percent' => $debet->pgm_comissao_taxa,
-                        'auto_withdraw' => $Wallets->wal_saque_automatico,
+                        'auto_withdraw' => $wallet->wal_saque_automatico,
                         'fines' => true,
                         'per_day_interest' => true,
                         'late_payment_fine' => $debet->pgm_comissao_fixo,
                         'auto_advance' => true,
                         'auto_advance_type' => 'days_after_payment',
-                        'auto_advance_option' => 20, // Número de dias após o pagamento em que a antecipação será realizada
+                        'auto_advance_option' => 20, // Number of days after the payment in which the anticipation will be made
                         'bank_slip' => [
                             'active' => true,
-                            'extra_due' => 3, // Dias de Vencimento Extras no Boleto
-                            'reprint_extra_due' => 1 // Dias de Vencimento Extras na 2a Via do Boleto
+                            'extra_due' => 3, // Expiration Days Extras on Ticket
+                            'reprint_extra_due' => 1 // Expiration Days Extras in the second Via do Boleto
                         ],
                         'credit_card' => [
                             'active' => true,
-                            'soft_descriptor' => 3, // Descrição que apareça na Fatura do Cartão do Cliente
+                            'soft_descriptor' => 3, // Description that appears on the Customer Card Invoice
                             'installments' => true,
                             'max_installments' => $debet->pgm_parcelas,
                             'max_installments_without_interest' => $debet->pgm_parcelas_pagas,
@@ -1138,21 +1296,21 @@ class Iugu extends Model
      *
      * Send data to change bank domicile. Value destination when transferring or withdrawing money
      */
-    public static function addBankDomicilio(Wallets $wallet, $documento)
+    public static function addBankDomicilio(Wallets $wallet, $document)
     {
         try 
         {
-            if ($wallets && $documento) 
+            if ($wallet && $document) 
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/bank_verification', [
                     'form_params' => [
                         'agency' => $wallet->wal_agencia,
                         'account' => $wallet->wal_conta,
-                        'account_type' => 'cc', // Tipo da Conta ("cc" para Conta Corrente e "cp" para Conta Poupança)
+                        'account_type' => 'cc', // Account Type ("cc" for Current Account and "cp" for Savings Account)
                         'bank' => $carteira->wal_banco,
                         'automatic_validation' => tru,
-                        'document' => $documento
+                        'document' => $document
                     
                     ]
                 ]);
@@ -1173,11 +1331,14 @@ class Iugu extends Model
      */
     public static function checkSendbankResidence()
     {
-        try {
+        try 
+        {
             $client = new Client(self::getHeaders());
             $request = $client->post('https://api.iugu.com/v1/bank_verification');
             return $request;
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
@@ -1262,8 +1423,8 @@ class Iugu extends Model
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/' . $idAccount . '/api_tokens', [
                     'form_params' => [
-                        'api_type' => 'TEST', // altere conforme o ambiente ('TEST' = desenvolvimento e 'LIVE' = produção)
-                        'description' => 'SmartClick' // Descrição do consumidor da API
+                        'api_type' => 'TEST', // changes according to the environment ('TEST' = development and 'LIVE' = production)
+                        'description' => 'SmartClick' // API Consumer Description
                     ]
                 ]);
                 
@@ -1310,7 +1471,7 @@ class Iugu extends Model
             if ($idAccount) 
             {
                 $client = new Client(self::getHeaders());
-                $request = $client->get('https://api.iugu.com/v1/' . Parametros::CLIENTE_ID_IUGU . '/api_tokens');
+                $request = $client->get('https://api.iugu.com/v1/' . $idAccount . '/api_tokens');
                 return $request;
             }
         } 
@@ -1325,7 +1486,7 @@ class Iugu extends Model
      *
      * Lists all events available for creating a Trigger
      */
-    public static function listarEventosDisponiveis()
+    public static function listAvailableEvents()
     {
         try {
             $client = new Client(self::getHeaders());
@@ -1341,10 +1502,12 @@ class Iugu extends Model
      *
      * Create a Hooks
      */
-    public static function createKitten($event, $url, $authorization)
+    public static function createHooks($event, $url, $authorization)
     {
-        try {
-            if ($event && $url && $authorization) {
+        try 
+        {
+            if ($event && $url && $authorization) 
+            {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/web_hooks', [
                     'form_params' => [
@@ -1355,7 +1518,9 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
@@ -1365,14 +1530,14 @@ class Iugu extends Model
      *
      * Change a Hooks
      */
-    public static function changeKitten($idHooks, $event, $url, $authorization)
+    public static function changeHooks($idHook, $event, $url, $authorization)
     {
         try 
         {
             if ($idHooks && $event && $url && $authorization) 
             {
                 $client = new Client(self::getHeaders());
-                $request = $client->put('https://api.iugu.com/v1/web_hooks/' . $idHooks, [
+                $request = $client->put('https://api.iugu.com/v1/web_hooks/' . $idHook, [
                     'form_params' => [
                         'event' => $event,
                         'url' => $url,
@@ -1393,14 +1558,14 @@ class Iugu extends Model
      *
      * Remove a Hooks
      */
-    public static function removHooks($idHooks)
+    public static function removeHooks($idHook)
     {
         try 
         {
-            if ($idHooks) 
+            if ($idHook) 
             {
                 $client = new Client(self::getHeaders());
-                $request = $client->delete('https://api.iugu.com/v1/web_hooks/' . $idHooks);
+                $request = $client->delete('https://api.iugu.com/v1/web_hooks/' . $idHook);
                 return $request;
             }
         } 
@@ -1415,14 +1580,14 @@ class Iugu extends Model
      *
      * Search a Hooks
      */
-    public static function searchKitten($idHooks)
+    public static function searchHooks($idHook)
     {
         try 
         {
-            if ($idHooks) 
+            if ($idHook) 
             {
                 $client = new Client(self::getHeaders());
-                $request = $client->get('https://api.iugu.com/v1/web_hooks/' . $idHooks);
+                $request = $client->get('https://api.iugu.com/v1/web_hooks/' . $idHook);
                 return $request;
             }
         } 
@@ -1437,7 +1602,7 @@ class Iugu extends Model
      *
      * List a Hooks
      */
-    public static function listKitten()
+    public static function listHooks()
     {
         try 
         {
@@ -1454,7 +1619,7 @@ class Iugu extends Model
     /**
      * List Available Email Identifiers IUGU
      *
-     * Retorna lista de emails disponíveis para personalização
+     * Retorna lista de emails disponï¿½veis para personalizaï¿½ï¿½o
      */
     public static function listIdentifiersAvailableEmail()
     {
@@ -1769,11 +1934,15 @@ class Iugu extends Model
      */
     public static function disputeContestation($idContestation, $files)
     {
-        try {
-            if ($idContestation && $files) {
+        try 
+        {
+            if ($idContestation && $files) 
+            {
                 $body = array();
-                if (is_array($files)) {
-                    foreach ($files as $key => $file) {
+                if (is_array($files)) 
+                {
+                    foreach ($files as $key => $file) 
+                    {
                         $body['file' . $key] = $file;
                     }
                 }
@@ -1783,13 +1952,15 @@ class Iugu extends Model
                 
                 return $request;
             }
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return $e->getMessage();
         }
     }
 
     /**
-     * Obey Contestação IUGU
+     * Obey contestation IUGU
      *
      * Obey the request for contestation.
      */
@@ -1954,7 +2125,7 @@ class Iugu extends Model
     }
 
     /**
-     * Get Desconto de pagamento - Configuração do desconto a ser aplicado
+     * Get Payment discount - Discount set to be applied
      */
     public static function getPaymentDiscounts($days, $percent)
     {
@@ -1967,7 +2138,7 @@ class Iugu extends Model
     }
 
     /**
-     * Criar Pagador IUGU
+     * Create Payer IUGU
      */
     private static function getPayer($debet)
     {
@@ -1982,7 +2153,7 @@ class Iugu extends Model
     }
 
     /**
-     * Criar Endereco do Pagador IUGU
+     * Create Payer Address IUGU
      */
     private static function getPayerAddress($debet)
     {
