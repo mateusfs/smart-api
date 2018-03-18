@@ -4,6 +4,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Gerencianet\Exception\GerencianetException;
 use Carbon\Carbon;
+use App\Parameter;
+
 
 class Gerencianet extends Model
 {
@@ -40,8 +42,8 @@ class Gerencianet extends Model
             ];
             
             $body = [
-                'custom_id' => Parametros::CLIENTE_ID_GERENCIA_NET, // associar transação Gerencianet com seu identificador próprio
-                'notification_url' => $url // url de notificação
+                'custom_id' => Parameter::CLIENTE_ID_GERENCIA_NET, // to associate Gerencianet transaction with its own identifier
+                'notification_url' => $url // notification url
             ];
             
             $api = new Gerencianet(self::getOptions());
@@ -112,8 +114,8 @@ class Gerencianet extends Model
         try {
             $body = [
                 'name' => $name, // nome do plano de assinatura
-                'interval' => $interval, // periodicidade da cobrança (em meses) - informe 1 para assinatura mensal
-                'repeats' => $repeats // número de vezes que a cobrança deve ser gerada (padrão: null, que significa que a cobrança é gerada por tempo indeterminado ou até que o plano seja cancelado)
+                'interval' => $interval, // periodicidade da cobranï¿½a (em meses) - informe 1 para assinatura mensal
+                'repeats' => $repeats // nï¿½mero de vezes que a cobranï¿½a deve ser gerada (padrï¿½o: null, que significa que a cobranï¿½a ï¿½ gerada por tempo indeterminado ou atï¿½ que o plano seja cancelado)
             ];
             
             $api = new Gerencianet(self::getOptions());
@@ -135,7 +137,7 @@ class Gerencianet extends Model
         try {
             
             $item = [
-                'name' => $name, // nome do item, produto ou serviço
+                'name' => $name, // nome do item, produto ou serviï¿½o
                 'amount' => $amount, // quantidade
                 'value' => $value // valor (1000 = R$ 10,00)
             ];
@@ -320,24 +322,24 @@ class Gerencianet extends Model
     }
 
     /**
-     * Criando carnês
+     * Criando carnï¿½s
      *
-     * Você está em: "Carnês > Criando carnês"
+     * Vocï¿½ estï¿½ em: "Carnï¿½s > Criando carnï¿½s"
      */
-    public static function criarCarne(Debets $debet, $name, $amount, $value, $expire_at = 5, $repeats = 5)
+    public static function criarCarne(Debt $debt, $name, $amount, $value, $expire_at = 5, $repeats = 5)
     {
         try {
             
             $item = [
-                'name' => $name, // nome do item, produto ou serviço
+                'name' => $name, // nome do item, produto ou serviï¿½o
                 'amount' => $amount, // quantidade
                 'value' => $value // valor (1000 = R$ 10,00)
             ];
             
             $customer = [
-                'name' => $debet->pgm_pagador_nome,
-                'cpf' => ($debet->pgm_pagador_cpf) ? $debet->pgm_pagador_cpf : $debet->pgm_pagador_cnpj,
-                'phone_number' => $debet->pgm_pagador_celular
+                'name' => $debt->pgm_pagador_nome,
+                'cpf' => ($debt->pgm_pagador_cpf) ? $debt->pgm_pagador_cpf : $debt->pgm_pagador_cnpj,
+                'phone_number' => $debt->pgm_pagador_celular
             ];
             
             $current = Carbon::now();
@@ -389,7 +391,7 @@ class Gerencianet extends Model
     }
 
     /**
-     * Alterando notification_url e/ou custom_id de carnês
+     * Alterando notification_url e/ou custom_id de carnï¿½s
      */
     public static function changeCarnet($idCarnet, $idTransaction, $url)
     {
@@ -416,7 +418,7 @@ class Gerencianet extends Model
     }
 
     /**
-     * Alterando notification_url e/ou custom_id de carnês
+     * Alterando notification_url e/ou custom_id de carnï¿½s
      */
     public static function alterarVencimentoCarne($idCarnet, $parcel, $expire_at = 1)
     {
@@ -446,7 +448,7 @@ class Gerencianet extends Model
     }
 
     /**
-     * Cancelar um determinado carnê
+     * Cancelar um determinado carnï¿½
      */
     public static function cancelarCarne($idCarne, $expire_at = 1)
     {
@@ -468,7 +470,7 @@ class Gerencianet extends Model
     }
 
     /**
-     * Cancelar parcela específica de um carnê existente
+     * Cancelar parcela especï¿½fica de um carnï¿½ existente
      */
     public static function cancelarParcelaCarne($idCarne, $parcela)
     {
@@ -491,7 +493,7 @@ class Gerencianet extends Model
     }
 
     /**
-     * Reenviar carnê por email
+     * Reenviar carnï¿½ por email
      */
     public static function reenviarCarnePorEmail($idCarnet, $email)
     {
@@ -577,7 +579,7 @@ class Gerencianet extends Model
         try {
             
             $item = [
-                'name' => $nome, // nome do item, produto ou serviço
+                'name' => $nome, // nome do item, produto ou serviï¿½o
                 'amount' => $quantidade, // quantidade
                 'value' => $valor // valor (1000 = R$ 10,00)
             ];
@@ -612,7 +614,7 @@ class Gerencianet extends Model
         try {
             
             $params = [
-                'token' => Parametros::PAYMENT_TOKEN_GERENCIA_NET
+                'token' => Parameter::PAYMENT_TOKEN_GERENCIA_NET
             ];
             
             $api = new Gerencianet(self::getOptions());
@@ -631,12 +633,12 @@ class Gerencianet extends Model
      *
      * Create a ticket in GerenciaNet
      */
-    public static function issueTicket(Debets $debet, $expire_at = 5)
+    public static function issueTicket(Debt $debt, $expire_at = 5)
     {
         try {
             
             $api = new Gerencianet(self::getOptions());
-            $charge = $api->createCharge([], self::getBody($debet->pgm_pagador_nome, 1, $debet->pgm_valor));
+            $charge = $api->createCharge([], self::getBody($debt->pgm_pagador_nome, 1, $debt->pgm_valor));
             
             if ($charge["code"] == 200) {
                 
@@ -645,9 +647,9 @@ class Gerencianet extends Model
                 ];
                 
                 $customer = [
-                    'name' => $debet->pgm_pagador_nome,
-                    'cpf' => ($debet->pgm_pagador_cpf) ? $debet->pgm_pagador_cpf : $debet->pgm_pagador_cnpj,
-                    'phone_number' => $debet->pgm_pagador_celular
+                    'name' => $debt->pgm_pagador_nome,
+                    'cpf' => ($debt->pgm_pagador_cpf) ? $debt->pgm_pagador_cpf : $debt->pgm_pagador_cnpj,
+                    'phone_number' => $debt->pgm_pagador_celular
                 ];
                 
                 $current = Carbon::now();
@@ -681,12 +683,12 @@ class Gerencianet extends Model
      *
      * You are in: "Other API Resources> Paying with Legal Entity"
      */
-    public static function issueTicketLegalPerson(Debets $debet, $expire_at = 5)
+    public static function issueTicketLegalPerson(Debt $debt, $expire_at = 5)
     {
         try {
             
             $api = new Gerencianet(self::getOptions());
-            $charge = $api->createCharge([], self::getBody($debet->pgm_pagador_nome, 1, $debet->pgm_valor));
+            $charge = $api->createCharge([], self::getBody($debt->pgm_pagador_nome, 1, $debt->pgm_valor));
             
             if ($charge["code"] == 200) {
                 
@@ -695,14 +697,14 @@ class Gerencianet extends Model
                 ];
                 
                 $juridical_data = [
-                    'corporate_name' => $debet->pgm_pagador_razao,
-                    'cnpj' => $debet->pgm_pagador_cnpj
+                    'corporate_name' => $debt->pgm_pagador_razao,
+                    'cnpj' => $debt->pgm_pagador_cnpj
                 ];
                 
                 $customer = [
-                    'name' => $debet->pgm_pagador_nome,
-                    'cpf' => ($debet->pgm_pagador_cpf) ? $debet->pgm_pagador_cpf : $debet->pgm_pagador_cnpj,
-                    'phone_number' => $debet->pgm_pagador_celular,
+                    'name' => $debt->pgm_pagador_nome,
+                    'cpf' => ($debt->pgm_pagador_cpf) ? $debt->pgm_pagador_cpf : $debt->pgm_pagador_cnpj,
+                    'phone_number' => $debt->pgm_pagador_celular,
                     'juridical_person' => $juridical_data
                 ];
                 
@@ -737,7 +739,7 @@ class Gerencianet extends Model
      *
      * You are in: "Other API Features> Define Addresses"
      */
-    public static function setTicketAddress(Debets $debet, $idTransaction)
+    public static function setTicketAddress(Debt $debt, $idTransaction)
     {
         try {
             
@@ -748,24 +750,24 @@ class Gerencianet extends Model
             ];
             
             $customer = [
-                'name' => $debet->pgm_pagador_nome,
-                'cpf' => ($debet->pgm_pagador_cpf) ? $debet->pgm_pagador_cpf : $debet->pgm_pagador_cnpj,
-                'phone_number' => $debet->pgm_pagador_celular
+                'name' => $debt->pgm_pagador_nome,
+                'cpf' => ($debt->pgm_pagador_cpf) ? $debt->pgm_pagador_cpf : $debt->pgm_pagador_cnpj,
+                'phone_number' => $debt->pgm_pagador_celular
             ];
             
             $billingAddress = [
-                'street' => $debet->pgm_endereco_logradouro,
-                'number' => $debet->pgm_endereco_numero,
-                'neighborhood' => $debet->pgm_endereco_bairro,
-                'zipcode' => $debet->pgm_endereco_cep,
-                'city' => $debet->pgm_endereco_cidade,
-                'state' => $debet->pgm_endereco_estado
+                'street' => $debt->pgm_endereco_logradouro,
+                'number' => $debt->pgm_endereco_numero,
+                'neighborhood' => $debt->pgm_endereco_bairro,
+                'zipcode' => $debt->pgm_endereco_cep,
+                'city' => $debt->pgm_endereco_cidade,
+                'state' => $debt->pgm_endereco_estado
             ];
             
             $creditCard = [
-                'installments' => $debet->pgm_parcelas, // número de parcelas em que o pagamento deve ser dividido
+                'installments' => $debt->pgm_parcelas, // nï¿½mero de parcelas em que o pagamento deve ser dividido
                 'billing_address' => $billingAddress,
-                'payment_token' => Parametros::PAYMENT_TOKEN_GERENCIA_NET,
+                'payment_token' => Parameter::PAYMENT_TOKEN_GERENCIA_NET,
                 'customer' => $customer
             ];
             
@@ -793,12 +795,12 @@ class Gerencianet extends Model
      *
      * Pay card by GerenciaNet
      */
-    public static function payCard(Debets $debet)
+    public static function payCard(Debt $debt)
     {
         try {
             
             $api = new Gerencianet(self::getOptions());
-            $charge = $api->createCharge([], self::getBody($debet->pgm_pagador_nome, 1, $debet->pgm_valor));
+            $charge = $api->createCharge([], self::getBody($debt->pgm_pagador_nome, 1, $debt->pgm_valor));
             
             if ($charge["code"] == 200) {
                 
@@ -807,26 +809,26 @@ class Gerencianet extends Model
                 ];
                 
                 $customer = [
-                    'name' => $debet->pgm_pagador_razao,
-                    'cpf' => $debet->pgm_pagador_cpf,
-                    'phone_number' => $debet->pgm_pagador_celular,
-                    'email' => $debet->pgm_pagador_email,
-                    'birth' => $debet->pgm_pagador_nascimento
+                    'name' => $debt->pgm_pagador_razao,
+                    'cpf' => $debt->pgm_pagador_cpf,
+                    'phone_number' => $debt->pgm_pagador_celular,
+                    'email' => $debt->pgm_pagador_email,
+                    'birth' => $debt->pgm_pagador_nascimento
                 ];
                 
                 $billingAddress = [
-                    'street' => $debet->pgm_endereco_logradouro,
-                    'number' => $debet->pgm_endereco_numero,
-                    'neighborhood' => $debet->pgm_endereco_bairro,
-                    'zipcode' => $debet->pgm_endereco_cep,
-                    'city' => $debet->pgm_endereco_cidade,
-                    'state' => $debet->pgm_endereco_estado // Verificar o estado do cliente
+                    'street' => $debt->pgm_endereco_logradouro,
+                    'number' => $debt->pgm_endereco_numero,
+                    'neighborhood' => $debt->pgm_endereco_bairro,
+                    'zipcode' => $debt->pgm_endereco_cep,
+                    'city' => $debt->pgm_endereco_cidade,
+                    'state' => $debt->pgm_endereco_estado // Verificar o estado do cliente
                 ];
                 
                 $creditCard = [
-                    'installments' => $debet->pgm_cartao_codigo, // Verificar installments do cliente
+                    'installments' => $debt->pgm_cartao_codigo, // Verificar installments do cliente
                     'billing_address' => $billingAddress,
-                    'payment_token' => Parametros::PAYMENT_TOKEN_GERENCIA_NET,
+                    'payment_token' => Parameter::PAYMENT_TOKEN_GERENCIA_NET,
                     'customer' => $customer
                 ];
                 
@@ -876,7 +878,7 @@ class Gerencianet extends Model
     /**
      * Marketplace GenreciaNet
      */
-    public static function payMarketplace(Debets $debet, $payee_code, $percentage, $name, $amount, $value, $repasses = array())
+    public static function payMarketplace(Debt $debt, $payee_code, $percentage, $name, $amount, $value, $repasses = array())
     {
         try {
             
@@ -905,26 +907,26 @@ class Gerencianet extends Model
                 ];
                 
                 $customer = [
-                    'name' => $debet->pgm_pagador_nome,
-                    'cpf' => ($debet->pgm_pagador_cpf) ? $debet->pgm_pagador_cpf : $debet->pgm_pagador_cnpj,
-                    'phone_number' => $debet->pgm_pagador_celular,
-                    'email' => $debet->pgm_pagador_email,
-                    'birth' => $debet->pgm_pagador_nascimento
+                    'name' => $debt->pgm_pagador_nome,
+                    'cpf' => ($debt->pgm_pagador_cpf) ? $debt->pgm_pagador_cpf : $debt->pgm_pagador_cnpj,
+                    'phone_number' => $debt->pgm_pagador_celular,
+                    'email' => $debt->pgm_pagador_email,
+                    'birth' => $debt->pgm_pagador_nascimento
                 ];
                 
                 $billingAddress = [
-                    'street' => $debet->pgm_endereco_logradouro,
-                    'number' => $debet->pgm_endereco_numero,
-                    'neighborhood' => $debet->pgm_endereco_bairro,
-                    'zipcode' => $debet->pgm_endereco_cep,
-                    'city' => $debet->pgm_endereco_cidade,
-                    'state' => $debet->pgm_endereco_estado
+                    'street' => $debt->pgm_endereco_logradouro,
+                    'number' => $debt->pgm_endereco_numero,
+                    'neighborhood' => $debt->pgm_endereco_bairro,
+                    'zipcode' => $debt->pgm_endereco_cep,
+                    'city' => $debt->pgm_endereco_cidade,
+                    'state' => $debt->pgm_endereco_estado
                 ];
                 
                 $creditCard = [
                     'installments' => (int) $_POST["installments"],
                     'billing_address' => $billingAddress,
-                    'payment_token' => Parametros::PAYMENT_TOKEN_GERENCIA_NET,
+                    'payment_token' => Parameter::PAYMENT_TOKEN_GERENCIA_NET,
                     'customer' => $customer
                 ];
                 
@@ -961,7 +963,7 @@ class Gerencianet extends Model
      *
      * You are here: Marketplace > Dividing receipts"
      */
-    public static function dividirRecebimentoMarketplace(Debets $debet, $name, $amount, $value, $repasses = array())
+    public static function dividirRecebimentoMarketplace(Debt $debt, $name, $amount, $value, $repasses = array())
     {
         try {
             
@@ -1134,9 +1136,9 @@ class Gerencianet extends Model
     private static function getOptions()
     {
         return [
-            'client_id' => Parametros::getClienteIdGerenciaNet(),
-            'client_secret' => Parametros::getSecretGerenciaNet(),
-            'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = produção)
+            'client_id' => Parameter::getClienteIdGerenciaNet(),
+            'client_secret' => Parameter::getSecretGerenciaNet(),
+            'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = produï¿½ï¿½o)
         ];
     }
 

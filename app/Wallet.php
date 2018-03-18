@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Wallets extends Model
+class Wallet extends Model
 {
 	protected $table = 'wallets';
 	protected $primaryKey = 'wal_id';

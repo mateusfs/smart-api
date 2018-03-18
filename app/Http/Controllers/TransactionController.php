@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Parametros;
+use App\Parameter;
 use Gerencianet\Request;
 use App\Gerencianet;
 
@@ -24,7 +24,7 @@ class TransactionController extends Controller
         $valor = $resquest->valor;
         
         if ($nome && $quantidade && $valor) {
-            if (Parametros::getIsGerenciaNet()) {
+            if (Parameter::getIsGerenciaNet()) {
                 $result = Gerencianet::criarTransaction($nome, $quantidade, $valor);
             }
             
@@ -44,15 +44,15 @@ class TransactionController extends Controller
      *
      * Update a transaction | Example: api/v1/transaction/update
      */
-    public function atualizar(Request $resquest)
+    public function update(Request $resquest)
     {
         
         $idTransaction = $resquest->idTransaction;
         $url = $resquest->url;
         
         if ($idTransaction && $url) {
-            if (Parametros::getIsGerenciaNet()) {
-                $result = Gerencianet::atualizarTransaction($idTransaction, $url);
+            if (Parameter::getIsGerenciaNet()) {
+                $result = Gerencianet::updateTranslation($idTransaction, $url);
             }
             
         }
@@ -71,12 +71,14 @@ class TransactionController extends Controller
      *
      * Detail a transaction | Example: api/v1/transaction/detail/$idTransaction
      */
-    public function detalhar($idTransaction)
+    public function detail($idTransaction)
     {
         
-        if ($idTransaction) {
-            if (Parametros::getIsGerenciaNet()) {
-                $result = Gerencianet::detalharTransacoes($idTransaction);
+        if ($idTransaction) 
+        {
+            if (Parameter::getIsGerenciaNet()) 
+            {
+                $result = Gerencianet::detailTransactions($idTransaction);
             }
         }
         
@@ -94,11 +96,11 @@ class TransactionController extends Controller
      *
      * Cancel a transaction | Example: api/v1/transaction/cancel/$idTransaction
      */
-    public function cancelar($idTransaction)
+    public function cancel($idTransaction)
     {
         
         if ($idTransaction) {
-            if (Parametros::getIsGerenciaNet()) {
+            if (Parameter::getIsGerenciaNet()) {
                 $result = Gerencianet::cancelTransaction($idTransaction);
             }
         }
@@ -115,9 +117,9 @@ class TransactionController extends Controller
     /**
      * Consult Notification Transaction GerenciaNet
      *
-     * Consult a notification | Example: api/v1/transaction/cancel/$idTransaction
+     * Consult a notification | Example: api/v1/transaction/consult/$idTransaction
      */
-    public function Consult()
+    public function consult()
     {
         
         $result = Gerencianet::ConsultNotification();

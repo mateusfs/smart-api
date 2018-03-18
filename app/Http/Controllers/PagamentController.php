@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Debets;
-use App\Parametros;
+use App\Debt;
+use App\Parameter;
 use App\Iugu;
 use App\Gerencianet;
 
@@ -15,23 +15,23 @@ class PagamentController extends Controller
     /**
      * Generate Pay per Ticket
      *
-     * Generate a ticket | Example: api/v1/pagament/ticket/$pgm_id
+     * Generate a ticket | Example: api/v1/pagament/ticket/$idPgm
      */
-    public function generatePagamentTicket($pgm_id)
+    public function generatePagamentTicket($idPgm)
     {
         
-        $debet = Debets::where('pgm_id', $pgm_id)->firstOrFail();
+        $debt = Debt::where('pgm_id', $idPgm)->firstOrFail();
         
-        if ($debet) 
+        if ($debt) 
         {
-            if (Parametros::getIsIugu()) 
+            if (Parameter::getIsIugu()) 
             {
-                $result = Iugu::issueTicket($debet);
+                $result = Iugu::issueTicket($debt);
             }
             
-            if (Parametros::getIsGerenciaNet()) 
+            if (Parameter::getIsGerenciaNet()) 
             {
-                $result = Gerencianet::issueTicket($debet);
+                $result = Gerencianet::issueTicket($debt);
             }
         }
         
@@ -42,10 +42,7 @@ class PagamentController extends Controller
         
         return response()->json(["error" => "Debt ID is required"], 403);
     }
-    
-    
-    
-    
+
     
     /**
      * Generate Pagament per ticket legal person
@@ -55,13 +52,13 @@ class PagamentController extends Controller
     public function generatePaymentLegalPerson($idPgm)
     {
         
-        $debet = Debets::where('pgm_id', $idPgm)->firstOrFail();
+        $debt = Debt::where('pgm_id', $idPgm)->firstOrFail();
         
-        if ($debet) 
+        if ($debt) 
         {
-            if (Parametros::getIsGerenciaNet()) 
+            if (Parameter::getIsGerenciaNet()) 
             {
-                $result = Gerencianet::issueOfCorporateTaxes($debet, 5);
+                $result = Gerencianet::issueOfCorporateTaxes($debt, 5);
             }
         }
         
@@ -78,22 +75,22 @@ class PagamentController extends Controller
      *
      * Generate a ticket | Example: api/v1/pagament/card/$idPgm
      */
-    public function gerarPagamentCartao($idPgm)
+    public function generatePagamentCard($idPgm)
     {
         
-        $debet = Debets::where('pgm_id', $idPgm)->firstOrFail();
+        $debt = Debt::where('pgm_id', $idPgm)->firstOrFail();
 
         
-        if ($debet) 
+        if ($debt) 
         {
-            if (Parametros::getIsIugu()) 
+            if (Parameter::getIsIugu()) 
             {
-                $result = Iugu::emetirCartao($debet);
+                $result = Iugu::emetirCartao($debt);
             }
             
-            if (Parametros::getIsGerenciaNet()) 
+            if (Parameter::getIsGerenciaNet()) 
             {
-                $result = Gerencianet::pagarCartao($debet);
+                $result = Gerencianet::pagarCartao($debt);
             }
         }
         
@@ -115,13 +112,13 @@ class PagamentController extends Controller
     public function setTicketAddress($idPgm, $idTransaction)
     {
         
-        $debet = Debets::where('pgm_id', $pgm_id)->firstOrFail();
+        $debt = Debt::where('pgm_id', $pgm_id)->firstOrFail();
         
-        if ($debet) 
+        if ($debt) 
         {
-            if (Parametros::getIsGerenciaNet()) 
+            if (Parameter::getIsGerenciaNet()) 
             {
-                $result = Gerencianet::setTicketAddress($idTransaction, $debet);
+                $result = Gerencianet::setTicketAddress($idTransaction, $debt);
             }
         }
         

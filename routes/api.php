@@ -16,71 +16,72 @@ use Illuminate\Http\Request;
 Route::prefix('v1')->group(function () {
  	Route::group(['middleware' => 'AuthToken'], function () {
  	    
- 	    Route::delete('wallets/delete/{wal_id}', 'WalletsController@delete');
- 	    Route::post('wallets/criar', 'WalletsController@criar');
- 	    Route::post('wallets/atualizar', 'WalletsController@atualizar');
- 	    Route::get('wallets/{wal_id}', 'WalletsController@index');
+ 	    Route::get('wallet/{idWal}', 'WalletController@index');
+ 	    Route::post('wallet/create', 'WalletController@create');
+ 	    Route::post('wallet/update', 'WalletController@update');
+ 	    Route::delete('wallet/delete/{idWal}', 'WalletController@delete');
 	 	
- 	    Route::delete('debets/delete/{pgm_id}', 'DebetsController@delete');
- 	    Route::post('debets/criar', 'DebetsController@criar');
- 	    Route::post('debets/atualizar', 'DebetsController@atualizar');
-     	Route::get('debets/{pgm_id}', 'DebetsController@index');
+ 	    Route::get('debt/{idPgm}', 'DebtController@index');
+ 	    Route::post('debt/create', 'DebtController@create');
+ 	    Route::post('debt/update', 'DebtController@update');
+ 	    Route::delete('debt/delete/{idPgm}', 'DebtController@delete');
      	
-     	Route::delete('itens/delete/{oit_id}', 'OrdersItemsController@delete');
-     	Route::post('itens/criar', 'OrdersItemsController@criar');
-     	Route::post('itens/atualizar', 'OrdersItemsController@atualizar');
-     	Route::get('itens/{oit_id}', 'OrdersItemsController@index');
+     	
+     	Route::get('item/{idOit}', 'OrderItemController@index');
+     	Route::post('item/create', 'OrderItemController@create');
+     	Route::post('item/update', 'OrderItemController@update');
+     	Route::delete('item/delete/{idOit}', 'OrderItemController@delete');
+     	
+     	Route::get('order/{idOrd}', 'OrderController@index');
+     	Route::post('order/create', 'OrderController@create');
+     	Route::post('order/update', 'OrderController@update');
+     	Route::delete('order/delete/{idOrd}', 'OrderController@delete');
+     	
+     	Route::get('payment/{idPrc}', 'PaymentAvailabilityController@index');
+     	Route::post('payment/create', 'PaymentAvailabilityController@create');
+     	Route::post('payment/update', 'PaymentAvailabilityController@update');
+     	Route::delete('payment/delete/{idPrc}', 'PaymentAvailabilityController@delete');
 	 	
-     	Route::delete('orders/delete/{ord_id}', 'OrdersController@delete');
-     	Route::post('orders/criar', 'OrdersController@criar');
-     	Route::post('orders/atualizar', 'OrdersController@atualizar');
-     	Route::get('orders/{ord_id}', 'OrdersController@index');
+	 	Route::get('withdrawal/{idSaq}', 'WithdrawalController@index');
+	 	Route::get('withdrawal/withdraw/{idSaq}', 'WithdrawalController@withdraw');
+	 	Route::post('withdrawal/update', 'WithdrawalController@update');
+	 	Route::post('withdrawal/create', 'WithdrawalController@create');
+	 	Route::delete('withdrawal/delete/{idSaq}', 'WithdrawalController@delete');
 	 	
-     	Route::delete('payments/delete/{prc_id}', 'PaymentsAvailabilityController@delete');
-     	Route::post('payments/criar', 'PaymentsAvailabilityController@criar');
-     	Route::post('payments/atualizar', 'PaymentsAvailabilityController@atualizar');
-	 	Route::get('payments/{prc_id}', 'PaymentsAvailabilityController@index');
-	 	
-	 	Route::delete('saques/delete/{saq_id}', 'SaquesController@delete');
-	 	Route::get('saques/sacar/{saq_id}', 'SaquesController@sacar');
-	 	Route::post('saques/atualizar', 'SaquesController@atualizar');
-	 	Route::post('saques/criar', 'SaquesController@criar');
-	 	Route::get('saques/{saq_id}', 'SaquesController@index');
-	 	
-	 	Route::get('pagament/boleto/{pgm_id}', 'PagamentController@gerarPagamentBoleto');
-	 	Route::get('pagament/cartao/{pgm_id}', 'PagamentController@gerarPagamentCartao');
-	 	Route::get('pagament/boleto/pessoaJuridica/{pgm_id}', 'PagamentController@gerarPagamentBoletoPessoaJuridica');
-	 	Route::get('pagament/boleto/definirEndereco/{pgm_id}/{idTransacao}', 'PagamentController@definirEnderecoBoleto');
+	 	Route::get('pagament/ticket/{idPgm}', 'PagamentController@generatePagamentTicket');
+	 	Route::get('pagament/card/{idPgm}', 'PagamentController@generatePagamentCard');
+	 	Route::get('pagament/ticket/legalPerson/{idPgm}', 'PagamentController@generatePaymentLegalPerson');
+	 	Route::get('pagament/ticket/setTicketAddress/{idPgm}/{idTransaction}', 'PagamentController@setTicketAddress');
 	 	
 	 	
-	 	Route::get('fatura/criar/', 'FaturaController@criarFatura');
-	 	Route::get('fatura/listar/', 'FaturaController@listarFaturas');
-	 	Route::get('fatura/capturar/{idFatura}', 'FaturaController@capturarFatura');
-	 	Route::get('fatura/reembolsar/{idFatura}', 'FaturaController@reembolsarFatura');
-	 	Route::get('fatura/cancelar/{idFatura}', 'FaturaController@cancelarFatura');
-	 	Route::get('fatura/gerarSegundaVia/{idFatura}', 'FaturaController@gerarSegundaViaFatura');
-	 	Route::get('fatura/buscar/{idFatura}', 'FaturaController@buscarFatura');
-	 	Route::get('fatura/enviarEmail/{idFatura}', 'FaturaController@enviarEmail');
+	 	Route::get('invoice/create/', 'InvoiceController@create');
+	 	Route::get('invoice/list/', 'InvoiceController@list');
+	 	Route::get('invoice/capture/{idInvoice}', 'InvoiceController@capture');
+	 	Route::get('invoice/refund/{idInvoice}', 'InvoiceController@refund');
+	 	Route::get('invoice/cancel/{idInvoice}', 'InvoiceController@cancel');
+	 	Route::get('invoice/generateSecondWay/{idInvoice}', 'InvoiceController@generateSecondWay');
+	 	Route::get('invoice/search/{idInvoice}', 'InvoiceController@search');
+	 	Route::get('invoice/sendEmail/{idInvoice}/{$to}', 'InvoiceController@sendEmail');
 	 	
-	 	Route::get('transferencia/listar/', 'TransferenciaController@listar');
-	 	Route::get('transferencia/listarTransferenciasBancarias/', 'TransferenciaController@listarTransferenciasBancarias');
-	 	Route::get('transferencia/buscarTransferenciaBancaria/', 'TransferenciaController@buscarTransferenciaBancaria');
-	 	Route::get('transferencia/transferir/{idConta}/{valor}', 'TransferenciaController@transferir');
-	 	Route::get('transferencia/buscar/{idTranferencia}', 'TransferenciaController@buscar');
+	 	Route::get('transfer/list/', 'TransferController@list');
+	 	Route::get('transfer/listBankTransfers/', 'TransferController@listBankTransfers');
+	 	Route::get('transfer/searchBankTransfer/', 'TransferController@searchBankTransfer');
+	 	Route::get('transfer/transfer/{idAccount}/{value}', 'TransferController@transfer');
+	 	Route::get('transfer/search/{idTransfer}', 'TransferController@search');
 	 	
-	 	Route::post('transacao/criar/', 'TransacaoController@criar');
-	 	Route::get('transacao/consultar/', 'TransacaoController@consultar');
-	 	Route::get('transacao/atualizar/{pgm_id}', 'TransacaoController@atualizar');
-	 	Route::get('transacao/detalhar/{idTransacao}', 'TransacaoController@detalhar');
-	 	Route::get('transacao/cancelar/{idTransacao}', 'TransacaoController@cancelar');
+	 	Route::post('transaction/create/', 'TransactionController@create');
+	 	Route::get('transaction/consult/', 'TransactionController@consult');
+	 	Route::get('transaction/update/{pgm_id}', 'TransactionController@update');
+	 	Route::get('transaction/detail/{idTransaction}', 'TransactionController@detail');
+	 	Route::get('transaction/cancel/{idTransaction}', 'TransactionController@cancel');
 	 	
-	 	Route::post('contestar/disputar/', 'ContestarController@disputar');
-	 	Route::get('contestar/listar/', 'ContestarController@listar');
-	 	Route::get('contestar/acatar/{idContestacao}', 'ContestarController@acatar');
-	 	Route::get('contestar/buscar/{idContestacao}', 'ContestarController@buscar');
+	 	Route::post('contest/dispute/', 'ContestController@dispute');
+	 	Route::get('contest/list/', 'ContestController@list');
+	 	Route::get('contest/obey/{idContestation}', 'ContestController@obey');
+	 	Route::get('contest/search/{idContestation}', 'ContestController@search');
 	 	
-	 	Route::get('financeiro/extratoFinanceiro', 'FinanceiroController@extratoFinanceiro');
-	 	Route::get('financeiro/extratoFaturas', 'FinanceiroController@extratoFaturas');
+	 	Route::get('financial/financialStatement', 'FinancialController@financialStatement');
+	 	Route::get('financial/invoiceStatement', 'FinancialController@invoiceStatement');
 	 	
  	});
  });

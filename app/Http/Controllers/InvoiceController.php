@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Debets;
-use App\Parametros;
+use App\Debt;
+use App\Parameter;
 use App\Iugu;
 
 /**
@@ -14,21 +14,21 @@ class InvoiceController extends Controller
     /**
      * Generate Invoice pelo IUGU
      *
-     * Generate a invoice | Example: api/v1/invoice/create
+     * Generate a invoice | Example: api/v1/invoice/create/$idPgm
      */
-    public function createInvoice($pgm_id)
+    public function create($idPgm)
     {
         
-        $divida = Debets::where('pgm_id', $pgm_id)->firstOrFail();
+        $debt = Debt::where('pgm_id', $idPgm)->firstOrFail();
         
-        if ($divida) {
-            if (Parametros::getIsIugu()) {
+        if ($debt) {
+            if (Parameter::getIsIugu()) {
                 
-                $emails = $divida->pgm_pagador_email.',smart@smartclic.com.br';
+                $emails = $debt->pgm_pagador_email.',smart@smartclic.com.br';
                 
                 $dataVencimento = date('Y-m-d') + 3;
                 
-                $items = Iugu::getItems($divida->pgm_pagador_nome, 1, $divida->pgm_valor);
+                $items = Iugu::getItems($debt->pgm_pagador_nome, 1, $debt->pgm_valor);
                 
                 $returnUrl = 'http://smartclic.com.br/';
                 
@@ -36,9 +36,9 @@ class InvoiceController extends Controller
                 
                 $logs = Iugu::getLogs();
                 
-                $custonVariables = Iugu::getCustonVariables($divida->pgm_pagador_nome, $divida->pgm_valor);
+                $custonVariables = Iugu::getCustonVariables($debt->pgm_pagador_nome, $debt->pgm_valor);
                 
-                $result = Iugu::criarFatura($divida->pgm_pagador_email, $emails, $dataVencimento, $items, $returnUrl, $expiredUrl, false, '', true, '', $idCliente, false, null, 'all', null, false, $logs, null, $custonVariables);
+                $result = Iugu::createInvoice($debt->pgm_pagador_email, $emails, $dataVencimento, $items, $returnUrl, $expiredUrl, false, '', true, '', $idCliente, false, null, 'all', null, false, $logs, null, $custonVariables);
             }
         }
         
@@ -55,7 +55,7 @@ class InvoiceController extends Controller
      *
      * Capturar a invoice | Example: api/v1/invoice/capture/$idInvoice
      */
-    public function captureFatura($idInvoice)
+    public function capture($idInvoice)
     {
         
         if($idInvoice){
@@ -74,13 +74,13 @@ class InvoiceController extends Controller
     /**
      * Repay Invoice
      *
-     * Repay a invoice | Example: api/v1/invoice/repay/$idInvoice
+     * Repay a invoice | Example: api/v1/invoice/refund/$idInvoice
      */
-    public function reembolsarInvoice($idInvoice)
+    public function refund($idInvoice)
     {
         
         if($idInvoice){
-            $result = Iugu::reembolsarInvoice($idInvoice);
+            $result = Iugu::refundInvoice($idInvoice);
         }
         
         
@@ -97,7 +97,7 @@ class InvoiceController extends Controller
      *
      * Cancel a invoice | Example: api/v1/invoice/cancel/$idInvoice
      */
-    public function cancelInvoice($idInvoice)
+    public function cancel($idInvoice)
     {
         
         if($idInvoice){
@@ -119,11 +119,11 @@ class InvoiceController extends Controller
      *
      * Generate a second way invoice | Example: api/v1/invoice/generateSecondWay/$idInvoice
      */
-    public function gerarSegundaViaFatura($idInvoice)
+    public function generateSecondWay($idInvoice)
     {
         
         if($idInvoice){
-            $result = Iugu::gerarSegundaViaFatura($idInvoice);
+            $result = Iugu::gerarateSecondInvoicePath($idInvoice);
         }
         
         
@@ -140,11 +140,11 @@ class InvoiceController extends Controller
      *
      * Search a invoice | Example: api/v1/invoice/search/$idInvoice
      */
-    public function buscarFatura($idInvoice)
+    public function search($idInvoice)
     {
         
         if($idInvoice){
-            $result = Iugu::buscarFatura($idInvoice);
+            $result = Iugu::searchInvoice($idInvoice);
         }
         
         
@@ -160,7 +160,7 @@ class InvoiceController extends Controller
      *
      * Search a invoice | Example: api/v1/invoice/list/
      */
-    public function listarFaturas()
+    public function list()
     {
         
         if($idInvoice){
@@ -172,20 +172,20 @@ class InvoiceController extends Controller
             return $result;
         }
         
-        return response()->json(["error" => "Invoice ID is required"], 403);
+        return response()->json(["error" => "We had trouble listing as invoices"], 403);
     }
     
     
     /**
      * Send Email Invoice
      *
-     * Send a email invoice | Example: api/v1/invoice/sendEmail/
+     * Send a email invoice | Example: api/v1/invoice/sendEmail/$idInvoice/$to
      */
-    public function sendEmail($idInvoice)
+    public function sendEmail($idInvoice, $to)
     {
         
-        if($idInvoice){
-            $result = Iugu::listInvoice($idInvoice);
+        if($idInvoice && $to){
+            $result = Iugu::sendEmail($idInvoice, $to);
         }
         
         

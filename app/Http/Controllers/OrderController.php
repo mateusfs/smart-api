@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Orders;
+use App\Order;
 
 /**
- * @resource Orders
+ * @resource Order
  *
  */
-class OrdersController extends Controller
+class OrderController extends Controller
 {
     /**
      * Search Order
      *
      * Search a order | Exemplo: api/v1/orders/1
      *
-     * @param number $ord_id
+     * @param number $idOrd
      */
-    public function index($ord_id)
+    public function index($idOrd)
 	{
-		return Orders::where('ord_id', $ord_id)->firstOrFail();
+	    return Order::where('ord_id', $idOrd)->firstOrFail();
 	}
 	
 	/**
@@ -30,9 +30,9 @@ class OrdersController extends Controller
 	 *
 	 * @return void
 	 */
-	public function criar(Request $request)
+	public function create(Request $request)
 	{
-		return Orders::created($request);
+		return Order::created($request);
 	}
 	
 	/**
@@ -44,7 +44,7 @@ class OrdersController extends Controller
 	 */
 	public function update(Request $request)
 	{
-    	$order = Orders::where('ord_id', $request->ord_id)->firstOrFail();
+    	$order = Order::where('ord_id', $request->ord_id)->firstOrFail();
     	
 		if($order)
 		{
@@ -58,13 +58,13 @@ class OrdersController extends Controller
 	 *
 	 * Remove Order | Exemplo: api/v1/orders/delete/1
 	 *
-	 * @param number $ord_id
+	 * @param number $idOrd
 	 * 
 	 * @return int
 	 */
-	public function delete($ord_id)
+	public function delete($idOrd)
 	{
-		$order = Orders::where('ord_id', $ord_id)->firstOrFail();
+	    $order = Order::where('ord_id', $idOrd)->firstOrFail();
 		if($order)
 		{
 			$order->delete();

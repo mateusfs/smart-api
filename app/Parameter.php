@@ -3,7 +3,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Parametros extends Model
+class Parameter extends Model
 {
 
     const CLIENTE_ID_IUGU = "";

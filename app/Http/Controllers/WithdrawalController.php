@@ -3,68 +3,71 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Withdrawals;
+use App\Withdrawal;
 use App\Iugu;
 use App\Gerencianet;
-use App\Parametros;
+use App\Parameter;
 
 
 
 /**
- * @resource Withdrawals
+ * @resource Withdrawal
  *
  */
-class WithdrawalsController extends Controller
+class WithdrawalController extends Controller
 {
     /**
      * Search Withdrawal
      *
-     * Search a withdrawal | Exemplo: api/v1/withdrawals/$saq_id
+     * Search a withdrawal | Exemplo: api/v1/withdrawal/$idSaq
      *
-     * @param number $saq_id
+     * @param number $idSaq
      */
-	public function index($saq_id)
+    public function index($idSaq)
 	{
-	    return Withdrawals::where('saq_id', $saq_id)->firstOrFail();
+	    return Withdrawal::where('saq_id', $idSaq)->firstOrFail();
 	}
 	
 	/**
 	 * Create Withdrawal
 	 *
-	 * Create a withdrawal | Exemplo: api/v1/withdrawals/create
+	 * Create a withdrawal | Exemplo: api/v1/withdrawal/create
 	 *
 	 * @return void
 	 */
-	public function criar(Request $request)
+	public function create(Request $request)
 	{
-	    return Withdrawals::created($request);
+	    return Withdrawal::created($request);
 	}
 	
 	/**
 	 * Update Withdrawal
 	 *
-	 * Update a withdrawal | Exemplo: api/v1/withdrawals/atualizar
+	 * Update a withdrawal | Exemplo: api/v1/withdrawal/update
 	 *
 	 * @return void
 	 */
 	public function update(Request $request)
 	{
-	    return Withdrawals::updated($request);
+	    $withdrawal = Withdrawal::where('saq_id', $saq_id)->firstOrFail();
+	    if($withdrawal){
+	        $withdrawal->save();
+	    }
 	}
 	
 	
 	/**
 	 * Remover Withdrawal
 	 *
-	 * Remover a withdrawal | Exemplo: api/v1/withdrawals/delete/$prc_id
+	 * Remover a withdrawal | Exemplo: api/v1/withdrawal/delete/$idSaq
 	 *
-	 * @param number $prc_id
+	 * @param number $idSaq
 	 *
 	 * @return int
 	 */
-	public function delete($prc_id)
+	public function delete($idSaq)
 	{
-	    $withdrawal = Withdrawals::where('saq_id', $saq_id)->firstOrFail();
+	    $withdrawal = Withdrawal::where('saq_id', $idSaq)->firstOrFail();
 	    if($withdrawal){
 	    	$withdrawal->delete();
 	    }
@@ -74,21 +77,21 @@ class WithdrawalsController extends Controller
 	/**
 	 * Order de Withdrawal
 	 *
-	 * Order of withdrawal | Exemplo: api/v1/withdrawals/withdraw/$saq_id
+	 * Order of withdrawal | Exemplo: api/v1/withdrawal/withdraw/$idSaq
 	 *
 	 * @return void
 	 */
-	public function withdraw($saq_id)
+	public function withdraw($idSaq)
 	{
 	    
-	    $withdraw = Withdrawals::where('saq_id', $saq_id)->firstOrFail();
+	    $withdraw = Withdrawal::where('saq_id', $idSaq)->firstOrFail();
 	    
 	    
 	    dd('Realizar Saque');
 	    
 	    if($withdraw)
 	    {
-	        if(Parametros::getIsIugu())
+	        if(Parameter::getIsIugu())
 	        {
 	            $customVariables = Iugu::getCustonVariables($withdraw->saq_intermediario, $withdraw->saq_valor);
 	            
@@ -99,8 +102,8 @@ class WithdrawalsController extends Controller
 	                $result = Iugu::requestWithdrawal($subAccount['account_id'], $withdraw->saq_valor, $customVariables);
 	            }
 	        }
-
-	        if(Parametros::getIsGerenciaNet())
+	        
+	        if(Parameter::getIsGerenciaNet())
 	        {
 	            $result = GerenciaNet::createTransaction($withdraw->saq_intermediario, 1, $withdraw->saq_valor);
 	        }

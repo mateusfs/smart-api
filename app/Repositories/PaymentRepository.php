@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Payments;
+use App\PaymentAvailability;
 
-class Payments
+class PaymentAvailabilityRepository
 {
     public function status()
     {

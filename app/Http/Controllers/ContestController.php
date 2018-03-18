@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Parametros;
+use App\Parameter;
 use App\Iugu;
 use Gerencianet\Request;
 
@@ -16,7 +16,7 @@ class ContestController extends Controller
      *
      * Dispute contestation | Exemplo: api/v1/contest/dispute/
      */
-    public function disputar(Request $request)
+    public function dispute(Request $request)
     {
         
         $idContest = $request->idContest;
@@ -24,7 +24,7 @@ class ContestController extends Controller
      
         if ($idContestation && $files) 
         {
-            if (Parametros::getIsIugu()) 
+            if (Parameter::getIsIugu()) 
             {
                 $result = Iugu::disputeContestation($idContestation, $files);
             }
@@ -49,7 +49,7 @@ class ContestController extends Controller
         
         if ($idContestation) 
         {
-            if (Parametros::getIsIugu()) 
+            if (Parameter::getIsIugu()) 
             {
                 $result = Iugu::obeyContestacao($idContestation);
             }
@@ -65,14 +65,14 @@ class ContestController extends Controller
     /**
      * Search Contest IUGU
      *
-     * Search Contest | Exemplo: api/v1/contest/buscar/$idContestation
+     * Search Contest | Exemplo: api/v1/contest/search/$idContestation
      */
-    public function buscar($idContestation)
+    public function search($idContestation)
     {
         
         if ($idContestation) 
         {
-            if (Parametros::getIsIugu()) 
+            if (Parameter::getIsIugu()) 
             {
                 $result = Iugu::searchContestation($idContestation);
             }
@@ -95,7 +95,7 @@ class ContestController extends Controller
         
         if ($idContestation) 
         {
-            if (Parametros::getIsIugu()) 
+            if (Parameter::getIsIugu()) 
             {
                 $result = Iugu::listContestation($idContestation);
             }

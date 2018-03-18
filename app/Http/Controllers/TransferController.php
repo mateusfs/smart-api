@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Debets;
-use App\Parametros;
+use App\Debt;
+use App\Parameter;
 use App\Iugu;
 
 /**
@@ -19,14 +19,14 @@ class TransferController extends Controller
     public function transfer($idAccount, $value)
     {
         
-        $divida = Debets::where('pgm_id', $pgm_id)->firstOrFail();
+        $divida = Debt::where('pgm_id', $pgm_id)->firstOrFail();
         
         
         if ($idAccount && $value) 
         {
-            if (Parametros::getIsIugu()) 
+            if (Parameter::getIsIugu()) 
             {
-                $result = Iugu::transfer($idAccount, $value);
+                $result = Iugu::transferValue($idAccount, $value);
             }
         }
         
@@ -48,8 +48,10 @@ class TransferController extends Controller
     public function search($idTransfer)
     {
         
-        if ($idTransfer) {
-            if (Parametros::getIsIugu()) {
+        if ($idTransfer) 
+        {
+            if (Parameter::getIsIugu()) 
+            {
                 $result = Iugu::searchTransfer($idTransfer);
             }
 
@@ -70,7 +72,7 @@ class TransferController extends Controller
      *
      * List a transfer | Example: api/v1/transfer/list/
      */
-    public function listar()
+    public function list()
     {
         
         $result = Iugu::listTransfer();
@@ -91,7 +93,7 @@ class TransferController extends Controller
     public function searchBankTransfer()
     {
         
-        if (Parametros::getIsIugu()) 
+        if (Parameter::getIsIugu()) 
         {
             $result = Iugu::searchBankTransfer();
         }
@@ -113,7 +115,7 @@ class TransferController extends Controller
     public function listBankTransfers()
     {
         
-        if (Parametros::getIsIugu()) 
+        if (Parameter::getIsIugu()) 
         {
             $result = Iugu::listBankTransfers();
         }

@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Debt;
 
-class Dividas
+class DebtRepository
 {
     public function status()
     {
