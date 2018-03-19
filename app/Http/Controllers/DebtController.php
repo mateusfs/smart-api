@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Debt;
+use App\Repositories\DebtRepository;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @resource Debt
@@ -14,7 +16,8 @@ class DebtController extends Controller {
 	 *
 	 * Search Debt | Exemplo: api/v1/Debt/$idPgm
 	 *
-	 * @param number $idPgm        	
+	 * @param number $idPgm
+	 * @return Response        	
 	 */
 	public function index($idPgm) {
 		return Debt::where ( 'pgm_id', $idPgm )->firstOrFail ();
@@ -25,10 +28,11 @@ class DebtController extends Controller {
 	 *
 	 * Create Debt | Exemplo: api/v1/Debt/create
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function create(Request $request) {
-		return Debt::created ( $request );
+	    return DebtRepository::create($request);
 	}
 	
 	/**
@@ -36,16 +40,12 @@ class DebtController extends Controller {
 	 *
 	 * Update Debt | Exemplo: api/v1/Debt/create
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function update(Request $request) 
 	{
-		$Debt = Debt::where ( 'pgm_id', $request->id_pgm )->firstOrFail ();
-		
-		if ($debt)
-		{
-		    $debt->save();
-		}
+	    return DebtRepository::update($request);
 	}
 	
 	/**
@@ -54,8 +54,7 @@ class DebtController extends Controller {
 	 * Remove Debt | Exemplo: api/v1/Debt/delete/$idPgm
 	 *
 	 * @param number $idPgm        	
-	 *
-	 * @return int
+     * @return Response
 	 */
 	public function delete($idPgm) 
 	{

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Parameter;
 use App\Iugu;
 use Gerencianet\Request;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @resource Contest
@@ -15,6 +16,9 @@ class ContestController extends Controller
      * Dispute contestation IUGU
      *
      * Dispute contestation | Exemplo: api/v1/contest/dispute/
+     * 
+     * @param Request $request
+	 * @return Response
      */
     public function dispute(Request $request)
     {
@@ -43,6 +47,9 @@ class ContestController extends Controller
      * Dispute Contest IUGU
      *
      * Dispute contest | Exemplo: api/v1/contest/obey/$idContestation
+     * 
+     * @param number $idContestation
+	 * @return Response
      */
     public function obey($idContestation)
     {
@@ -66,6 +73,9 @@ class ContestController extends Controller
      * Search Contest IUGU
      *
      * Search Contest | Exemplo: api/v1/contest/search/$idContestation
+     * 
+     * @param number $idContestation
+	 * @return Response
      */
     public function search($idContestation)
     {
@@ -89,6 +99,9 @@ class ContestController extends Controller
      * List Contest IUGU
      *
      * List a contest | Exemplo: api/v1/contest/list/$idContestation
+     * 
+     * @param number $idContestation
+	 * @return Response
      */
     public function list($idContestation)
     {

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Wallet;
 use Illuminate\Http\Request;
+use App\Repositories\WalletRepository;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @resource Wallet
@@ -17,8 +19,7 @@ class WalletController extends Controller
      * Search a wallet | Exemplo: api/v1/wallet/$idWal
      * 
      * @param number $idWal
-     * 
-     * @return Wallet
+     * @return Response
      */
 	public function index($idWal)
 	{
@@ -31,11 +32,12 @@ class WalletController extends Controller
 	 *
 	 * Create a wallet | Exemplo: api/v1/wallet/create
 	 * 
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function create(Request $request)
 	{
-	    return Wallet::created($request);
+	    return WalletRepository::create($request);
 	}
 	
 	/**
@@ -43,27 +45,22 @@ class WalletController extends Controller
 	 *
 	 * Update a wallet | Exemplo: api/v1/wallet/update
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function update(Request $request)
 	{
-	    $wallet = Wallet::where('wal_id', $request->wal_id)->firstOrFail();
-    	
-		if($wallet)
-		{
-		    $wallet->save();
-		}
+	    return WalletRepository::update($request);
 	}
 	
 	
 	/**
-	 * Remove Wallet
+	 * Delete Wallet
 	 *
-	 * Remove Wallet | Exemplo: api/v1/wallet/delete/$idWal
+	 * Delete Wallet | Exemplo: api/v1/wallet/delete/$idWal
 	 * 
 	 * @param number $idWal
-	 * 
-	 * @return int
+	 * @return Response
 	 */
 	public function delete($idWal)
 	{
@@ -71,7 +68,7 @@ class WalletController extends Controller
 		
 		if($wallet)
 		{
-			$wallet->delete();
+		    return WalletRepository::delete($wallet);
 		}
 	}
 }

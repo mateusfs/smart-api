@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Debt;
 use App\Parameter;
 use App\Iugu;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @resource Invoice
@@ -15,6 +16,9 @@ class InvoiceController extends Controller
      * Generate Invoice pelo IUGU
      *
      * Generate a invoice | Example: api/v1/invoice/create/$idPgm
+     * 
+     * @param number $idPgm
+	 * @return Response
      */
     public function create($idPgm)
     {
@@ -54,6 +58,9 @@ class InvoiceController extends Controller
      * Capturar Invoice 
      *
      * Capturar a invoice | Example: api/v1/invoice/capture/$idInvoice
+     * 
+     * @param number $idInvoice
+	 * @return Response
      */
     public function capture($idInvoice)
     {
@@ -75,6 +82,9 @@ class InvoiceController extends Controller
      * Repay Invoice
      *
      * Repay a invoice | Example: api/v1/invoice/refund/$idInvoice
+     * 
+     * @param number $idInvoice
+	 * @return Response
      */
     public function refund($idInvoice)
     {
@@ -96,6 +106,9 @@ class InvoiceController extends Controller
      * Cancel Invoice
      *
      * Cancel a invoice | Example: api/v1/invoice/cancel/$idInvoice
+     * 
+     * @param number $idInvoice
+	 * @return Response
      */
     public function cancel($idInvoice)
     {
@@ -118,6 +131,9 @@ class InvoiceController extends Controller
      * Generate Second Way Invoice
      *
      * Generate a second way invoice | Example: api/v1/invoice/generateSecondWay/$idInvoice
+     * 
+     * @param number $idInvoice
+	 * @return Response
      */
     public function generateSecondWay($idInvoice)
     {
@@ -139,6 +155,9 @@ class InvoiceController extends Controller
      * Search Invoice
      *
      * Search a invoice | Example: api/v1/invoice/search/$idInvoice
+     * 
+     * @param number $idInvoice
+	 * @return Response
      */
     public function search($idInvoice)
     {
@@ -159,6 +178,8 @@ class InvoiceController extends Controller
      * Search Invoice
      *
      * Search a invoice | Example: api/v1/invoice/list/
+     * 
+	 * @return Response
      */
     public function list()
     {

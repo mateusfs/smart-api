@@ -27,32 +27,35 @@ Route::prefix('v1')->group(function () {
  	    Route::delete('debt/delete/{idPgm}', 'DebtController@delete');
      	
      	
-     	Route::get('item/{idOit}', 'OrderItemController@index');
-     	Route::post('item/create', 'OrderItemController@create');
-     	Route::post('item/update', 'OrderItemController@update');
-     	Route::delete('item/delete/{idOit}', 'OrderItemController@delete');
+     	Route::get('item/{idOit}', 'ItemController@index');
+     	Route::post('item/create', 'ItemController@create');
+     	Route::post('item/update', 'ItemController@update');
+     	Route::delete('item/delete/{idOit}', 'ItemController@delete');
      	
      	Route::get('order/{idOrd}', 'OrderController@index');
      	Route::post('order/create', 'OrderController@create');
      	Route::post('order/update', 'OrderController@update');
      	Route::delete('order/delete/{idOrd}', 'OrderController@delete');
      	
-     	Route::get('payment/{idPrc}', 'PaymentAvailabilityController@index');
-     	Route::post('payment/create', 'PaymentAvailabilityController@create');
-     	Route::post('payment/update', 'PaymentAvailabilityController@update');
-     	Route::delete('payment/delete/{idPrc}', 'PaymentAvailabilityController@delete');
-	 	
+     	Route::get('intermediator/{idOrd}', 'IntermediatorController@index');
+     	Route::post('intermediator/create', 'IntermediatorController@create');
+     	Route::post('intermediator/update', 'IntermediatorController@update');
+     	Route::delete('intermediator/delete/{idOrd}', 'IntermediatorController@delete');
+     	
+     	Route::get('payment/{idPrc}', 'PaymentController@index');
+     	Route::post('payment/create', 'PaymentController@create');
+     	Route::post('payment/update', 'PaymentController@update');
+     	Route::delete('payment/delete/{idPrc}', 'PaymentController@delete');
+     	Route::get('payment/ticket/{idPgm}', 'PaymentController@generatePagamentTicket');
+     	Route::get('payment/card/{idPgm}', 'PaymentController@generatePagamentCard');
+     	Route::get('payment/ticket/legalPerson/{idPgm}', 'PaymentController@generatePaymentLegalPerson');
+     	Route::get('payment/ticket/setTicketAddress/{idPgm}/{idTransaction}', 'PaymentController@setTicketAddress');
+     	
 	 	Route::get('withdrawal/{idSaq}', 'WithdrawalController@index');
 	 	Route::get('withdrawal/withdraw/{idSaq}', 'WithdrawalController@withdraw');
 	 	Route::post('withdrawal/update', 'WithdrawalController@update');
 	 	Route::post('withdrawal/create', 'WithdrawalController@create');
 	 	Route::delete('withdrawal/delete/{idSaq}', 'WithdrawalController@delete');
-	 	
-	 	Route::get('pagament/ticket/{idPgm}', 'PagamentController@generatePagamentTicket');
-	 	Route::get('pagament/card/{idPgm}', 'PagamentController@generatePagamentCard');
-	 	Route::get('pagament/ticket/legalPerson/{idPgm}', 'PagamentController@generatePaymentLegalPerson');
-	 	Route::get('pagament/ticket/setTicketAddress/{idPgm}/{idTransaction}', 'PagamentController@setTicketAddress');
-	 	
 	 	
 	 	Route::get('invoice/create/', 'InvoiceController@create');
 	 	Route::get('invoice/list/', 'InvoiceController@list');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Debt;
 use App\Parameter;
 use App\Iugu;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @resource Transfer
@@ -15,6 +16,10 @@ class TransferController extends Controller
      * Generate Transfer IUGU
      *
      * Generate a transfer | Example: api/v1/transfer/transfer/$idAccount/$value
+     * 
+     * @param number $idAccount        	
+     * @param number $value
+     * @return Response
      */
     public function transfer($idAccount, $value)
     {
@@ -44,6 +49,9 @@ class TransferController extends Controller
      * Search transfer IUGU
      *
      * Search transfer | Example: api/v1/transfer/search/$idTransfer
+     * 
+     * @param number $idTransfer
+     * @return Response
      */
     public function search($idTransfer)
     {
@@ -71,6 +79,8 @@ class TransferController extends Controller
      * List transfer IUGU
      *
      * List a transfer | Example: api/v1/transfer/list/
+     * 
+     * @return Response
      */
     public function list()
     {
@@ -89,6 +99,8 @@ class TransferController extends Controller
      * Search Bank Transfer IUGU
      *
      * Search a bank transfer | Example: api/v1/transfer/searchBankTransfer/
+     * 
+     * @return Response
      */
     public function searchBankTransfer()
     {
@@ -111,6 +123,8 @@ class TransferController extends Controller
      * List Bank Transfer IUGU
      *
      * List bank transfer | Example: api/v1/transfer/listBankTransfers/
+     * 
+     * @return Response
      */
     public function listBankTransfers()
     {

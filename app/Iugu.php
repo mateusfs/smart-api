@@ -3,7 +3,6 @@ namespace App;
 
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
-use App\Parameter;
 
 class Iugu extends Model
 {

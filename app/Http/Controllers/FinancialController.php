@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Iugu;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @resource Financial
@@ -13,6 +14,8 @@ class FinancialController extends Controller
      * Financial Statement IUGU
      *
      * Financial Statement | Exemplo: api/v1/financial/financialStatement
+     * 
+	 * @return Response
      */
     public function financialStatement()
     {
@@ -31,6 +34,8 @@ class FinancialController extends Controller
      * Invoice Statement IUGU
      *
      * Invoice Statement | Exemplo: api/v1/financial/invoiceStatement
+     * 
+     * @return Response
      */
     public function invoiceStatement()
     {

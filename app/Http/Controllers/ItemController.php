@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\OrderItem;
+use App\Item;
+use App\Repositories\ItemRepository;
+use GuzzleHttp\Psr7\Response;
 
 /**
- * @resource OrderItem
+ * @resource Item
  *
  */
-class OrderItemController extends Controller
+class ItemController extends Controller
 {
     /**
      * Search Item
@@ -17,10 +19,11 @@ class OrderItemController extends Controller
      * Search Item | Exemplo: api/v1/item/$idOit
      *
      * @param number $idOit
+     * @return Response
      */
 	public function index($idOit)
 	{
-	    return OrderItem::where('oit_id', $idOit)->firstOrFail();
+	    return Item::where('oit_id', $idOit)->firstOrFail();
 	}
 	
 	/**
@@ -28,11 +31,12 @@ class OrderItemController extends Controller
 	 *
 	 * Create Item | Exemplo: api/v1/item/create
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function create(Request $request)
 	{
-		return OrderItem::created($request);
+		return ItemRepository::create($request);
 	}
 	
 	/**
@@ -40,16 +44,12 @@ class OrderItemController extends Controller
 	 *
 	 * Update Item | Exemplo: api/v1/item/update
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function update(Request $request)
 	{
-		$item = OrderItem::where('oit_id', $request->oit_id)->firstOrFail();
-		
-		if($item)
-		{
-		    $item->save();
-		}
+	    return ItemRepository::update($request);
 	}
 	
 	
@@ -59,16 +59,15 @@ class OrderItemController extends Controller
 	 * Remover Item | Exemplo: api/v1/item/delete/$idOit
 	 *
 	 * @param number $idOit
-	 * 
-	 * @return int
+	 * @return Response
 	 */
 	public function delete($idOit)
 	{
-	    $item = OrderItem::where('oit_id', $idOit)->firstOrFail();
+	    $item = Item::where('oit_id', $idOit)->firstOrFail();
 		
 		if($item)
 		{
-			$item->delete();
+		    return ItemRepository::delete($item);
 		}
 	}
 }

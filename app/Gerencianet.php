@@ -4,7 +4,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Gerencianet\Exception\GerencianetException;
 use Carbon\Carbon;
-use App\Parameter;
 
 
 class Gerencianet extends Model

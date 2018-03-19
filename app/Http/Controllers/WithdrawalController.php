@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Withdrawal;
-use App\Iugu;
-use App\Gerencianet;
-use App\Parameter;
+use App\Repositories\WithdrawalRepository;
+use GuzzleHttp\Psr7\Response;
 
 
 
@@ -22,6 +21,7 @@ class WithdrawalController extends Controller
      * Search a withdrawal | Exemplo: api/v1/withdrawal/$idSaq
      *
      * @param number $idSaq
+     * @return Response
      */
     public function index($idSaq)
 	{
@@ -33,11 +33,12 @@ class WithdrawalController extends Controller
 	 *
 	 * Create a withdrawal | Exemplo: api/v1/withdrawal/create
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function create(Request $request)
 	{
-	    return Withdrawal::created($request);
+	    return WithdrawalRepository::create($request);
 	}
 	
 	/**
@@ -45,14 +46,12 @@ class WithdrawalController extends Controller
 	 *
 	 * Update a withdrawal | Exemplo: api/v1/withdrawal/update
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function update(Request $request)
 	{
-	    $withdrawal = Withdrawal::where('saq_id', $saq_id)->firstOrFail();
-	    if($withdrawal){
-	        $withdrawal->save();
-	    }
+	    return WithdrawalRepository::update($request);
 	}
 	
 	
@@ -61,61 +60,36 @@ class WithdrawalController extends Controller
 	 *
 	 * Remover a withdrawal | Exemplo: api/v1/withdrawal/delete/$idSaq
 	 *
-	 * @param number $idSaq
-	 *
-	 * @return int
+     * @param number $idSaq
+	 * @return Response
 	 */
 	public function delete($idSaq)
 	{
 	    $withdrawal = Withdrawal::where('saq_id', $idSaq)->firstOrFail();
-	    if($withdrawal){
-	    	$withdrawal->delete();
+	    
+	    if($withdrawal)
+	    {
+	        return WithdrawalRepository::delete($withdrawal);
 	    }
 	}
 	
 	
 	/**
-	 * Order de Withdrawal
+	 * Withdraw of Withdrawal
 	 *
-	 * Order of withdrawal | Exemplo: api/v1/withdrawal/withdraw/$idSaq
+	 * Withdraw of withdrawal | Exemplo: api/v1/withdrawal/withdraw/$idSaq
 	 *
-	 * @return void
+	 * @param number $idSaq
+     * @return Response
 	 */
 	public function withdraw($idSaq)
 	{
-	    
 	    $withdraw = Withdrawal::where('saq_id', $idSaq)->firstOrFail();
-	    
-	    
-	    dd('Realizar Saque');
-	    
-	    if($withdraw)
+	       
+	    if($withdrawal)
 	    {
-	        if(Parameter::getIsIugu())
-	        {
-	            $customVariables = Iugu::getCustonVariables($withdraw->saq_intermediario, $withdraw->saq_valor);
-	            
-	            $subAccount = Iugu::orderOfWithdrawal($withdraw->saq_intermediario, null);
-	            
-	            if($subAccount)
-	            {
-	                $result = Iugu::requestWithdrawal($subAccount['account_id'], $withdraw->saq_valor, $customVariables);
-	            }
-	        }
-	        
-	        if(Parameter::getIsGerenciaNet())
-	        {
-	            $result = GerenciaNet::createTransaction($withdraw->saq_intermediario, 1, $withdraw->saq_valor);
-	        }
-	        
+	        return WithdrawalRepository::withdraw($withdrawal);
 	    }
-	    
-	    if($result)
-	    {
-	        return $result;
-        }
-        
-        return response()->json(["error" => "Serving ID is required"], 403);
 	}
 	
 

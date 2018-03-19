@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Repositories\OrderRepository;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @resource Order
@@ -17,6 +19,7 @@ class OrderController extends Controller
      * Search a order | Exemplo: api/v1/orders/1
      *
      * @param number $idOrd
+     * @return Response
      */
     public function index($idOrd)
 	{
@@ -28,11 +31,12 @@ class OrderController extends Controller
 	 *
 	 * Create a order | Exemplo: api/v1/itens/create
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function create(Request $request)
 	{
-		return Order::created($request);
+		return OrderRepository::create($request);
 	}
 	
 	/**
@@ -40,16 +44,12 @@ class OrderController extends Controller
 	 *
 	 * Update a Order | Exemplo: api/v1/orders/update
 	 *
-	 * @return void
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function update(Request $request)
 	{
-    	$order = Order::where('ord_id', $request->ord_id)->firstOrFail();
-    	
-		if($order)
-		{
-		    $order->save();
-		}
+	    return OrderRepository::update($request);
 	}
 	
 	
@@ -59,15 +59,15 @@ class OrderController extends Controller
 	 * Remove Order | Exemplo: api/v1/orders/delete/1
 	 *
 	 * @param number $idOrd
-	 * 
-	 * @return int
+	 * @return Response
 	 */
 	public function delete($idOrd)
 	{
 	    $order = Order::where('ord_id', $idOrd)->firstOrFail();
+	    
 		if($order)
 		{
-			$order->delete();
+		    return OrderRepository::delete($order);
 		}
 	}
 }

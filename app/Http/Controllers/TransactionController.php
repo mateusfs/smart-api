@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Parameter;
 use Gerencianet\Request;
 use App\Gerencianet;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @resource Transaction
@@ -15,6 +16,9 @@ class TransactionController extends Controller
      * Update Transaction GerenciaNet
      *
      * Update a transaction | Example: api/v1/transaction/create
+     * 
+     * @param Request $resquest        	
+     * @return Response
      */
     public function create(Request $resquest)
     {
@@ -43,6 +47,9 @@ class TransactionController extends Controller
      * Update Transaction GerenciaNet
      *
      * Update a transaction | Example: api/v1/transaction/update
+     * 
+     * @param Request $resquest        	
+     * @return Response
      */
     public function update(Request $resquest)
     {
@@ -70,6 +77,9 @@ class TransactionController extends Controller
      * Detail Transaction GerenciaNet
      *
      * Detail a transaction | Example: api/v1/transaction/detail/$idTransaction
+     * 
+     * @param number $idTransaction        	
+     * @return Response
      */
     public function detail($idTransaction)
     {
@@ -95,6 +105,9 @@ class TransactionController extends Controller
      * Cancel Transaction GerenciaNet
      *
      * Cancel a transaction | Example: api/v1/transaction/cancel/$idTransaction
+     * 
+     * @param number $idTransaction        	
+     * @return Response
      */
     public function cancel($idTransaction)
     {
@@ -118,6 +131,9 @@ class TransactionController extends Controller
      * Consult Notification Transaction GerenciaNet
      *
      * Consult a notification | Example: api/v1/transaction/consult/$idTransaction
+     * 
+     * @param number $idTransaction        	
+     * @return Response
      */
     public function consult()
     {
