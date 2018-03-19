@@ -60,7 +60,7 @@ class PaymentRepository
      * Status a payment.
      *
      * @param  Request  $payment
-     * @return status
+     * @return string
      */
     public function status()
     {
