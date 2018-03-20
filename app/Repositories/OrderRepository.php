@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Order;
-use Gerencianet\Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Validation\Validator;
 
@@ -20,11 +19,11 @@ class OrderRepository
         if($this->validate($request) == true){
             return Order::created($request);
         }
-        
+
         return response()->json(["error" => "Problems creating a order"], 403);
     }
-    
-    
+
+
     /**
      * Update a new order post.
      *
@@ -36,10 +35,10 @@ class OrderRepository
         if($this->validate($request) == true){
             return Order::saved($request);
         }
-        
+
         return response()->json(["error" => "Problems updating a order"], 403);
     }
-    
+
     /**
      * Delete a order.
      *
@@ -54,7 +53,7 @@ class OrderRepository
         }
         return response()->json(["error" => "Problems deleting a order"], 403);
     }
-    
+
     /**
      * Status a order.
      *
@@ -63,7 +62,7 @@ class OrderRepository
      */
     public function status()
     {
-     
+
     }
 
     /**
@@ -75,15 +74,15 @@ class OrderRepository
     public function validate($data)
     {
         $v = Validator::make($data, $this->rules);
-        
+
         if ($v->fails())
         {
             return $v->errors;
         }
-        
+
         return true;
     }
-    
+
     protected $rules = [
         'ord_carteira' => 'required',
         'ord_aceitar_boleto' => 'required',

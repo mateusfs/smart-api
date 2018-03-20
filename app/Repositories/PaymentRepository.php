@@ -3,13 +3,12 @@
 namespace App\Repositories;
 
 use App\Payment;
-use Gerencianet\Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Validation\Validator;
 
 class PaymentRepository
 {
-    
+
     /**
      * Create a new payment post.
      *
@@ -21,10 +20,10 @@ class PaymentRepository
         if($this->validate($request) == true){
             return Payment::created($request);
         }
-        
+
         return response()->json(["error" => "Problems creating a payment"], 403);
     }
-    
+
     /**
      * Update a new payment post.
      *
@@ -36,10 +35,10 @@ class PaymentRepository
         if($this->validate($request) == true){
             return Payment::saved($request);
         }
-        
+
         return response()->json(["error" => "Problems updating a payment"], 403);
     }
-    
+
     /**
      * Delete a payment.
      *
@@ -52,10 +51,10 @@ class PaymentRepository
         {
            return $payment->delete();
         }
-        
+
         return response()->json(["error" => "Problems deleting a payment"], 403);
     }
-    
+
     /**
      * Status a payment.
      *
@@ -77,7 +76,7 @@ class PaymentRepository
     {
         // disponivel true/false
     }
-    
+
     /**
      * Validade a payment.
      *
@@ -87,16 +86,16 @@ class PaymentRepository
     public function validate($data)
     {
         $v = Validator::make($data, $this->rules);
-        
+
         if ($v->fails())
         {
             return $v->errors;
         }
-        
+
         return true;
     }
-    
-    
+
+
     protected $rules = [
 		'prc_local' => 'required',
 		'prc_carteira' => 'required',

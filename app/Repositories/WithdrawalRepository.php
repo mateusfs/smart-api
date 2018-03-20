@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Withdrawal;
-use Gerencianet\Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Validation\Validator;
 use App\Parameter;
@@ -12,7 +11,7 @@ use App\Iugu;
 
 class WithdrawalRepository
 {
-    
+
     /**
      * Create a new withdrawal post.
      *
@@ -24,7 +23,7 @@ class WithdrawalRepository
         if($this->validate($request) == true){
             return Withdrawal::created($request);
         }
-        
+
         return response()->json(["error" => "Problems creating a withdrawal"], 403);
     }
 
@@ -39,10 +38,10 @@ class WithdrawalRepository
         if($this->validate($request) == true){
             return Withdrawal::saved($request);
         }
-        
+
         return response()->json(["error" => "Problems updating a withdrawal"], 403);
     }
-    
+
     /**
      * Delete a withdrawal.
      *
@@ -88,7 +87,7 @@ class WithdrawalRepository
      */
     public function calcBalance($who='owner')
     {
-        
+
     }
 
     /**
@@ -101,37 +100,37 @@ class WithdrawalRepository
     {
         // verificar saldo dele(cliente)
         // automatizar o saque
-        
+
         if($withdraw)
         {
             if(Parameter::getIsIugu())
             {
                 $customVariables = Iugu::getCustonVariables($withdraw->saq_intermediario, $withdraw->saq_valor);
-                
+
                 $subAccount = Iugu::orderOfWithdrawal($withdraw->saq_intermediario, null);
-                
+
                 if($subAccount)
                 {
                     $result = Iugu::requestWithdrawal($subAccount['account_id'], $withdraw->saq_valor, $customVariables);
                 }
             }
-            
+
             if(Parameter::getIsGerenciaNet())
             {
                 $result = Gerencianet::createTransaction($withdraw->saq_intermediario, 1, $withdraw->saq_valor);
             }
-            
+
         }
-        
+
         if($result)
         {
             return $result;
         }
-        
+
         return response()->json(["error" => "Problems withdraw"], 403);
     }
 
-    
+
     /**
      * Validade a withdrawal.
      *
@@ -141,16 +140,16 @@ class WithdrawalRepository
     public function validate($data)
     {
         $v = Validator::make($data, $this->rules);
-        
+
         if ($v->fails())
         {
             return $v->errors;
         }
-        
+
         return true;
     }
-    
-    
+
+
     protected $rules = [
         'saq_carteira' => 'required',
         'saq_criado_em' => 'required',
@@ -160,7 +159,7 @@ class WithdrawalRepository
         'saq_intermediario_code' => 'required',
         'saq_pago_em' => 'required',
     ];
-    
+
 
 
 

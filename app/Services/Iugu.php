@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Services;
 
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
@@ -12,73 +12,73 @@ class Iugu extends Model
      */
     public static function issueTicket(Debt $debt)
     {
-        try 
+        try
         {
-            if ($debt) 
+            if ($debt)
             {
                 $idCustomer = Parameter::CLIENTE_ID_IUGU;
-                
+
                 $token = $this->createToken($idCustomer);
-                
+
                 $paymentMethod = $this->createPaymentMethod($idCustomer);
-                
+
                 $items = $this->getItems($debt->pgm_pagador_nome, 1, $debt->pgm_valor);
-                
+
                 if($paymentMethod && $items){
                     $result = $this->directBilling($debts, 'bank_slip', $token, $paymentMethod['id'], true, $idCustomer, '', $debt->pgm_pagador_email, $debt->pgm_parcelas, null, 5, $items);
                 }
-                
+
                 return $result;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
     }
-    
-    
+
+
     /**
      * Issue Card IUGU
      *
      */
     public static function issueCard(Debt $debt)
     {
-        try 
+        try
         {
-            if ($debt) 
+            if ($debt)
             {
                 $idCustomer = Parameter::CLIENTE_ID_IUGU;
-                
+
                 $token = $this->createToken($idCustomer);
-                
+
                 $formaDePamanto = $this->createPaymentMethod($idCustomer);
-                
-                $returnUrl = 'http://smartclic.com.br/';
-                
-                $expiredUrl = 'http://smartclic.com.br/';
-                
+
+                #$returnUrl = 'http://smartclic.com.br/';
+
+                #$expiredUrl = 'http://smartclic.com.br/';
+
                 $emails = $debt->pgm_pagador_email.',smart@smartclic.com.br';
-                
+
                 $fatura = $this->createInvoice($debt->pgm_pagador_email, $emails, $dataVencimento, $items, $returnUrl, $expiredUrl, false, '', '', $idCustomer, false, null, 'credit_card');
-                
+
                 $items = $this->getItems($debt->pgm_pagador_razao, 1, $debt->pgm_valor);
-                
+
                 if($formaDePamanto && $items){
                     $result = self::cobrancaDireta($debts, '', $token, $formaDePamanto['id'], true, $idCustomer, $fatura['id'], $debt->pgm_pagador_email, $debt->pgm_parcelas, null, 5, $items);
                 }
-                
+
                 return $result;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
     }
-    
-    
-    
+
+
+
     /**
      * Create Invoice IUGU
      *
@@ -86,7 +86,7 @@ class Iugu extends Model
      */
     public static function createInvoice($email, $emails, $dueDate, $items, $returnUrl, $expiredUrl, $fines, $latePaymentFine, $perDayInterest = true, $discountCents, $idCustomer, $ignoreEmail = false, $idSubscription = null, $payableWith = 'all', $credits = null, $earlyPaymentDiscount = false, $payer, $logs = null, $paymenDiscounts = null, $custonVariables = null)
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->post('https://api.iugu.com/v1/invoices', [
@@ -112,14 +112,14 @@ class Iugu extends Model
                     $logs,
                     $paymenDiscounts,
                     $custonVariables
-                
+
                 ]
             ]);
-            
+
             return $request;
-            
+
         }
-        catch (\Exception $e) 
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -132,9 +132,9 @@ class Iugu extends Model
      */
     public static function captureInvoice($idInvoice)
     {
-        try 
+        try
         {
-            if ($idInvoice) 
+            if ($idInvoice)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . '/capture', [
@@ -142,11 +142,11 @@ class Iugu extends Model
                         'id' => $idInvoice
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -155,15 +155,15 @@ class Iugu extends Model
     /**
      * Refund Invoice IUGU
      *
-     * Refund an Invoice. Only some means of payment allow the refund, as for example the Credit Card. 
+     * Refund an Invoice. Only some means of payment allow the refund, as for example the Credit Card.
      * After the refund, the invoice has the status of "refunded" / "refunded".
-     * 
+     *
      */
     public static function refundInvoice($idInvoice)
     {
-        try 
+        try
         {
-            if ($idInvoice) 
+            if ($idInvoice)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . '/refund', [
@@ -171,11 +171,11 @@ class Iugu extends Model
                         'id' => $idInvoice
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -188,9 +188,9 @@ class Iugu extends Model
      */
     public static function cancelInvoice($idInvoice)
     {
-        try 
+        try
         {
-            if ($idInvoice) 
+            if ($idInvoice)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . '/cancel', [
@@ -198,11 +198,11 @@ class Iugu extends Model
                         'id' => $idInvoice
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -215,9 +215,9 @@ class Iugu extends Model
      */
     public static function gerarateSecondInvoicePath($idInvoice, $items = null)
     {
-        try 
+        try
         {
-            if ($idInvoice) 
+            if ($idInvoice)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . '/duplicate', [
@@ -231,11 +231,11 @@ class Iugu extends Model
                         $items
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -248,9 +248,9 @@ class Iugu extends Model
      */
     public static function searchInvoice($idInvoice)
     {
-        try 
+        try
         {
-            if ($idInvoice) 
+            if ($idInvoice)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice, [
@@ -258,11 +258,11 @@ class Iugu extends Model
                         'id' => $idInvoice
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -271,21 +271,21 @@ class Iugu extends Model
     /**
      * List Invoices IUGU
      *
-     * Returns a list of invoices in your account sorted by the creation date, from the most recent to the latest. 
-     * By default, this endpoint returns a maximum of 100 records. The "totalItems" field always contains the total 
+     * Returns a list of invoices in your account sorted by the creation date, from the most recent to the latest.
+     * By default, this endpoint returns a maximum of 100 records. The "totalItems" field always contains the total
      * number of invoices registered, regardless of the search Parameter used, and the search result is always within "items".
-     * 
+     *
      */
     public static function listInvoices()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/invoices/');
-            
+
             return $request;
         }
-        catch (\Exception $e) 
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -298,9 +298,9 @@ class Iugu extends Model
      */
     public static function sendEmailInvoice($idInvoice)
     {
-        try 
+        try
         {
-            if ($idInvoice) 
+            if ($idInvoice)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/invoices/' . $idInvoice . 'send_email', [
@@ -308,11 +308,11 @@ class Iugu extends Model
                         'id' => $idInvoice
                     ]
                 ]);
-                
+
                 return $request;
             }
         }
-        catch (\Exception $e) 
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -325,10 +325,10 @@ class Iugu extends Model
      */
     public static function directBilling(Debt $debt, $method = 'bank_slip', $token = null, $customerPaymentMethodId = null, $restrictPaymentMethod = true, $idCustomere = null, $idFatura = null, $email = null, $months, $discountCents = null, $bankSlipExtraDays = 3, $items = null)
     {
-        try 
+        try
         {
-            
-            if ($debt) 
+
+            if ($debt)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/charge', [
@@ -349,10 +349,10 @@ class Iugu extends Model
                     ]
                 ]);
             }
-            
+
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -400,12 +400,12 @@ class Iugu extends Model
      */
     public static function updateClient(Debt $debt, $defaultPaymentMethodId = null, $customVariables = null)
     {
-        try 
+        try
         {
-            if ($debt) 
+            if ($debt)
             {
                 $client = new Client(self::getHeaders());
-                
+
                 $request = $client->put('https://api.iugu.com/v1/customers/' . Parameter::CLIENTE_ID_IUGU, [
                     'form_params' => [
                         'email' => $debt->pgm_pagador_email,
@@ -428,8 +428,8 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -442,16 +442,16 @@ class Iugu extends Model
      */
     public static function removeClient($idCustomer)
     {
-        try 
+        try
         {
-            if ($idCustomer) 
+            if ($idCustomer)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->delte('https://api.iugu.com/v1/customers/' . $idCustomer);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -464,16 +464,16 @@ class Iugu extends Model
      */
     public static function searchCliente($idCustomer)
     {
-        try 
+        try
         {
-            if ($idCustomer) 
+            if ($idCustomer)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/customers/' . $idCustomer);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -481,21 +481,21 @@ class Iugu extends Model
 
     /**
      * List Clients IUGU
-     * 
-     * Returns a list of all customers registered to your account sorted by Creation date, the first being the most recently created. 
-     * The "totalItems" field always contains the number of customers registered, regardless of the search Parameter 
+     *
+     * Returns a list of all customers registered to your account sorted by Creation date, the first being the most recently created.
+     * The "totalItems" field always contains the number of customers registered, regardless of the search Parameter
      * used and the search result is always within "items".
-     * 
+     *
      */
     public static function listClients()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/customers/');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -508,10 +508,10 @@ class Iugu extends Model
      */
     public static function createPaymentMethod($idCustomer, $token)
     {
-        try 
+        try
         {
-            
-            if ($idCustomer) 
+
+            if ($idCustomer)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods', [
@@ -521,11 +521,11 @@ class Iugu extends Model
                         'set_as_default' => false
                     ]
                 ]);
-                
+
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -538,9 +538,9 @@ class Iugu extends Model
      */
     public static function changePaymentMethod($idCustomer, $idPayment)
     {
-        try 
+        try
         {
-            if ($idCustomer && $idPayment) 
+            if ($idCustomer && $idPayment)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods/' . $idPayment, [
@@ -548,11 +548,11 @@ class Iugu extends Model
                         'description' => 'SmartClic'
                     ]
                 ]);
-                
+
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -565,9 +565,9 @@ class Iugu extends Model
      */
     public static function removeFormPayment($idCustomer, $idPayment)
     {
-        try 
+        try
         {
-            if ($idCustomer && $idPayment) 
+            if ($idCustomer && $idPayment)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->delete('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods/' . $idPayment, [
@@ -575,11 +575,11 @@ class Iugu extends Model
                         'description' => 'SmartClic'
                     ]
                 ]);
-                
+
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -592,16 +592,16 @@ class Iugu extends Model
      */
     public static function searchFormPayment($idCustomer, $idPayment)
     {
-        try 
+        try
         {
-            if ($idCustomer && $idPayment) 
+            if ($idCustomer && $idPayment)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods/' . $idPayment);
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -611,20 +611,20 @@ class Iugu extends Model
      * List of Forms of Payment IUGU
      *
      * Returns a list of all forms of payment for a given customer
-     * 
+     *
      */
     public static function listFormPayment($idCustomer)
     {
-        try 
+        try
         {
-            if ($idCustomer) 
+            if ($idCustomer)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/customers/' . $idCustomer . '/payment_methods');
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -637,9 +637,9 @@ class Iugu extends Model
      */
     public static function createPlan($name, $identifier, $interval, $intervalType = 'months', $valueCents, $payableWith = 'bank_slip', $features = null)
     {
-        try 
+        try
         {
-            if ($identifier) 
+            if ($identifier)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/plans', [
@@ -655,8 +655,8 @@ class Iugu extends Model
                 ]);
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -665,15 +665,15 @@ class Iugu extends Model
     /**
      * Change Plan IUGU
      *
-     * Changes the data of a Plan, is not informed by anything. 
+     * Changes the data of a Plan, is not informed by anything.
      * The changes will not change the Subscriptions that already use the Plan, but only the new ones.
-     * 
+     *
      */
     public static function changePlan($idPlan, $name, $interval, $intervalType = 'months', $valueCents, $payableWith = 'bank_slip', $features = null)
     {
-        try 
+        try
         {
-            if ($idPlan) 
+            if ($idPlan)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/plans/' . $idPlan, [
@@ -688,8 +688,8 @@ class Iugu extends Model
                 ]);
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -699,20 +699,20 @@ class Iugu extends Model
      * Remove Plan IUGU
      *
      * Removes data from a Plan
-     * 
+     *
      */
     public static function removePlan($idPlan)
     {
-        try 
+        try
         {
-            if ($idPlan) 
+            if ($idPlan)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->delete('https://api.iugu.com/v1/plans/' . $idPlan);
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -725,16 +725,16 @@ class Iugu extends Model
      */
     public static function searchPlan($idPlan)
     {
-        try 
+        try
         {
-            if ($idPlan) 
+            if ($idPlan)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/plans/' . $idPlan);
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -747,16 +747,16 @@ class Iugu extends Model
      */
     public static function searcForPlansByIdentifier($identifier)
     {
-        try 
+        try
         {
-            if ($identifier) 
+            if ($identifier)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/plans/identifier/' . $identifier);
                 return json_decode($request->getBody()->getContents());
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -765,20 +765,20 @@ class Iugu extends Model
     /**
      * List Plans IUGU
      *
-     * Returns a list of all plans in your account sorted by Creation date, the first being the most recently created. 
-     * The totalItems field always contains the number of plans registered, regardless of the search Parameter used 
+     * Returns a list of all plans in your account sorted by Creation date, the first being the most recently created.
+     * The totalItems field always contains the number of plans registered, regardless of the search Parameter used
      * and the search result is always within items.
-     * 
+     *
      */
     public static function listPlans()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/plans');
             return json_decode($request->getBody()->getContents());
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -791,10 +791,10 @@ class Iugu extends Model
      */
     public static function createSubscription($idCustomer, $planIdentifier = '', $expiresAt, $payablWith = 'bank_slip', $creditsBased = false, $priceCents, $creditsCycle, $creditsMin, $subitems = null, $customerVariables = null)
     {
-        try 
+        try
         {
-            
-            if ($idCustomer) 
+
+            if ($idCustomer)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/subscriptions', [
@@ -813,11 +813,11 @@ class Iugu extends Model
                         $customerVariables
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -830,18 +830,18 @@ class Iugu extends Model
      */
     public static function enableSignature($idSubscription)
     {
-        try 
+        try
         {
-            
-            if ($idSubscription) 
+
+            if ($idSubscription)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/activate');
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -854,16 +854,16 @@ class Iugu extends Model
      */
     public static function suspendSubscription($idSubscription)
     {
-        try 
+        try
         {
-            if ($idSubscription) 
+            if ($idSubscription)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/suspend');
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -877,7 +877,7 @@ class Iugu extends Model
     public static function changeSubscription($idSubscription, $planIdentifier, $expiresAt, $ignoreDueEmail, $payableWith, $creditsBased, $priceCents, $creditsCycle, $creditsMin, $suspended = false, $skipCharge = true, $subitems = null)
     {
         try {
-            
+
             if ($idSubscription && $planIdentifier) {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idSubscription, [
@@ -897,7 +897,7 @@ class Iugu extends Model
                     ]
                 ]);
             }
-            
+
             return $request;
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -911,16 +911,16 @@ class Iugu extends Model
      */
     public static function simulateChangePlanCheck($idSubscription, $changePlanSimulation)
     {
-        try 
+        try
         {
-            if ($idSubscription && $changePlanSimulation) 
+            if ($idSubscription && $changePlanSimulation)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/change_plan_simulation/' . $changePlanSimulation);
                 return $request;
             }
         }
-        catch (\Exception $e) 
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -933,16 +933,16 @@ class Iugu extends Model
      */
     public static function changeSubscriptionPlan($idSubscription, $changePlan)
     {
-        try 
+        try
         {
-            
+
             if ($idSubscription && $changePlan) {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/subscriptions/' . $changePlanSimulation . '/change_plan/' . $changePlan);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -956,8 +956,8 @@ class Iugu extends Model
     public static function addCreditOnSignature($idSubscription, $quantity)
     {
         try {
-            
-            if ($idSubscription && $quantity) 
+
+            if ($idSubscription && $quantity)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/add_credits', [
@@ -967,8 +967,8 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -982,7 +982,7 @@ class Iugu extends Model
     public static function removeCreditOnSignature($idSubscription, $quantity)
     {
         try {
-            
+
             if ($idSubscription && $quantity) {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/subscriptions/' . $idSubscription . '/remove_credits', [
@@ -1005,15 +1005,15 @@ class Iugu extends Model
     public static function removeSignature($idSubscription)
     {
         try {
-            
-            if ($idSubscription) 
+
+            if ($idSubscription)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->delete('https://api.iugu.com/v1/subscriptions/' . $idSubscription);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1026,17 +1026,17 @@ class Iugu extends Model
      */
     public static function searchSignature($idSubscription)
     {
-        try 
+        try
         {
-            
-            if ($idSubscription) 
+
+            if ($idSubscription)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/subscriptions/' . $idSubscription);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1045,19 +1045,19 @@ class Iugu extends Model
     /**
      * List Subscriptions
      *
-     * Returns a list of all signatures in your account sorted by Creation date, the first being the most recently created. 
-     * The totalItems field always contains the number of signatures registered, regardless of the search Parameter used 
+     * Returns a list of all signatures in your account sorted by Creation date, the first being the most recently created.
+     * The totalItems field always contains the number of signatures registered, regardless of the search Parameter used
      * and the search result is always within items.
      */
     public static function listSubscriptions()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/subscriptions');
             return $request;
         }
-        catch (\Exception $e) 
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1070,10 +1070,10 @@ class Iugu extends Model
      */
     public static function transferValue($idReceiver, $amountCents, $customVariables = null)
     {
-        try 
+        try
         {
-            
-            if ($idReceiver && $amountCents) 
+
+            if ($idReceiver && $amountCents)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/transfers', [
@@ -1084,10 +1084,10 @@ class Iugu extends Model
                     ]
                 ]);
             }
-            
+
             return $request;
         }
-        catch (\Exception $e) 
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1100,7 +1100,7 @@ class Iugu extends Model
      */
     public static function searchTransfer($idTransfer)
     {
-        try 
+        try
         {
             if ($idTransfer)
             {
@@ -1108,8 +1108,8 @@ class Iugu extends Model
                 $request = $client->get('https://api.iugu.com/v1/transfers/' . $idTransfer);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1122,13 +1122,13 @@ class Iugu extends Model
      */
     public static function listTransfer()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/transfers');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1141,9 +1141,9 @@ class Iugu extends Model
      */
     public static function createSubaccount($name, $commissionPercent)
     {
-        try 
+        try
         {
-            if ($name && $commissionPercent) 
+            if ($name && $commissionPercent)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/marketplace/create_account', [
@@ -1152,11 +1152,11 @@ class Iugu extends Model
                         'commission_percent' => $commissionPercent
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1169,11 +1169,11 @@ class Iugu extends Model
      */
     public static function sendSubAccountVerification($idAccount, Debt $debt, Wallet $wallet, $file)
     {
-        try 
+        try
         {
-            if ($idAccount && $debt && $wallet && $file) 
+            if ($idAccount && $debt && $wallet && $file)
             {
-                
+
                 $fileBody = null;
                 if ($file) {
                     $fileBody = [
@@ -1184,7 +1184,7 @@ class Iugu extends Model
                         ]
                     ];
                 }
-                
+
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/accounts/' . $idAccount . '/request_verification', [
                     'form_params' => [
@@ -1212,11 +1212,11 @@ class Iugu extends Model
                         $fileBody
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1229,16 +1229,16 @@ class Iugu extends Model
      */
     public static function accountInformation($idSubAccount)
     {
-        try 
+        try
         {
-            if ($idSubAccount) 
+            if ($idSubAccount)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/accounts/' . $idSubAccount);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1251,9 +1251,9 @@ class Iugu extends Model
      */
     public static function setUpAccount(Debt $debt, Wallet $wallet)
     {
-        try 
+        try
         {
-            if ($debt && $wallet) 
+            if ($debt && $wallet)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/accounts/configuration', [
@@ -1299,9 +1299,9 @@ class Iugu extends Model
      */
     public static function addBankDomicilio(Wallet $wallet, $document)
     {
-        try 
+        try
         {
-            if ($wallet && $document) 
+            if ($wallet && $document)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/bank_verification', [
@@ -1312,14 +1312,14 @@ class Iugu extends Model
                         'bank' => $carteira->wal_banco,
                         'automatic_validation' => tru,
                         'document' => $document
-                    
+
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1332,13 +1332,13 @@ class Iugu extends Model
      */
     public static function checkSendbankResidence()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->post('https://api.iugu.com/v1/bank_verification');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1351,9 +1351,9 @@ class Iugu extends Model
      */
     public static function requestWithdrawal($idSubAccount, $value, $customVariables = null)
     {
-        try 
+        try
         {
-            if ($idSubAccount && $value) 
+            if ($idSubAccount && $value)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/accounts/' . $idSubAccount . '/request_withdraw', [
@@ -1362,11 +1362,11 @@ class Iugu extends Model
                         $customVariables
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1379,13 +1379,13 @@ class Iugu extends Model
      */
     public static function listAccounts()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/marketplace');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1398,13 +1398,13 @@ class Iugu extends Model
      */
     public static function renewToken()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->post('https://api.iugu.com/v1/profile/renew_access_token');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1417,9 +1417,9 @@ class Iugu extends Model
      */
     public static function createToken($idCustomer)
     {
-        try 
+        try
         {
-            if ($idCustomer) 
+            if ($idCustomer)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/' . $idCustomer . '/api_tokens', [
@@ -1428,11 +1428,11 @@ class Iugu extends Model
                         'description' => 'SmartClick' // API Consumer Description
                     ]
                 ]);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1445,16 +1445,16 @@ class Iugu extends Model
      */
     public static function removeToken($idAccount, $idToken)
     {
-        try 
+        try
         {
-            if ($idAccount && $idToken) 
+            if ($idAccount && $idToken)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->delete('https://api.iugu.com/v1/' . Parameter::CLIENTE_ID_IUGU . '/api_tokens/' . $idToken);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1467,16 +1467,16 @@ class Iugu extends Model
      */
     public static function listToken($idAccount)
     {
-        try 
+        try
         {
-            if ($idAccount) 
+            if ($idAccount)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/' . $idAccount . '/api_tokens');
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1505,9 +1505,9 @@ class Iugu extends Model
      */
     public static function createHook($event, $url, $authorization)
     {
-        try 
+        try
         {
-            if ($event && $url && $authorization) 
+            if ($event && $url && $authorization)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/web_hooks', [
@@ -1519,8 +1519,8 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1533,9 +1533,9 @@ class Iugu extends Model
      */
     public static function changeHook($idHook, $event, $url, $authorization)
     {
-        try 
+        try
         {
-            if ($idHooks && $event && $url && $authorization) 
+            if ($idHooks && $event && $url && $authorization)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/web_hooks/' . $idHook, [
@@ -1547,8 +1547,8 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1561,16 +1561,16 @@ class Iugu extends Model
      */
     public static function removeHook($idHook)
     {
-        try 
+        try
         {
-            if ($idHook) 
+            if ($idHook)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->delete('https://api.iugu.com/v1/web_hooks/' . $idHook);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1583,16 +1583,16 @@ class Iugu extends Model
      */
     public static function searchHooks($idHook)
     {
-        try 
+        try
         {
-            if ($idHook) 
+            if ($idHook)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/web_hooks/' . $idHook);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1605,13 +1605,13 @@ class Iugu extends Model
      */
     public static function listHooks()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/web_hooks');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1624,13 +1624,13 @@ class Iugu extends Model
      */
     public static function listIdentifiersAvailableEmail()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/emails/supported_emails');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1643,16 +1643,16 @@ class Iugu extends Model
      */
     public static function searchLayoutPadraoEmail($identifier)
     {
-        try 
+        try
         {
-            if ($identifier) 
+            if ($identifier)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/emails/default_layout/' . $identifier);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1665,9 +1665,9 @@ class Iugu extends Model
      */
     public static function createEmail($identifier, $template, $subject, $active)
     {
-        try 
+        try
         {
-            if ($identifier && $template && $subject && $active) 
+            if ($identifier && $template && $subject && $active)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/emails', [
@@ -1680,8 +1680,8 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1694,9 +1694,9 @@ class Iugu extends Model
      */
     public static function changeEmail($idEmail, $identifier, $template, $subject, $active)
     {
-        try 
+        try
         {
-            if ($idEmail && $identifier && $template && $subject && $active) 
+            if ($idEmail && $identifier && $template && $subject && $active)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/emails/' . $idEmail, [
@@ -1709,8 +1709,8 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1723,16 +1723,16 @@ class Iugu extends Model
      */
     public static function removeEmail($idEmail)
     {
-        try 
+        try
         {
-            if ($idEmail) 
+            if ($idEmail)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->delete('https://api.iugu.com/v1/emails/' . $idEmail);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1745,16 +1745,16 @@ class Iugu extends Model
      */
     public static function viewTemplateEmail($identifier)
     {
-        try 
+        try
         {
-            if ($identifier) 
+            if ($identifier)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/emails/preview/' . $identifier);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1767,9 +1767,9 @@ class Iugu extends Model
      */
     public static function sendEmail($identifier, $to)
     {
-        try 
+        try
         {
-            if ($identifier && $to) 
+            if ($identifier && $to)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/emails/test/' . $identifier, [
@@ -1779,8 +1779,8 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1793,16 +1793,16 @@ class Iugu extends Model
      */
     public static function searchEmail($idEmail)
     {
-        try 
+        try
         {
-            if ($idEmail) 
+            if ($idEmail)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/emails/' . $idEmail);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1815,13 +1815,13 @@ class Iugu extends Model
      */
     public static function listEmails()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/emails/');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1834,16 +1834,16 @@ class Iugu extends Model
      */
     public static function searchBankTransfer($idTransfer)
     {
-        try 
+        try
         {
-            if ($idTransfer) 
+            if ($idTransfer)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/withdraw_requests/' . $idTransfer);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1861,8 +1861,8 @@ class Iugu extends Model
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/withdraw_requests');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1875,13 +1875,13 @@ class Iugu extends Model
      */
     public static function listReceivables()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/financial_transaction_requests');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1892,13 +1892,13 @@ class Iugu extends Model
      */
     public static function simulateAnticipatedReceivables()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/financial_transaction_requests/advance_simulation');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1909,9 +1909,9 @@ class Iugu extends Model
      */
     public static function anticipateReceivables($transactions)
     {
-        try 
+        try
         {
-            if ($transactions) 
+            if ($transactions)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->post('https://api.iugu.com/v1/financial_transaction_requests/advance', [
@@ -1921,8 +1921,8 @@ class Iugu extends Model
                 ]);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1935,26 +1935,26 @@ class Iugu extends Model
      */
     public static function disputeContestation($idContestation, $files)
     {
-        try 
+        try
         {
-            if ($idContestation && $files) 
+            if ($idContestation && $files)
             {
                 $body = array();
-                if (is_array($files)) 
+                if (is_array($files))
                 {
-                    foreach ($files as $key => $file) 
+                    foreach ($files as $key => $file)
                     {
                         $body['file' . $key] = $file;
                     }
                 }
-                
+
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/chargebacks/' . $idContestation . '/contest', $body);
-                
+
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1967,16 +1967,16 @@ class Iugu extends Model
      */
     public static function obeyContestation($idContestation)
     {
-        try 
+        try
         {
-            if ($idContestation) 
+            if ($idContestation)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->put('https://api.iugu.com/v1/chargebacks/' . $idContestation . '/accept');
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -1989,16 +1989,16 @@ class Iugu extends Model
      */
     public static function searchContestation($idContestation)
     {
-        try 
+        try
         {
-            if ($idContestation) 
+            if ($idContestation)
             {
                 $client = new Client(self::getHeaders());
                 $request = $client->get('https://api.iugu.com/v1/chargebacks/' . $idContestation);
                 return $request;
             }
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }
@@ -2011,13 +2011,13 @@ class Iugu extends Model
      */
     public static function listContestation()
     {
-        try 
+        try
         {
             $client = new Client(self::getHeaders());
             $request = $client->get('https://api.iugu.com/v1/chargebacks');
             return $request;
-        } 
-        catch (\Exception $e) 
+        }
+        catch (\Exception $e)
         {
             return $e->getMessage();
         }

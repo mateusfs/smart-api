@@ -6,23 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-	protected $table = 'payments_availability';
-	protected $primaryKey = 'prc_id';
-	
+	protected $table = 'receivables';
+	protected $primaryKey = 'rcb_id';
+
 	protected $fillable = [
-			'prc_id',
-			'prc_local',
-			'prc_carteira',
-			'prc_pagamento',
-			'prc_valor',
-			'prc_numero',
-			'prc_disponivel_em',
-			'prc_disponibilizada',
-			'prc_status',
-			'prc_intermediario_taxa',
-			'prc_empresa',
-			'prc_cliente'
+			'rcb_id',
+			'rcb_local',
+			'rcb_carteira',
+			'rcb_pagamento',
+			'rcb_valor',
+			'rcb_numero',
+			'rcb_disponivel_em',
+			'rcb_disponibilizada',
+			'rcb_status',
+			'rcb_intermediario_taxa',
+			'rcb_empresa',
+			'rcb_cliente'
 	];
 }
-
-

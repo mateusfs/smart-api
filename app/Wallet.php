@@ -8,7 +8,7 @@ class Wallet extends Model
 {
 	protected $table = 'wallets';
 	protected $primaryKey = 'wal_id';
-	
+
 	protected $fillable = [
 			'wal_id',
 			'wal_title',
@@ -30,7 +30,6 @@ class Wallet extends Model
 			'wal_banco',
 			'wal_agencia',
 			'wal_conta',
-			'pes_senha',
 			'wal_intermediary',
 			'wal_intermediary_settings'
 	];

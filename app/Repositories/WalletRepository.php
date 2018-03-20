@@ -3,13 +3,12 @@
 namespace App\Repositories;
 
 use App\Wallet;
-use Gerencianet\Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Validation\Validator;
 
 class WalletRepository
 {
-    
+
     /**
      * Create a new wallet post.
      *
@@ -21,10 +20,10 @@ class WalletRepository
         if($this->validate($request) == true){
             return Wallet::created($request);
         }
-        
+
         return response()->json(["error" => "Problems creating a wallet"], 403);
     }
-    
+
     /**
      * Update a new wallet post.
      *
@@ -36,10 +35,10 @@ class WalletRepository
         if($this->validate($request) == true){
             return Wallet::saved($request);
         }
-        
+
         return response()->json(["error" => "Problems updating a wallet"], 403);
     }
-    
+
     /**
      * Delete a wallet.
      *
@@ -52,7 +51,7 @@ class WalletRepository
         {
             return $wallet->delete();
         }
-        
+
         return response()->json(["error" => "Problems deleting a wallet"], 403);
     }
 
@@ -64,7 +63,7 @@ class WalletRepository
      */
     public function status()
     {
-        
+
     }
 
 
@@ -77,16 +76,16 @@ class WalletRepository
     public function validate($data)
     {
         $v = Validator::make($data, $this->rules);
-        
+
         if ($v->fails())
         {
             return $v->errors;
         }
-        
+
         return true;
     }
-    
-    
+
+
     protected $rules = [
         'wal_title' => 'required',
         'wal_key' => 'required',
@@ -111,7 +110,7 @@ class WalletRepository
         'wal_intermediary' => 'required',
         'wal_intermediary_settings' => 'required'
     ];
-    
+
 
 
 

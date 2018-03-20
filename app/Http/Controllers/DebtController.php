@@ -17,12 +17,12 @@ class DebtController extends Controller {
 	 * Search Debt | Exemplo: api/v1/Debt/$idPgm
 	 *
 	 * @param number $idPgm
-	 * @return Response        	
+	 * @return Response
 	 */
 	public function index($idPgm) {
-		return Debt::where ( 'pgm_id', $idPgm )->firstOrFail ();
+		return Debt::where ( 'dbt_id', $idPgm )->firstOrFail ();
 	}
-	
+
 	/**
 	 * Create Debt
 	 *
@@ -32,9 +32,12 @@ class DebtController extends Controller {
 	 * @return Response
 	 */
 	public function create(Request $request) {
-	    return DebtRepository::create($request);
+		$DebtRepository = new DebtRepository;
+		$x = $DebtRepository->create($request->all());
+		return $x;
+	    #return DebtRepository::create($request);
 	}
-	
+
 	/**
 	 * Update Debt
 	 *
@@ -43,25 +46,25 @@ class DebtController extends Controller {
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function update(Request $request) 
+	public function update(Request $request)
 	{
 	    return DebtRepository::update($request);
 	}
-	
+
 	/**
 	 * Remove Debt
 	 *
 	 * Remove Debt | Exemplo: api/v1/Debt/delete/$idPgm
 	 *
-	 * @param number $idPgm        	
+	 * @param number $idPgm
      * @return Response
 	 */
-	public function delete($idPgm) 
+	public function delete($idPgm)
 	{
-	    
-	    $debt = Debt::where ( 'pgm_id', $idPgm )->firstOrFail ();
-		
-		if ($debt) 
+
+	    $debt = Debt::where ( 'dbt_id', $idPgm )->firstOrFail ();
+
+		if ($debt)
 		{
 		    $debt->delete();
 		}

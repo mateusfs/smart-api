@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Item;
-use Gerencianet\Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Validation\Validator;
 
@@ -20,11 +19,11 @@ class ItemRepository
         if($this->validate($request) == true){
             return Item::created($request);
         }
-        
+
         return response()->json(["error" => "Problems creating a order"], 403);
     }
-    
-    
+
+
     /**
      * Update a new order post.
      *
@@ -36,10 +35,10 @@ class ItemRepository
         if($this->validate($request) == true){
             return Item::saved($request);
         }
-        
+
         return response()->json(["error" => "Problems updating a order"], 403);
     }
-    
+
     /**
      * Delete a item.
      *
@@ -54,7 +53,7 @@ class ItemRepository
         }
         return response()->json(["error" => "Problems deleting a item"], 403);
     }
-    
+
     /**
      * Status a item.
      *
@@ -63,7 +62,7 @@ class ItemRepository
      */
     public function status()
     {
-     
+
     }
 
     /**
@@ -75,16 +74,16 @@ class ItemRepository
     public function validate($data)
     {
         $v = Validator::make($data, $this->rules);
-        
+
         if ($v->fails())
         {
             return $v->errors;
         }
-        
+
         return true;
     }
-    
-    
+
+
     protected $rules = [
         'oit_pedido' => 'required',
         'oit_titulo' => 'required',

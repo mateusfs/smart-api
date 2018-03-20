@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use Gerencianet\Request;
 use GuzzleHttp\Psr7\Response;
 use App\Intermediator;
 
@@ -19,10 +18,10 @@ class IntermediatorRepository
         if($this->validate($request) == true){
             return Intermediator::created($request);
         }
-        
+
         return response()->json(["error" => "Problems creating a intermediator"], 403);
     }
-    
+
     /**
      * Update a new intermediator post.
      *
@@ -34,10 +33,10 @@ class IntermediatorRepository
         if($this->validate($request) == true){
             return Intermediator::saved($request);
         }
-        
+
         return response()->json(["error" => "Problems updating a intermediator"], 403);
     }
-    
+
     /**
      * Delete a intermediator.
      *
@@ -52,7 +51,7 @@ class IntermediatorRepository
         }
         return response()->json(["error" => "Problems deleting a intermediator"], 403);
     }
-    
+
     /**
      * Status a intermediator.
      *
@@ -60,9 +59,9 @@ class IntermediatorRepository
      */
     public function status()
     {
-        
+
     }
-    
+
     /**
      * Paid a intermediator.
      *
@@ -70,7 +69,7 @@ class IntermediatorRepository
      */
     public function paid()
     {
-        
+
     }
 
 }
