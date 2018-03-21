@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Parameter;
 use App\Iugu;
 use Gerencianet\Request;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 /**
  * @resource Contest

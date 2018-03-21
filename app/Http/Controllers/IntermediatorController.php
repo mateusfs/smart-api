@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 use App\Intermediator;
 use App\Repositories\IntermediatorRepository;
 
@@ -36,7 +36,13 @@ class IntermediatorController extends Controller
 	 */
 	public function create(Request $request)
 	{
-	    return IntermediatorRepository::create($request);
+	    $intermediatorRepository = new IntermediatorRepository;
+	    
+	    if($intermediatorRepository){
+	    	return $intermediatorRepository->create($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems creating a intermediator"], 403);
 	}
 	
 	/**
@@ -48,8 +54,14 @@ class IntermediatorController extends Controller
 	 * @return Response
 	 */
 	public function update(Request $request)
-	{
-	    return IntermediatorRepository::update($request);
+	{   
+	    $intermediatorRepository = new IntermediatorRepository;
+	    
+	    if($intermediatorRepository){
+	    	return $intermediatorRepository->update($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems updating a intermediator"], 403);
 	}
 	
 	

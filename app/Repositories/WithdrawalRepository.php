@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Withdrawal;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
 use App\Parameter;
 use App\Gerencianet;

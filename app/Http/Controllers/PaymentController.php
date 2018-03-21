@@ -9,7 +9,7 @@ use App\Gerencianet;
 use App\Debt;
 use App\Iugu;
 use App\Repositories\PaymentRepository;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 /**
  * @resource Payment
@@ -38,7 +38,13 @@ class PaymentController extends Controller {
 	 */
 	public function create(Request $request) 
 	{
-	    return PaymentRepository::create($request);
+	    $paymentRepository = new PaymentRepository;
+	    
+	    if($paymentRepository){
+	    	return $paymentRepository->create($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems creating a payment"], 403);
 	}
 	
 	/**
@@ -51,7 +57,13 @@ class PaymentController extends Controller {
 	 */
 	public function update(Request $request) 
 	{
-	    return PaymentRepository::update($request);
+	    $paymentRepository = new PaymentRepository;
+	    
+	    if($paymentRepository){
+	    	return $paymentRepository->update($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems updating a payment"], 403);
 	}
 	
 	/**

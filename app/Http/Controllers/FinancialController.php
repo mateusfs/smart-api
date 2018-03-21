@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Iugu;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 /**
  * @resource Financial

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Wallet;
 use Illuminate\Http\Request;
 use App\Repositories\WalletRepository;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 /**
  * @resource Wallet
@@ -37,7 +37,13 @@ class WalletController extends Controller
 	 */
 	public function create(Request $request)
 	{
-	    return WalletRepository::create($request);
+	    $walletRepository = new WalletRepository;
+	    
+	    if($walletRepository){
+	    	return $walletRepository->create($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems creating a wallet"], 403);
 	}
 	
 	/**
@@ -50,7 +56,13 @@ class WalletController extends Controller
 	 */
 	public function update(Request $request)
 	{
-	    return WalletRepository::update($request);
+	    $walletRepository = new WalletRepository;
+	    
+	    if($walletRepository){
+	    	return $walletRepository->update($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems updating a wallet"], 403);
 	}
 	
 	

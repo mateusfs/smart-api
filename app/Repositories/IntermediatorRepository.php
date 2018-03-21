@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 use App\Intermediator;
 
 class IntermediatorRepository

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Debt;
 use App\Repositories\DebtRepository;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 /**
  * @resource Debt
@@ -14,7 +14,7 @@ class DebtController extends Controller {
 	/**
 	 * Search Debt
 	 *
-	 * Search Debt | Exemplo: api/v1/Debt/$idPgm
+	 * Search Debt | Exemplo: api/v1/bebt/$idPgm
 	 *
 	 * @param number $idPgm
 	 * @return Response
@@ -26,35 +26,45 @@ class DebtController extends Controller {
 	/**
 	 * Create Debt
 	 *
-	 * Create Debt | Exemplo: api/v1/Debt/create
+	 * Create Debt | Exemplo: api/v1/bebt/create
 	 *
 	 * @param Request $request
 	 * @return Response
 	 */
 	public function create(Request $request) {
-		$DebtRepository = new DebtRepository;
-		$x = $DebtRepository->create($request->all());
-		return $x;
-	    #return DebtRepository::create($request);
+		
+		$debtRepository = new DebtRepository;
+		
+		if($debtRepository){
+			return $debtRepository->create($request->all());
+		}
+
+		return response()->json(["error" => "Problems creating a withdrawal"], 403);
 	}
 
 	/**
 	 * Update Debt
 	 *
-	 * Update Debt | Exemplo: api/v1/Debt/create
+	 * Update Debt | Exemplo: api/v1/bebt/update
 	 *
 	 * @param Request $request
 	 * @return Response
 	 */
 	public function update(Request $request)
 	{
-	    return DebtRepository::update($request);
+		$debtRepository = new DebtRepository;
+		
+		if($debtRepository){
+			return $debtRepository->update($request->all());
+		}
+		
+		return response()->json(["error" => "Problems updating a withdrawal"], 403);
 	}
 
 	/**
 	 * Remove Debt
 	 *
-	 * Remove Debt | Exemplo: api/v1/Debt/delete/$idPgm
+	 * Remove Debt | Exemplo: api/v1/bebt/delete/$idPgm
 	 *
 	 * @param number $idPgm
      * @return Response

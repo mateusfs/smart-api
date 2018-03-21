@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Debt;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
 
 class DebtRepository
@@ -26,10 +26,9 @@ class DebtRepository
      */
     public function create($request)
     {
-        return Debt::create($request);
-        #if($this->validate($request) == true){
-
-        #}
+        if($this->validate($request) == true){
+        	return Debt::create($request);
+        }
 
         return response()->json(["error" => "Problems creating a debt"], 403);
     }

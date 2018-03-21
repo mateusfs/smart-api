@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\Repositories\ItemRepository;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 /**
  * @resource Item
@@ -36,7 +36,13 @@ class ItemController extends Controller
 	 */
 	public function create(Request $request)
 	{
-		return ItemRepository::create($request);
+		$itemRepository = new ItemRepository;
+		
+		if($itemRepository){
+			return $itemRepository->create($request->all());
+		}
+		
+		return response()->json(["error" => "Problems creating a item"], 403);
 	}
 	
 	/**
@@ -49,7 +55,13 @@ class ItemController extends Controller
 	 */
 	public function update(Request $request)
 	{
-	    return ItemRepository::update($request);
+		$itemRepository = new ItemRepository;
+	    
+	    if($itemRepository){
+	    	return $itemRepository->update($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems updating a item"], 403);
 	}
 	
 	

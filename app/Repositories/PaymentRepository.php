@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Payment;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
 
 class PaymentRepository

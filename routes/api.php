@@ -25,7 +25,16 @@ Route::prefix('v1')->group(function () {
  	    Route::post('debt/create', 'DebtController@create');
  	    Route::post('debt/update', 'DebtController@update');
  	    Route::delete('debt/delete/{idPgm}', 'DebtController@delete');
-     	
+ 	    
+ 	    Route::get('fee/{idFee}', 'FeeController@index');
+ 	    Route::post('fee/create', 'FeeController@create');
+ 	    Route::post('fee/update', 'FeeController@update');
+ 	    Route::delete('fee/delete/{idFee}', 'FeeController@delete');
+ 	    
+ 	    Route::get('intermediatorMethod/{idImt}', 'IntermediatorMethodController@index');
+ 	    Route::post('intermediatorMethod/create', 'IntermediatorMethodController@create');
+ 	    Route::post('intermediatorMethod/update', 'IntermediatorMethodController@update');
+ 	    Route::delete('intermediatorMethod/delete/{idImt}', 'IntermediatorMethodController@delete');
      	
      	Route::get('item/{idOit}', 'ItemController@index');
      	Route::post('item/create', 'ItemController@create');

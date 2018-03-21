@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Parameter;
 use Gerencianet\Request;
 use App\Gerencianet;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 /**
  * @resource Transaction

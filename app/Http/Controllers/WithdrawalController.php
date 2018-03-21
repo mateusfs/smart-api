@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Withdrawal;
 use App\Repositories\WithdrawalRepository;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 
 
@@ -38,7 +38,13 @@ class WithdrawalController extends Controller
 	 */
 	public function create(Request $request)
 	{
-	    return WithdrawalRepository::create($request);
+	    $withdrawalRepository = new WithdrawalRepository;
+	    
+	    if($withdrawalRepository){
+	    	return $withdrawalRepository->create($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems creating a withdrawal"], 403);
 	}
 	
 	/**
@@ -51,7 +57,13 @@ class WithdrawalController extends Controller
 	 */
 	public function update(Request $request)
 	{
-	    return WithdrawalRepository::update($request);
+	    $withdrawalRepository = new WithdrawalRepository;
+	    
+	    if($withdrawalRepository){
+	    	return $withdrawalRepository->update($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems updating a withdrawal"], 403);
 	}
 	
 	

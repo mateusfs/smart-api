@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use App\Repositories\OrderRepository;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 
 /**
  * @resource Order
@@ -36,7 +36,13 @@ class OrderController extends Controller
 	 */
 	public function create(Request $request)
 	{
-		return OrderRepository::create($request);
+		$orderRepository = new OrderRepository;
+		
+		if($orderRepository){
+			return $orderRepository->create($request->all());
+		}
+		
+		return response()->json(["error" => "Problems creating a ordem"], 403);
 	}
 	
 	/**
@@ -49,7 +55,13 @@ class OrderController extends Controller
 	 */
 	public function update(Request $request)
 	{
-	    return OrderRepository::update($request);
+	    $orderRepository = new OrderRepository;
+	    
+	    if($orderRepository){
+	    	return $orderRepository->update($request->all());
+	    }
+	    
+	    return response()->json(["error" => "Problems updating a ordem"], 403);
 	}
 	
 	
