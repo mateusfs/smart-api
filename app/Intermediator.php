@@ -9,7 +9,12 @@ class Intermediator extends Model
 	protected $table = 'intermediator';
 	protected $primaryKey = 'int_id';
 	
-	protected $fillable = [];
+	protected $fillable = [
+			'int_id',
+			'int_title'
+	];
+
 }
+
 
 

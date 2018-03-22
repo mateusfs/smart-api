@@ -19,5 +19,3 @@ class Item extends Model
 			'oit_valor'
 	];
 }
-
-

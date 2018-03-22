@@ -20,7 +20,7 @@ class FeeController extends Controller {
 	 * @return Response
 	 */
 	public function index($idFee) {
-		return Fee::where ( 'int_id', $idFee)->firstOrFail ();
+		return Fee::where ( 'fee_id', $idFee)->firstOrFail ();
 	}
 
 	/**
@@ -33,10 +33,10 @@ class FeeController extends Controller {
 	 */
 	public function create(Request $request) {
 		
-		$FeeRepository = new FeeRepository;
+		$feeRepository = new FeeRepository;
 		
-		if($FeeRepository){
-			return $FeeRepository->create($request->all());
+		if($feeRepository){
+			return $feeRepository->create($request->all());
 		}
 
 		return response()->json(["error" => "Problems creating a fee"], 403);
@@ -52,10 +52,10 @@ class FeeController extends Controller {
 	 */
 	public function update(Request $request)
 	{
-		$FeeRepository = new feeRepository;
+		$feeRepository = new feeRepository;
 		
-		if($FeeRepository){
-			return $FeeRepository->update($request->all());
+		if($feeRepository){
+			return $feeRepository->update($request->all());
 		}
 		
 		return response()->json(["error" => "Problems updating a fee"], 403);
@@ -72,11 +72,15 @@ class FeeController extends Controller {
 	public function delete($idFee)
 	{
 
-		$Fee = Fee::where ( 'int_id', $idFee)->firstOrFail ();
+		$fee = Fee::where ( 'fee_id', $idFee)->firstOrFail ();
 
-		if ($Fee)
+		$feeRepository = new feeRepository;
+		
+		if($feeRepository && $fee)
 		{
-		    $Fee->delete();
+			return $feeRepository->delete($fee);
 		}
+		
+		return response()->json(["error" => "Problems deleting a fee"], 403);
 	}
 }

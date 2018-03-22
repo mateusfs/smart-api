@@ -8,6 +8,9 @@ use Illuminate\Validation\Validator;
 
 class DebtRepository
 {
+	/**
+	 * Rules Debt
+	 */
     protected $rules = [
         'dbt_order_id' => 'required',
         'dbt_value' => 'required',
@@ -21,7 +24,7 @@ class DebtRepository
     /**
      * Create a new debt post.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
     public function create($request)
@@ -36,13 +39,13 @@ class DebtRepository
     /**
      * Update a new debt post.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
     public function update($request)
     {
         if($this->validate($request) == true){
-            return Debt::saved($request);
+            return Debt::save($request);
         }
 
         return response()->json(["error" => "Problems updating a debt"], 403);
@@ -51,7 +54,7 @@ class DebtRepository
     /**
      * Delete a debt.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
     public function delete(Debt $debt)
@@ -77,7 +80,7 @@ class DebtRepository
     /**
      * Paid of debt.
      *
-     * @param  Request  $debt
+     * @param  $debt
      * @return true/false
      */
     public function paid()
@@ -88,7 +91,7 @@ class DebtRepository
     /**
      * Installments open of debt.
      *
-     * @param  Request  $debt
+     * @param  $debt
      * @return true/false
      */
     public function installmentsOpen()
@@ -99,7 +102,7 @@ class DebtRepository
     /**
      * Installments paid of debt.
      *
-     * @param  Request  $debt
+     * @param  $debt
      * @return true/false
      */
     public function installmentsPaid()
@@ -110,7 +113,7 @@ class DebtRepository
     /**
      * Expired of debt.
      *
-     * @param  Request  $debt
+     * @param  $debt
      * @return true/false
      */
     public function expired()
@@ -121,7 +124,7 @@ class DebtRepository
     /**
      * Accept after of debt.
      *
-     * @param  Request  $debt
+     * @param  $debt
      * @return true/false
      */
     public function acceptAfter()
@@ -132,7 +135,7 @@ class DebtRepository
     /**
      * Calcule expired fee of debt.
      *
-     * @param  Request  $debt
+     * @param  $debt
      * @return true
      */
     public function calcExpiredFee()
@@ -144,7 +147,7 @@ class DebtRepository
     /**
      * Validate a debt.
      *
-     * @param  Request  $data
+     * @param  $data
      * @return true
      */
     public function validate($data)

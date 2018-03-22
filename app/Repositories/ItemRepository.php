@@ -8,16 +8,29 @@ use Illuminate\Validation\Validator;
 
 class ItemRepository
 {
+	
+	/**
+	 * Rules Item
+	 */
+	protected $rules = [
+			'oit_pedido' => 'required',
+			'oit_titulo' => 'required',
+			'oit_tipo' => 'required',
+			'oit_tipo_id' => 'required',
+			'oit_quantidade' => 'required',
+			'oit_valor'=> 'required'
+	];
+	
     /**
      * Create a new Item post.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
-    public function create(Request $request)
+    public function create($request)
     {
         if($this->validate($request) == true){
-            return Item::created($request);
+            return Item::create($request);
         }
 
         return response()->json(["error" => "Problems creating a order"], 403);
@@ -27,13 +40,13 @@ class ItemRepository
     /**
      * Update a new order post.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update($request)
     {
         if($this->validate($request) == true){
-            return Item::saved($request);
+            return Item::save($request);
         }
 
         return response()->json(["error" => "Problems updating a order"], 403);
@@ -42,7 +55,7 @@ class ItemRepository
     /**
      * Delete a item.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
     public function delete(Item $item)
@@ -57,7 +70,7 @@ class ItemRepository
     /**
      * Status a item.
      *
-     * @param  Request  $item
+     * @param  $item
      * @return string
      */
     public function status()
@@ -68,7 +81,7 @@ class ItemRepository
     /**
      * Validate a item.
      *
-     * @param  Request  $data
+     * @param  $data
      * @return true
      */
     public function validate($data)
@@ -82,15 +95,5 @@ class ItemRepository
 
         return true;
     }
-
-
-    protected $rules = [
-        'oit_pedido' => 'required',
-        'oit_titulo' => 'required',
-        'oit_tipo' => 'required',
-        'oit_tipo_id' => 'required',
-        'oit_quantidade' => 'required',
-        'oit_valor'=> 'required'
-    ];
 
 }

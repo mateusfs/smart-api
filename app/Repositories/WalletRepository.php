@@ -9,13 +9,42 @@ use Illuminate\Validation\Validator;
 class WalletRepository
 {
 
+	/**
+	 * Rules Wallet
+	 */
+	protected $rules = [
+			'wal_title' => 'required',
+			'wal_key' => 'required',
+			'wal_secret' => 'required',
+			'wal_pin' => 'required',
+			'wal_saque_automatico' => 'required',
+			'wal_multas' => 'required',
+			'wal_antecipacao' => 'required',
+			'wal_antecipacao_tipo' => 'required',
+			'wal_antecipacao_dias' => 'required',
+			'wal_soft_descriptor' => 'required',
+			'wal_pacelamento_max' => 'required',
+			'wal_aceitar_boleto' => 'required',
+			'wal_aceitar_cartao' => 'required',
+			'wal_cartao_comissao_taxa' => 'required',
+			'wal_cartao_comissao_fixo' => 'required',
+			'wal_taxa_cartao_antecipacao' => 'required',
+			'wal_banco' => 'required',
+			'wal_agencia' => 'required',
+			'wal_conta' => 'required',
+			'pes_senha' => 'required',
+			'wal_intermediary' => 'required',
+			'wal_intermediary_settings' => 'required'
+	];
+	
+	
     /**
      * Create a new wallet post.
      *
      * @param  Request  $request
      * @return Response
      */
-    public function create(Request $request)
+    public function create($request)
     {
         if($this->validate($request) == true){
             return Wallet::created($request);
@@ -27,10 +56,10 @@ class WalletRepository
     /**
      * Update a new wallet post.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update($request)
     {
         if($this->validate($request) == true){
             return Wallet::saved($request);
@@ -42,7 +71,7 @@ class WalletRepository
     /**
      * Delete a wallet.
      *
-     * @param  Request  $request
+     * @param  $wallet
      * @return Response
      */
     public function delete(Wallet $wallet)
@@ -70,7 +99,7 @@ class WalletRepository
     /**
      * Validade a wallet.
      *
-     * @param  Request  $data
+     * @param  $data
      * @return true
      */
     public function validate($data)
@@ -86,31 +115,7 @@ class WalletRepository
     }
 
 
-    protected $rules = [
-        'wal_title' => 'required',
-        'wal_key' => 'required',
-        'wal_secret' => 'required',
-        'wal_pin' => 'required',
-        'wal_saque_automatico' => 'required',
-        'wal_multas' => 'required',
-        'wal_antecipacao' => 'required',
-        'wal_antecipacao_tipo' => 'required',
-        'wal_antecipacao_dias' => 'required',
-        'wal_soft_descriptor' => 'required',
-        'wal_pacelamento_max' => 'required',
-        'wal_aceitar_boleto' => 'required',
-        'wal_aceitar_cartao' => 'required',
-        'wal_cartao_comissao_taxa' => 'required',
-        'wal_cartao_comissao_fixo' => 'required',
-        'wal_taxa_cartao_antecipacao' => 'required',
-        'wal_banco' => 'required',
-        'wal_agencia' => 'required',
-        'wal_conta' => 'required',
-        'pes_senha' => 'required',
-        'wal_intermediary' => 'required',
-        'wal_intermediary_settings' => 'required'
-    ];
-
+    
 
 
 

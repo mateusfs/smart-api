@@ -79,10 +79,14 @@ class WithdrawalController extends Controller
 	{
 	    $withdrawal = Withdrawal::where('saq_id', $idSaq)->firstOrFail();
 	    
-	    if($withdrawal)
+	    $withdrawalRepository = new WithdrawalRepository;
+	    
+	    if($withdrawalRepository && $withdrawal)
 	    {
-	        return WithdrawalRepository::delete($withdrawal);
+	    	return $withdrawalRepository->delete($withdrawal);
 	    }
+	    
+	    return response()->json(["error" => "Problems deleting a withdrawal"], 403);
 	}
 	
 	

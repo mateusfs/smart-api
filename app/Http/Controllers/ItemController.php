@@ -77,9 +77,13 @@ class ItemController extends Controller
 	{
 	    $item = Item::where('oit_id', $idOit)->firstOrFail();
 		
-		if($item)
-		{
-		    return ItemRepository::delete($item);
-		}
+	    $itemRepository = new ItemRepository;
+	    
+	    if($itemRepository&& $order)
+	    {
+	    	return $itemRepository->delete($order);
+	    }
+	    
+	    return response()->json(["error" => "Problems deleting a item"], 403);
 	}
 }

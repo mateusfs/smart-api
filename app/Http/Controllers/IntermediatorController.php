@@ -16,14 +16,14 @@ class IntermediatorController extends Controller
     /**
      * Search Intermediator
      *
-     * Search a intermediator | Exemplo: api/v1/intermediator/$idSaq
+     * Search a intermediator | Exemplo: api/v1/intermediator/$idInt
      *
-     * @param number $idSaq
+     * @param number $idInt
      * @return Response
      */
-    public function index($idSaq)
+	public function index($idInt)
 	{
-	    return Intermediator::where('saq_id', $idSaq)->firstOrFail();
+		return Intermediator::where('int_id', $idInt)->firstOrFail();
 	}
 	
 	/**
@@ -68,19 +68,23 @@ class IntermediatorController extends Controller
 	/**
 	 * Remover Intermediator
 	 *
-	 * Remover a intermediator | Exemplo: api/v1/intermediator/delete/$idSaq
+	 * Remover a intermediator | Exemplo: api/v1/intermediator/delete/$idInt
 	 *
-     * @param number $idSaq
+     * @param number $idInt
 	 * @return Response
 	 */
-	public function delete($idSaq)
+	public function delete($idInt)
 	{
-	    $intermediator = Intermediator::where('saq_id', $idSaq)->firstOrFail();
+		$intermediator = Intermediator::where('int_id', $idInt)->firstOrFail();
 	    
-	    if($intermediator)
+	    $intermediatorRepository = new IntermediatorRepository;
+	    
+	    if($intermediatorRepository && $intermediator)
 	    {
-	        return IntermediatorRepository::delete($intermediator);
+	    	return $intermediatorRepository->delete($intermediator);
 	    }
+	    
+	    return response()->json(["error" => "Problems deleting a intermediator"], 403);
 	}
 	
 

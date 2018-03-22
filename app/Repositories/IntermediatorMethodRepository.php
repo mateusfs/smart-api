@@ -5,18 +5,22 @@ namespace App\Repositories;
 use Illuminate\Http\Response;
 use App\Intermediator;
 
-class IntermediatorRepository
+class IntermediatorMethodRepository
 {
+	
 	/**
-	 * Rules intermediator
+	 * Rules Intermediator Method
 	 */
 	protected $rules = [
-			'int_title' => 'required'
+			'imt_intermediator_id' => 'required',
+			'imt_title' => 'required',
+			'imt_type' => 'required',
+			'imt_fixed' => 'required',
+			'imt_variable' => 'required'
 	];
 	
-	
      /**
-     * Create a new intermediator post.
+     * Create a new method intermediator post.
      *
      * @param  $request
      * @return Response
@@ -27,11 +31,11 @@ class IntermediatorRepository
             return Intermediator::create($request);
         }
 
-        return response()->json(["error" => "Problems creating a intermediator"], 403);
+        return response()->json(["error" => "Problems creating a method intermediator"], 403);
     }
 
     /**
-     * Update a new intermediator post.
+     * Update a new method intermediator post.
      *
      * @param  $request
      * @return Response
@@ -42,13 +46,13 @@ class IntermediatorRepository
             return Intermediator::save($request);
         }
 
-        return response()->json(["error" => "Problems updating a intermediator"], 403);
+        return response()->json(["error" => "Problems updating a method intermediator"], 403);
     }
 
     /**
-     * Delete a intermediator.
+     * Delete a method intermediator.
      *
-     * @param  $intermediator
+     * @param  $request
      * @return Response
      */
     public function delete(Intermediator $intermediator)
@@ -57,11 +61,11 @@ class IntermediatorRepository
         {
             return $intermediator->delete();
         }
-        return response()->json(["error" => "Problems deleting a intermediator"], 403);
+        return response()->json(["error" => "Problems deleting a method intermediator"], 403);
     }
 
     /**
-     * Status a intermediator.
+     * Status a method intermediator.
      *
      * @return string
      */
@@ -71,7 +75,7 @@ class IntermediatorRepository
     }
 
     /**
-     * Paid a intermediator.
+     * Paid a method intermediator.
      *
      * @return string
      */
@@ -79,28 +83,10 @@ class IntermediatorRepository
     {
 
     }
+
     
     /**
-     * Validate a item.
-     *
-     * @param  $data
-     * @return true
-     */
-    public function validate($data)
-    {
-    	$v = Validator::make($data, $this->rules);
-    	
-    	if ($v->fails())
-    	{
-    		return $v->errors;
-    	}
-    	
-    	return true;
-    }
-    
-    
-    /**
-     * Validate a intermediator.
+     * Validate a method intermediator.
      *
      * @param  $data
      * @return true
@@ -119,7 +105,5 @@ class IntermediatorRepository
     
     
     
-    
-    
-    
+   
 }

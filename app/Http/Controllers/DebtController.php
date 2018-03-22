@@ -14,19 +14,19 @@ class DebtController extends Controller {
 	/**
 	 * Search Debt
 	 *
-	 * Search Debt | Exemplo: api/v1/bebt/$idPgm
+	 * Search Debt | Exemplo: api/v1/debt/$idDbt
 	 *
-	 * @param number $idPgm
+	 * @param number $idDbt
 	 * @return Response
 	 */
-	public function index($idPgm) {
-		return Debt::where ( 'dbt_id', $idPgm )->firstOrFail ();
+	public function index($idDbt) {
+		return Debt::where ( 'dbt_id', $idDbt)->firstOrFail ();
 	}
 
 	/**
 	 * Create Debt
 	 *
-	 * Create Debt | Exemplo: api/v1/bebt/create
+	 * Create Debt | Exemplo: api/v1/debt/create
 	 *
 	 * @param Request $request
 	 * @return Response
@@ -45,7 +45,7 @@ class DebtController extends Controller {
 	/**
 	 * Update Debt
 	 *
-	 * Update Debt | Exemplo: api/v1/bebt/update
+	 * Update Debt | Exemplo: api/v1/debt/update
 	 *
 	 * @param Request $request
 	 * @return Response
@@ -64,19 +64,23 @@ class DebtController extends Controller {
 	/**
 	 * Remove Debt
 	 *
-	 * Remove Debt | Exemplo: api/v1/bebt/delete/$idPgm
+	 * Remove Debt | Exemplo: api/v1/debt/delete/$idDbt
 	 *
-	 * @param number $idPgm
+	 * @param number $idDbt
      * @return Response
 	 */
-	public function delete($idPgm)
+	public function delete($idDbt)
 	{
 
-	    $debt = Debt::where ( 'dbt_id', $idPgm )->firstOrFail ();
+	    $debt = Debt::where ( 'dbt_id', $idDbt )->firstOrFail ();
 
-		if ($debt)
-		{
-		    $debt->delete();
-		}
+	    $debtRepository = new DebtRepository;
+	    
+	    if($debtRepository && $debt)
+	    {
+	    	return $debtRepository->delete($debt);
+	    }
+	    
+	    return response()->json(["error" => "Problems deleting a debt"], 403);
 	}
 }

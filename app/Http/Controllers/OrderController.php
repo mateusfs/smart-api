@@ -76,10 +76,14 @@ class OrderController extends Controller
 	public function delete($idOrd)
 	{
 	    $order = Order::where('ord_id', $idOrd)->firstOrFail();
-	    
-		if($order)
+		
+	    $orderRepository = new OrderRepository;
+		
+	    if($orderRepository&& $order)
 		{
-		    return OrderRepository::delete($order);
+			return $orderRepository->delete($order);
 		}
+		
+		return response()->json(["error" => "Problems deleting a order"], 403);
 	}
 }

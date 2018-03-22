@@ -12,9 +12,9 @@ use Illuminate\Http\Response;
  */
 class IntermediatorMethodController extends Controller {
 	/**
-	 * Search IntermediatorMethod
+	 * Search Intermediator Method
 	 *
-	 * Search IntermediatorMethod | Exemplo: api/v1/intermediatorMethod/$idImt
+	 * Search Intermediator Method | Exemplo: api/v1/intermediatorMethod/$idImt
 	 *
 	 * @param number $idPgm
 	 * @return Response
@@ -24,9 +24,9 @@ class IntermediatorMethodController extends Controller {
 	}
 
 	/**
-	 * Create IntermediatorMethod
+	 * Create Intermediator Method
 	 *
-	 * Create IntermediatorMethod | Exemplo: api/v1/intermediatorMethod/create
+	 * Create Intermediator Method | Exemplo: api/v1/intermediatorMethod/create
 	 *
 	 * @param Request $request
 	 * @return Response
@@ -39,32 +39,32 @@ class IntermediatorMethodController extends Controller {
 			return $intermediatorMethodRepository->create($request->all());
 		}
 
-		return response()->json(["error" => "Problems creating a withdrawal"], 403);
+		return response()->json(["error" => "Problems creating a method intermediator"], 403);
 	}
 
 	/**
-	 * Update IntermediatorMethod
+	 * Update Intermediator Method
 	 *
-	 * Update IntermediatorMethod | Exemplo: api/v1/intermediatorMethod/update
+	 * Update Intermediator Method | Exemplo: api/v1/intermediatorMethod/update
 	 *
 	 * @param Request $request
 	 * @return Response
 	 */
 	public function update(Request $request)
 	{
-		$intermediatorMethodRepository= new IntermediatorMethodRepository;
+		$intermediatorMethodRepository = new IntermediatorMethodRepository;
 		
 		if($intermediatorMethodRepository){
 			return $intermediatorMethodRepository->update($request->all());
 		}
 		
-		return response()->json(["error" => "Problems updating a withdrawal"], 403);
+		return response()->json(["error" => "Problems updating a method intermediator"], 403);
 	}
 
 	/**
-	 * Remove IntermediatorMethod
+	 * Remove Intermediator Method
 	 *
-	 * Remove IntermediatorMethod | Exemplo: api/v1/intermediatorMethod/delete/$idImt
+	 * Remove Intermediator Method | Exemplo: api/v1/intermediatorMethod/delete/$idImt
 	 *
 	 * @param number $idImt
      * @return Response
@@ -74,9 +74,13 @@ class IntermediatorMethodController extends Controller {
 
 		$intermediatorMethod = IntermediatorMethod::where ( 'imt_id', $idImt)->firstOrFail ();
 
-		if ($intermediatorMethod)
+		$intermediatorMethodRepository = new IntermediatorMethodRepository;
+		
+		if($intermediatorMethodRepository && $intermediatorMethod)
 		{
-			$intermediatorMethod->delete();
+			return $intermediatorMethodRepository->delete($intermediatorMethod);
 		}
+		
+		return response()->json(["error" => "Problems deleting a method intermediator"], 403);
 	}
 }

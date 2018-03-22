@@ -78,9 +78,13 @@ class WalletController extends Controller
 	{
 	    $wallet = Wallet::where('wal_id', $idWal)->firstOrFail();
 		
-		if($wallet)
-		{
-		    return WalletRepository::delete($wallet);
-		}
+	    $walletRepository = new WalletRepository;
+	    
+	    if($walletRepository && $wallet)
+	    {
+	    	return $walletRepository->delete($wallet);
+	    }
+	    
+	    return response()->json(["error" => "Problems deleting a wallet"], 403);
 	}
 }

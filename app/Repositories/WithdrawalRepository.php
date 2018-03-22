@@ -11,17 +11,29 @@ use App\Iugu;
 
 class WithdrawalRepository
 {
-
+	/**
+	 * Rules Withdrawal
+	 */
+	protected $rules = [
+			'saq_carteira' => 'required',
+			'saq_criado_em' => 'required',
+			'saq_valor' => 'required',
+			'saq_status' => 'required',
+			'saq_intermediario' => 'required',
+			'saq_intermediario_code' => 'required',
+			'saq_pago_em' => 'required',
+	];
+	
     /**
      * Create a new withdrawal post.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
-    public function create(Request $request)
+    public function create($request)
     {
         if($this->validate($request) == true){
-            return Withdrawal::created($request);
+            return Withdrawal::create($request);
         }
 
         return response()->json(["error" => "Problems creating a withdrawal"], 403);
@@ -30,13 +42,13 @@ class WithdrawalRepository
     /**
      * Update a new withdrawal post.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update($request)
     {
         if($this->validate($request) == true){
-            return Withdrawal::saved($request);
+            return Withdrawal::save($request);
         }
 
         return response()->json(["error" => "Problems updating a withdrawal"], 403);
@@ -45,7 +57,7 @@ class WithdrawalRepository
     /**
      * Delete a withdrawal.
      *
-     * @param  Request  $request
+     * @param  $withdrawal
      * @return Response
      */
     public function delete(Withdrawal $withdrawal)
@@ -60,7 +72,9 @@ class WithdrawalRepository
     /**
      * Delete a withdrawal.
      *
-     * @param  Request  $request
+     * @param  $method
+     * @param  $data_ini
+     * @param  $data_fin
      * @return Response
      */
     public function calcReceivables($method='total',$data_ini=null,$data_fin=null)
@@ -71,7 +85,7 @@ class WithdrawalRepository
     /**
      * Calule fees of withdrawal.
      *
-     * @param  Request  $request
+     * @param  $to
      * @return Response
      */
     public function calcFeesTo($to='intermadiator')
@@ -82,7 +96,7 @@ class WithdrawalRepository
     /**
      * Calcule balance of withdrawal.
      *
-     * @param  Request  $request
+     * @param  $who
      * @return Response
      */
     public function calcBalance($who='owner')
@@ -93,7 +107,7 @@ class WithdrawalRepository
     /**
      * Verify of withdrawal.
      *
-     * @param  Request  $request
+     * @param  $withdraw
      * @return Response
      */
     public function withDraw(Withdrawal $withdraw)
@@ -148,19 +162,4 @@ class WithdrawalRepository
 
         return true;
     }
-
-
-    protected $rules = [
-        'saq_carteira' => 'required',
-        'saq_criado_em' => 'required',
-        'saq_valor' => 'required',
-        'saq_status' => 'required',
-        'saq_intermediario' => 'required',
-        'saq_intermediario_code' => 'required',
-        'saq_pago_em' => 'required',
-    ];
-
-
-
-
 }
