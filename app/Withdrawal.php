@@ -10,7 +10,6 @@ class Withdrawal extends Model
 	protected $primaryKey = 'saq_id';
 	
 	protected $fillable = [
-			'saq_id',
 			'saq_carteira',
 			'saq_criado_em',
 			'saq_valor',
@@ -18,6 +17,10 @@ class Withdrawal extends Model
 			'saq_intermediario',
 			'saq_intermediario_code',
 			'saq_pago_em'
+	];
+	
+	protected  $hidden = [
+			'saq_id',
 	];
 }
 

@@ -20,9 +20,9 @@ Route::prefix('v1')->group(function () {
  		 *  Contest
  		 */
  		Route::post('contest/dispute/', 'ContestController@dispute');
- 		Route::get('contest/list/', 'ContestController@list');
  		Route::get('contest/obey/{idContestation}', 'ContestController@obey');
  		Route::get('contest/search/{idContestation}', 'ContestController@search');
+ 		Route::get('contest/list/', 'ContestController@list');
  		
  		/**
  		 *  Debt

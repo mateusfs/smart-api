@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Order;
 use App\Repositories\OrderRepository;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 /**
  * @resource Order

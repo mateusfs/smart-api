@@ -2,8 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Debt;
-use App\Parameter;
-use App\Iugu;
+use App\Services\Iugu;
+use App\Services\Parameter;
 use Illuminate\Http\Response;
 
 /**

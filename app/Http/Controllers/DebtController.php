@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Debt;
 use App\Repositories\DebtRepository;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 /**
  * @resource Debt

@@ -5,39 +5,10 @@ namespace App\Repositories;
 use App\Wallet;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
+use App\Http\Requests\WalletRequest;
 
 class WalletRepository
 {
-
-	/**
-	 * Rules Wallet
-	 */
-	protected $rules = [
-			'wal_title' => 'required',
-			'wal_key' => 'required',
-			'wal_secret' => 'required',
-			'wal_pin' => 'required',
-			'wal_saque_automatico' => 'required',
-			'wal_multas' => 'required',
-			'wal_antecipacao' => 'required',
-			'wal_antecipacao_tipo' => 'required',
-			'wal_antecipacao_dias' => 'required',
-			'wal_soft_descriptor' => 'required',
-			'wal_pacelamento_max' => 'required',
-			'wal_aceitar_boleto' => 'required',
-			'wal_aceitar_cartao' => 'required',
-			'wal_cartao_comissao_taxa' => 'required',
-			'wal_cartao_comissao_fixo' => 'required',
-			'wal_taxa_cartao_antecipacao' => 'required',
-			'wal_banco' => 'required',
-			'wal_agencia' => 'required',
-			'wal_conta' => 'required',
-			'pes_senha' => 'required',
-			'wal_intermediary' => 'required',
-			'wal_intermediary_settings' => 'required'
-	];
-	
-	
     /**
      * Create a new wallet post.
      *
@@ -104,7 +75,7 @@ class WalletRepository
      */
     public function validate($data)
     {
-        $v = Validator::make($data, $this->rules);
+    	$v = Validator::make($data, WalletRequest::rules());
 
         if ($v->fails())
         {

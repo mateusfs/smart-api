@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Http\Response;
 use App\Intermediator;
+use App\Http\Requests\IntermediatorRequest;
 
 class IntermediatorRepository
 {
@@ -88,7 +89,7 @@ class IntermediatorRepository
      */
     public function validate($data)
     {
-    	$v = Validator::make($data, $this->rules);
+    	$v = Validator::make($data, IntermediatorRequest::rules());
     	
     	if ($v->fails())
     	{

@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Receivable;
-use App\Parameter;
-use App\Gerencianet;
-use App\Iugu;
 use App\Repositories\ReceivableRepository;
 use Illuminate\Http\Response;
 

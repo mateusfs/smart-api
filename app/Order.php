@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
 	protected $table = 'orders';
-	protected $primaryKey = 'oit_id';
+	protected $primaryKey = 'ord_id';
 	
 	protected $fillable = [
-			'ord_id',
 			'ord_carteira',
 			'ord_aceitar_boleto',
 			'ord_aceitar_cartao',
@@ -29,6 +28,11 @@ class Order extends Model
 			'ord_email',
 			'ord_celular'
 	];
+	
+	protected  $hidden = [
+			'ord_id',
+	];
+			
 }
 
 

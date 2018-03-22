@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Parameter;
-use App\Iugu;
-use Gerencianet\Request;
+use App\Services\Parameter;
+use App\Services\Iugu;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 /**
  * @resource Contest

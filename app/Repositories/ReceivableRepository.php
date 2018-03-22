@@ -5,24 +5,12 @@ namespace App\Repositories;
 use App\Receivable;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
+use App\Http\Requests\ReceivableRequest;
 
 class ReceivableRepository
 {
 
 	/**
-	 * Rules Receivable
-	 */
-	protected $rules = [
-			'prc_carteira' => 'required',
-			'prc_pagamento' => 'required',
-			'prc_valor' => 'required',
-			'prc_numero' => 'required',
-			'prc_disponivel_em' => 'required',
-			'prc_disponibilizada' => 'required',
-			'prc_status' => 'required'
-	];
-	
-    /**
      * Create a new receivable post.
      *
      * @param  $request
@@ -98,7 +86,7 @@ class ReceivableRepository
      */
     public function validate($data)
     {
-        $v = Validator::make($data, $this->rules);
+    	$v = Validator::make($data, ReceivableRequest::rules());
 
         if ($v->fails())
         {

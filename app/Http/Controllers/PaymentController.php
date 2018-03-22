@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Payment;
-use App\Parameter;
-use App\Gerencianet;
-use App\Iugu;
+use App\Services\Parameter;
+use App\Services\Gerencianet;
+use App\Services\Iugu;
 use App\Repositories\PaymentRepository;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 /**
  * @resource Payment

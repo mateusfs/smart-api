@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\IntermediatorMethod;
 use App\Repositories\IntermediatorMethodRepository;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 /**
  * @resource IntermediatorMethod

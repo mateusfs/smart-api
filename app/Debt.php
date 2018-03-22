@@ -11,7 +11,6 @@ class Debt extends Model
 	public $timestamps  = false;
 
 	protected $fillable = [
-			'dbt_id',
 			'dbt_order_id',
 			'dbt_value',
 			'dbt_value_quota',
@@ -27,5 +26,9 @@ class Debt extends Model
 			'dbt_created_at',
 			'dbt_updated_at',
 			'dbt_deleted_at'
+	];
+	
+	protected  $hidden = [
+			'dbt_id',
 	];
 }

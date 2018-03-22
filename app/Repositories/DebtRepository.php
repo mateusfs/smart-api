@@ -5,22 +5,10 @@ namespace App\Repositories;
 use App\Debt;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
+use App\Http\Requests\DebtRequest;
 
 class DebtRepository
 {
-	/**
-	 * Rules Debt
-	 */
-    protected $rules = [
-        'dbt_order_id' => 'required',
-        'dbt_value' => 'required',
-        'dbt_value_quota' => 'required',
-        'dbt_value_fee' => 'required',
-        'dbt_due_at' => 'required',
-        'dbt_accept_creditcard' => 'required',
-        'dbt_accept_billet' => 'required',
-    ];
-
     /**
      * Create a new debt post.
      *
@@ -152,7 +140,8 @@ class DebtRepository
      */
     public function validate($data)
     {
-        $v = Validator::make($data, $this->rules);
+    	
+    	$v = Validator::make($data, DebtRequest::rules());
 
         if ($v->fails())
         {

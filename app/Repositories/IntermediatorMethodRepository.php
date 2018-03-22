@@ -4,21 +4,11 @@ namespace App\Repositories;
 
 use Illuminate\Http\Response;
 use App\Intermediator;
+use App\Http\Requests\IntermediatorMethodRequest;
 
 class IntermediatorMethodRepository
 {
-	
-	/**
-	 * Rules Intermediator Method
-	 */
-	protected $rules = [
-			'imt_intermediator_id' => 'required',
-			'imt_title' => 'required',
-			'imt_type' => 'required',
-			'imt_fixed' => 'required',
-			'imt_variable' => 'required'
-	];
-	
+
      /**
      * Create a new method intermediator post.
      *
@@ -93,7 +83,7 @@ class IntermediatorMethodRepository
      */
     public function validate($data)
     {
-    	$v = Validator::make($data, $this->rules);
+    	$v = Validator::make($data, IntermediatorMethodRequest::rules());
     	
     	if ($v->fails())
     	{
@@ -102,8 +92,6 @@ class IntermediatorMethodRepository
     	
     	return true;
     }
-    
-    
     
    
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Wallet;
-use Illuminate\Http\Request;
 use App\Repositories\WalletRepository;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 /**
  * @resource Wallet

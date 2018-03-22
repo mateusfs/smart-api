@@ -10,7 +10,6 @@ class Payment extends Model
 	protected $primaryKey = 'rcb_id';
 
 	protected $fillable = [
-			'pgm_id',
 			'pgm_local',
 			'pgm_carteira',
 			'pgm_pedido',
@@ -65,5 +64,9 @@ class Payment extends Model
 			'pgm_disponivel_intermediario',
 			'pgm_disponivel_empresa',
 			'pgm_disponivel_cliente',
+	];
+	
+	protected  $hidden = [
+			'pgm_id',
 	];
 }

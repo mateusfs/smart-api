@@ -5,32 +5,10 @@ namespace App\Repositories;
 use App\Order;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
+use App\Http\Requests\OrderRequest;
 
 class OrderRepository
 {
-	/**
-	 * Rules Order
-	 */
-	protected $rules = [
-			'ord_carteira' => 'required',
-			'ord_aceitar_boleto' => 'required',
-			'ord_aceitar_cartao' => 'required',
-			'ord_aceitar_cartao_parcelas' => 'required',
-			'ord_status' => 'required',
-			'ord_emails' => 'required',
-			'ord_pagamento_minimo' => 'required',
-			'ord_criado_em' => 'required',
-			'ord_atualizar' => 'required',
-			'ord_vencimento' => 'required',
-			'ord_receber_ate' => 'required',
-			'ord_multa_atraso' => 'required',
-			'ord_juros_dia' => 'required',
-			'ord_entrega' => 'required',
-			'ord_nome' => 'required',
-			'ord_email' => 'required',
-			'ord_celular' => 'required'
-	];
-	
     /**
      * Create a new order post.
      *
@@ -96,7 +74,7 @@ class OrderRepository
      */
     public function validate($data)
     {
-        $v = Validator::make($data, $this->rules);
+    	$v = Validator::make($data, OrderRequest::rules());
 
         if ($v->fails())
         {

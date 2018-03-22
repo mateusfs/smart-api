@@ -10,7 +10,6 @@ class Wallet extends Model
 	protected $primaryKey = 'wal_id';
 
 	protected $fillable = [
-			'wal_id',
 			'wal_title',
 			'wal_key',
 			'wal_secret',
@@ -32,5 +31,9 @@ class Wallet extends Model
 			'wal_conta',
 			'wal_intermediary',
 			'wal_intermediary_settings'
+	];
+	
+	protected  $hidden = [
+			'wal_id',
 	];
 }

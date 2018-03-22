@@ -10,7 +10,6 @@ class Receivable extends Model
 	protected $primaryKey = 'rcb_id';
 
 	protected $fillable = [
-			'rcb_id',
 			'rcb_carteira',
 			'rcb_pagamento',
 			'rcb_valor',
@@ -18,5 +17,9 @@ class Receivable extends Model
 			'rcb_disponivel_em',
 			'rcb_disponibilizada',
 			'rcb_status'
+	];
+	
+	protected  $hidden = [
+			'rcb_id',
 	];
 }

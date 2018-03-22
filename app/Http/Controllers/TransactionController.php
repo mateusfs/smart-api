@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Parameter;
-use Gerencianet\Request;
-use App\Gerencianet;
+use App\Services\Parameter;
+use App\Services\Gerencianet;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 /**
  * @resource Transaction

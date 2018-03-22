@@ -8,20 +8,7 @@ use Illuminate\Validation\Validator;
 
 class FeeRepository
 {
-	/**
-	 * Rules Fee
-	 */
-    protected $rules = [
-        'fee_wallet_id' => 'required',
-        'fee_debt_id' => 'required',
-        'fee_payment_id' => 'required',
-        'fee_datetime' => 'required',
-        'fee_value' => 'required',
-        'fee_created_at' => 'required',
-        'fee_to' => 'required',
-   		'fee_description' => 'required'
-    ];
-
+	
     /**
      * Create a new fee post.
      *
@@ -120,7 +107,7 @@ class FeeRepository
      */
     public function validate($data)
     {
-        $v = Validator::make($data, $this->rules);
+    	$v = Validator::make($data, FeeRepository::rules());
 
         if ($v->fails())
         {

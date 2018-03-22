@@ -8,23 +8,11 @@ use Illuminate\Validation\Validator;
 use App\Parameter;
 use App\Gerencianet;
 use App\Iugu;
+use App\Http\Requests\WithdrawalRequest;
 
 class WithdrawalRepository
 {
 	/**
-	 * Rules Withdrawal
-	 */
-	protected $rules = [
-			'saq_carteira' => 'required',
-			'saq_criado_em' => 'required',
-			'saq_valor' => 'required',
-			'saq_status' => 'required',
-			'saq_intermediario' => 'required',
-			'saq_intermediario_code' => 'required',
-			'saq_pago_em' => 'required',
-	];
-	
-    /**
      * Create a new withdrawal post.
      *
      * @param  $request
@@ -153,7 +141,7 @@ class WithdrawalRepository
      */
     public function validate($data)
     {
-        $v = Validator::make($data, $this->rules);
+    	$v = Validator::make($data, WithdrawalRequest::rules());
 
         if ($v->fails())
         {

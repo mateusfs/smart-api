@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Fee extends Model
 {
 	protected $table = 'fees';
-	protected $primaryKey = 'dbt_id';
+	protected $primaryKey = 'fee_id';
 	public $timestamps  = false;
 
 	protected $fillable = [
-			'fee_id',
 			'fee_wallet_id',
 			'fee_debt_id',
 			'fee_payment_id',
@@ -20,5 +19,9 @@ class Fee extends Model
 			'fee_created_at',
 			'fee_to',
 			'fee_description',
+	];
+	
+	protected  $hidden = [
+			'fee_id',
 	];
 }
