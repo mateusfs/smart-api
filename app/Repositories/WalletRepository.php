@@ -3,16 +3,16 @@
 namespace App\Repositories;
 
 use App\Wallet;
+use App\Http\Requests\WalletRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
-use App\Http\Requests\WalletRequest;
 
 class WalletRepository
 {
     /**
      * Create a new wallet post.
      *
-     * @param  Request  $request
+     * @param  $request
      * @return Response
      */
     public function create($request)
@@ -58,7 +58,7 @@ class WalletRepository
     /**
      * Status a wallet.
      *
-     * @param  Request  $data
+     * @param  $data
      * @return true
      */
     public function status()

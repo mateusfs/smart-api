@@ -3,6 +3,8 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
+use App\Debt;
+use App\Wallet;
 
 class Iugu extends Model
 {
@@ -1165,7 +1167,8 @@ class Iugu extends Model
     /**
      * Submit Subaccount Verification IUGU
      *
-     * Allows you to send documents for sub-account verification. All sub-accounts must have their documentation verified to issue invoices in prodc mode
+     * Allows you to send documents for sub-account verification. 
+     * All sub-accounts must have their documentation verified to issue invoices in prodc mode
      */
     public static function sendSubAccountVerification($idAccount, Debt $debt, Wallet $wallet, $file)
     {

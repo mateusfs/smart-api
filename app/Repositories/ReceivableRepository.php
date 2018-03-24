@@ -70,7 +70,7 @@ class ReceivableRepository
     /**
      * Avaliable a receivable.
      *
-     * @param  Request  $receivable
+     * @param  $receivable
      * @return true/false
      */
     public function avaliable($receivable)

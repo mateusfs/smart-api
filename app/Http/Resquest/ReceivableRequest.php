@@ -22,7 +22,7 @@ class ReceivableRequest extends BaseRequest
     public function rules()
     {
         return [
-       		'prc_carteira' => 'required|min:5|max:100',
+       		'prc_carteira' => 'required|min:1|max:100',
        		'prc_pagamento' => 'required',
        		'prc_valor' => 'required',
        		'prc_numero' => 'required',

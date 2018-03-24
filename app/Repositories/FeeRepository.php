@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Debt;
+use App\Fee;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
 
@@ -18,7 +18,7 @@ class FeeRepository
     public function create($request)
     {
         if($this->validate($request) == true){
-        	return fee::create($request);
+        	return Fee::create($request);
         }
 
         return response()->json(["error" => "Problems creating a fee"], 403);
@@ -33,7 +33,7 @@ class FeeRepository
     public function update($request)
     {
         if($this->validate($request) == true){
-            return fee::save($request);
+            return Fee::save($request);
         }
 
         return response()->json(["error" => "Problems updating a fee"], 403);
@@ -45,7 +45,7 @@ class FeeRepository
      * @param  $request
      * @return Response
      */
-    public function delete(Debt $fee)
+    public function delete(Fee $fee)
     {
         if($fee)
         {
@@ -57,7 +57,6 @@ class FeeRepository
     /**
      * Status of fee.
      *
-     * @param  Request  $fee
      * @return string
      */
     public function status()

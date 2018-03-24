@@ -5,9 +5,9 @@ namespace App\Repositories;
 use App\Withdrawal;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
-use App\Parameter;
-use App\Gerencianet;
-use App\Iugu;
+use App\Services\Parameter;
+use App\Services\Gerencianet;
+use App\Services\Iugu;
 use App\Http\Requests\WithdrawalRequest;
 
 class WithdrawalRepository
@@ -136,7 +136,7 @@ class WithdrawalRepository
     /**
      * Validade a withdrawal.
      *
-     * @param  Request  $data
+     * @param  $data
      * @return true
      */
     public function validate($data)

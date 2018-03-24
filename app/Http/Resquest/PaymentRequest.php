@@ -22,7 +22,7 @@ class PaymentRequest extends BaseRequest
     public function rules()
     {
         return [
-       		'pgm_id' => 'required|min:5|max:100',
+       		'pgm_id' => 'required|min:1|max:100',
         	'pgm_local' => 'required',
         	'pgm_carteira' => 'required',
         	'pgm_pedido' => 'required',

@@ -22,7 +22,7 @@ class IntermediatorRequest extends BaseRequest
     public function rules()
     {
         return [
-            'int_id' => 'required|min:5|max:100',
+            'int_id' => 'required|min:1|max:100',
             'int_title' => 'required',
         ];
     }

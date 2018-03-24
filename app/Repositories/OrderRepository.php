@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Order;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
-use App\Http\Requests\OrderRequest;
 
 class OrderRepository
 {
@@ -15,7 +15,7 @@ class OrderRepository
      * @param  $request
      * @return Response
      */
-    public function create(Request $request)
+    public function create($request)
     {
         if($this->validate($request) == true){
             return Order::create($request);

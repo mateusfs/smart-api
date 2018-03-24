@@ -22,7 +22,7 @@ class FeeRequest extends BaseRequest
     public function rules()
     {
         return [
-            'fee_wallet_id' => 'required|min:5|max:100',
+            'fee_wallet_id' => 'required|min:1|max:100',
             'fee_debt_id' => 'required|numeric',
         	'fee_payment_id' => 'required|numeric',
         	'fee_datetime' => 'required|numeric',

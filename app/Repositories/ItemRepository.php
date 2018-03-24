@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Item;
+use App\Http\Requests\ItemRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
-use App\Http\Requests\ItemRequest;
 
 class ItemRepository
 {

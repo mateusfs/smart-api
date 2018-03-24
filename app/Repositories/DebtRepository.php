@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Debt;
+use App\Http\Requests\DebtRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
-use App\Http\Requests\DebtRequest;
 
 class DebtRepository
 {
@@ -57,7 +57,7 @@ class DebtRepository
     /**
      * Status of debt.
      *
-     * @param  Request  $debt
+     * @param  $debt
      * @return string
      */
     public function status()

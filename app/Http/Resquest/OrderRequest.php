@@ -22,7 +22,7 @@ class OrderRequest extends BaseRequest
     public function rules()
     {
         return [
-        	'ord_carteira' => 'required|min:5|max:100',
+        	'ord_carteira' => 'required|min:1|max:100',
         	'ord_aceitar_boleto' => 'required',
         	'ord_aceitar_cartao' => 'required',
         	'ord_aceitar_cartao_parcelas' => 'required',

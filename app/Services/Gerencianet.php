@@ -4,6 +4,7 @@ namespace App\Services;
 use Illuminate\Database\Eloquent\Model;
 use Gerencianet\Exception\GerencianetException;
 use Carbon\Carbon;
+use App\Debt;
 
 
 class Gerencianet extends Model
@@ -321,18 +322,18 @@ class Gerencianet extends Model
     }
 
     /**
-     * Criando carn�s
+     * Creating carnets
      *
-     * Voc� est� em: "Carn�s > Criando carn�s"
+     * You are in: "Carnet > Making carnet"
      */
-    public static function criarCarne(Debt $debt, $name, $amount, $value, $expire_at = 5, $repeats = 5)
+    public static function createCarnet(Debt $debt, $name, $amount, $value, $expire_at = 5, $repeats = 5)
     {
         try {
 
             $item = [
-                'name' => $name, // nome do item, produto ou servi�o
-                'amount' => $amount, // quantidade
-                'value' => $value // valor (1000 = R$ 10,00)
+                'name' => $name, // name of the item, product or service
+                'amount' => $amount, // amount
+                'value' => $value // value (1000 = R$ 10,00)
             ];
 
             $customer = [

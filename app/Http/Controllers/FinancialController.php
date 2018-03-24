@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Iugu;
+use App\Services\Iugu;
 use Illuminate\Http\Response;
 
 /**

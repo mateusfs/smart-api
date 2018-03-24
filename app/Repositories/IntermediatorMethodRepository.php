@@ -2,8 +2,9 @@
 
 namespace App\Repositories;
 
-use Illuminate\Http\Response;
 use App\Intermediator;
+use Illuminate\Http\Response;
+use Illuminate\Validation\Validator;
 use App\Http\Requests\IntermediatorMethodRequest;
 
 class IntermediatorMethodRepository

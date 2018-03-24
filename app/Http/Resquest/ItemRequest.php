@@ -22,7 +22,7 @@ class ItemRequest extends BaseRequest
     public function rules()
     {
         return [
-        	'oit_pedido' => 'required|min:5|max:100',
+        	'oit_pedido' => 'required|min:1|max:100',
         	'oit_titulo' => 'required',
         	'oit_tipo' => 'required',
         	'oit_tipo_id' => 'required',

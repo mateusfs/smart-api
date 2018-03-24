@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Receivable;
+use App\Http\Requests\PaymentRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Validator;
-use App\Http\Requests\PaymentRequest;
 
 class PaymentRepository
 {

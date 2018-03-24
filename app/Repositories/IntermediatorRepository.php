@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
-use Illuminate\Http\Response;
 use App\Intermediator;
 use App\Http\Requests\IntermediatorRequest;
+use Illuminate\Http\Response;
+use Illuminate\Validation\Validator;
 
 class IntermediatorRepository
 {
@@ -98,29 +99,4 @@ class IntermediatorRepository
     	
     	return true;
     }
-    
-    
-    /**
-     * Validate a intermediator.
-     *
-     * @param  $data
-     * @return true
-     */
-    public function validate($data)
-    {
-    	$v = Validator::make($data, $this->rules);
-    	
-    	if ($v->fails())
-    	{
-    		return $v->errors;
-    	}
-    	
-    	return true;
-    }
-    
-    
-    
-    
-    
-    
 }

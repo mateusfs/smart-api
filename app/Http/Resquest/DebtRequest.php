@@ -22,7 +22,7 @@ class DebtRequest extends BaseRequest
     public function rules()
     {
         return [
-            'dbt_order_id' => 'required|min:5|max:100',
+            'dbt_order_id' => 'required|min:1|max:100',
             'dbt_value' => 'required|numeric',
         	'dbt_value_quota' => 'required|numeric',
         	'dbt_value_fee' => 'required|numeric',

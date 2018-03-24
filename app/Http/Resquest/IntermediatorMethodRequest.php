@@ -22,7 +22,7 @@ class IntermediatorMethodRequest extends BaseRequest
     public function rules()
     {
         return [
-            'imt_intermediator_id' => 'required|min:5|max:100',
+            'imt_intermediator_id' => 'required|min:1|max:100',
             'imt_title' => 'required',
         	'imt_type' => 'required|numeric',
         	'imt_fixed' => 'required|numeric',

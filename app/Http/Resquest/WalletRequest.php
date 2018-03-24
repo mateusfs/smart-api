@@ -22,7 +22,7 @@ class WalletRequest extends BaseRequest
     public function rules()
     {
         return [
-       		'wal_title' => 'required|min:5|max:100',
+       		'wal_title' => 'required|min:1|max:100',
       		'wal_key' => 'required',
        		'wal_secret' => 'required',
        		'wal_pin' => 'required',
