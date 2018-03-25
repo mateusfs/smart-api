@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Smart Clic
+                    Sorry by Smart Clic
                 </div>
 
                 <div class="links">

@@ -13,9 +13,9 @@ class ContestController extends Controller
 {
 
     /**
-     * Dispute contestation IUGU
+     * Dispute Contest IUGU
      *
-     * Dispute contestation | Exemplo: api/v1/contest/dispute/
+     * Dispute Contest | Exemplo: api/v1/contest/dispute/
      * 
      * @param Request $request
 	 * @return Response

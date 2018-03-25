@@ -1313,7 +1313,7 @@ class Iugu extends Model
                         'account' => $wallet->wal_conta,
                         'account_type' => 'cc', // Account Type ("cc" for Current Account and "cp" for Savings Account)
                         'bank' => $carteira->wal_banco,
-                        'automatic_validation' => tru,
+                        'automatic_validation' => true,
                         'document' => $document
 
                     ]
