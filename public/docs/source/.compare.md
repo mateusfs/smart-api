@@ -16,10 +16,11 @@ toc_footers:
 
 
 
+
 # Info
 
 Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/docs/collection.json)
+[Get Postman Collection](http://localhost/docs/collection.json)
 <!-- END_INFO -->
 
 #Contest
@@ -298,9 +299,9 @@ $.ajax(settings).done(function (response) {
 <!-- END_ca0d39d09ea55ce7847bc8145ef878de -->
 
 <!-- START_d06a4c66001e43c3e04a7eaf9b1775cf -->
-## Remove Debt
+## Delete Debt
 
-Remove Debt | Exemplo: api/v1/debt/delete/$idDbt
+Delete Debt | Exemplo: api/v1/debt/delete/$idDbt
 
 > Example request:
 
@@ -745,13 +746,7 @@ $.ajax(settings).done(function (response) {
 > Example response:
 
 ```json
-{
-    "imt_intermediator_id": 1,
-    "imt_title": "Cartão Crédito",
-    "imt_type": "creditcard",
-    "imt_fixed": "0.70",
-    "imt_variable": "2.51"
-}
+null
 ```
 
 ### HTTP Request
@@ -1236,14 +1231,7 @@ $.ajax(settings).done(function (response) {
 > Example response:
 
 ```json
-{
-    "oit_pedido": 1,
-    "oit_titulo": "Reserva Piso Inferior Mesa 3",
-    "oit_tipo": "reservas",
-    "oit_tipo_id": 848490,
-    "oit_quantidade": 1,
-    "oit_valor": "100.00"
-}
+null
 ```
 
 ### HTTP Request
@@ -1539,63 +1527,7 @@ $.ajax(settings).done(function (response) {
 > Example response:
 
 ```json
-{
-    "pgm_local": 2,
-    "pgm_carteira": 501,
-    "pgm_pedido": 1,
-    "pgm_valor": "3.00",
-    "pgm_parcelas": 1,
-    "pgm_parcelas_pagas": 0,
-    "pgm_status": "",
-    "pgm_pagador_nome": "Leonardo Filipe Bento",
-    "pgm_pagador_email": "lonok@msn.com",
-    "pgm_pagador_celular": "47996546929",
-    "pgm_pagador_cpf": "04314101946",
-    "pgm_pagador_genero": "Masculino",
-    "pgm_pagador_nascimento": "0000-00-00",
-    "pgm_pagador_razao": "",
-    "pgm_pagador_cnpj": "",
-    "pgm_metodo": "boleto",
-    "pgm_intermediario": "iugu",
-    "pgm_intermediario_code": "CECB9C843C88406F9667D1F8191F27EA",
-    "pgm_intermediario_status": "",
-    "pgm_intermediario_taxa": "0.00",
-    "pgm_intermediario_fixo": "1.98",
-    "pgm_intermediario_variavel": "0.00",
-    "pgm_intermediario_total": "0.00",
-    "pgm_intermediario_disponivel": "0.00",
-    "pgm_boleto_url": "https:\/\/faturas.iugu.com\/cecb9c84-3c88-406f-9667-d1f8191f27ea-baac?bs=true",
-    "pgm_boleto_digitavel": "2379338128 50003844920 41000050801 7 72310000000300",
-    "pgm_cartao_metodo": "CrÃ©dit",
-    "pgm_cartao_bandeira": "",
-    "pgm_cartao_numero": "",
-    "pgm_cartao_mes": "",
-    "pgm_cartao_ano": 0,
-    "pgm_cartao_nome": "",
-    "pgm_cartao_codigo": 0,
-    "pgm_cartao_recobrancas": 0,
-    "pgm_endereco_cep": "88302060",
-    "pgm_endereco_cidade": 4208203,
-    "pgm_endereco_logradouro": "Rua Jose Raimundo De Oliveira",
-    "pgm_endereco_numero": "129",
-    "pgm_endereco_bairro": "Centro",
-    "pgm_endereco_complemento": "Casa",
-    "pgm_comissao_custo": "0.00",
-    "pgm_comissao_taxa": "0.00",
-    "pgm_comissao_fixo": "8.02",
-    "pgm_comissao_variavel": "0.00",
-    "pgm_comissao_total": "0.00",
-    "pgm_comissao_paga": "",
-    "pgm_criado_em": "2017-07-25 18:11:00",
-    "pgm_pago_em": "0000-00-00 00:00:00",
-    "pgm_cliente_taxa": "0.00",
-    "pgm_cliente_liquido": "0.00",
-    "pgm_disponivel_futuro": "3.00",
-    "pgm_disponivel_liberado": "0.00",
-    "pgm_disponivel_intermediario": "0.00",
-    "pgm_disponivel_empresa": "0.00",
-    "pgm_disponivel_cliente": "0.00"
-}
+null
 ```
 
 ### HTTP Request

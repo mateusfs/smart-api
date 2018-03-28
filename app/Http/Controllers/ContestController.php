@@ -44,12 +44,12 @@ class ContestController extends Controller
     
     
     /**
-     * Dispute Contest IUGU
+     * Obey Contest IUGU
      *
-     * Dispute contest | Exemplo: api/v1/contest/obey/$idContestation
+     * Obey contest | Exemplo: api/v1/contest/obey/$idContestation
      * 
      * @param number $idContestation
-	 * @return Response
+	 * @return Response 
      */
     public function obey($idContestation)
     {
@@ -58,7 +58,7 @@ class ContestController extends Controller
         {
             if (Parameter::getIsIugu()) 
             {
-                $result = Iugu::obeyContestacao($idContestation);
+            	$result = Iugu::obeyContestation($idContestation);
             }
         }
         

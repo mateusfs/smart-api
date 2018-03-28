@@ -1,1980 +1,3076 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
-
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/all.js"></script>
-
-
-          <script>
-        $(function() {
-            setupLanguages(["bash","javascript"]);
-        });
-      </script>
-      </head>
-
-  <body class="">
-    <a href="#" id="nav-button">
-      <span>
-        NAV
-        <img src="images/navbar.png" />
-      </span>
-    </a>
-    <div class="tocify-wrapper">
-        <img src="images/logo.png" />
-                    <div class="lang-selector">
-                                  <a href="#" data-language-name="bash">bash</a>
-                                  <a href="#" data-language-name="javascript">javascript</a>
-                            </div>
-                            <div class="search">
-              <input type="text" class="search" id="input-search" placeholder="Search">
-            </div>
-            <ul class="search-results"></ul>
-              <div id="toc">
-      </div>
-                    <ul class="toc-footer">
-                                  <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
-                            </ul>
-            </div>
-    <div class="page-wrapper">
-      <div class="dark-box"></div>
-      <div class="content">
-          <!-- START_INFO -->
-<h1>Info</h1>
-<p>Welcome to the generated API reference.
-<a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
-<!-- END_INFO -->
-<h1>Contest</h1>
-<!-- START_b1313b6371954d24fafd7ef13a8d213d -->
-<h2>Dispute Contest IUGU</h2>
-<p>Dispute Contest | Exemplo: api/v1/contest/dispute/</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/contest/dispute" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/contest/dispute",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/contest/dispute</code></p>
-<!-- END_b1313b6371954d24fafd7ef13a8d213d -->
-<!-- START_19ca24bb67a31858fde80b603205fd0a -->
-<h2>Dispute Contest IUGU</h2>
-<p>Dispute contest | Exemplo: api/v1/contest/obey/$idContestation</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/contest/obey/{idContestation}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/contest/obey/{idContestation}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/contest/obey/{idContestation}</code></p>
-<p><code>HEAD api/v1/contest/obey/{idContestation}</code></p>
-<!-- END_19ca24bb67a31858fde80b603205fd0a -->
-<!-- START_8389bdceda54bf8364c7609a7bfdf480 -->
-<h2>Search Contest IUGU</h2>
-<p>Search Contest | Exemplo: api/v1/contest/search/$idContestation</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/contest/search/{idContestation}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/contest/search/{idContestation}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/contest/search/{idContestation}</code></p>
-<p><code>HEAD api/v1/contest/search/{idContestation}</code></p>
-<!-- END_8389bdceda54bf8364c7609a7bfdf480 -->
-<!-- START_b622e2e595f29cd8a0e266d64f9b1154 -->
-<h2>List Contest IUGU</h2>
-<p>List a contest | Exemplo: api/v1/contest/list/$idContestation</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/contest/list" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/contest/list",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/contest/list</code></p>
-<p><code>HEAD api/v1/contest/list</code></p>
-<!-- END_b622e2e595f29cd8a0e266d64f9b1154 -->
-<h1>Debt</h1>
-<!-- START_74a7dfba4f54475f47ebf0d76a1f719a -->
-<h2>Search Debt</h2>
-<p>Search Debt | Exemplo: api/v1/debt/$idDbt</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/debt/{idDbt}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/debt/{idDbt}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/debt/{idDbt}</code></p>
-<p><code>HEAD api/v1/debt/{idDbt}</code></p>
-<!-- END_74a7dfba4f54475f47ebf0d76a1f719a -->
-<!-- START_fe6f39b07ae556fa89e213cb57f2aa07 -->
-<h2>Create Debt</h2>
-<p>Create Debt | Exemplo: api/v1/debt/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/debt/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/debt/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/debt/create</code></p>
-<!-- END_fe6f39b07ae556fa89e213cb57f2aa07 -->
-<!-- START_ca0d39d09ea55ce7847bc8145ef878de -->
-<h2>Update Debt</h2>
-<p>Update Debt | Exemplo: api/v1/debt/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/debt/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/debt/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/debt/update</code></p>
-<!-- END_ca0d39d09ea55ce7847bc8145ef878de -->
-<!-- START_d06a4c66001e43c3e04a7eaf9b1775cf -->
-<h2>Remove Debt</h2>
-<p>Remove Debt | Exemplo: api/v1/debt/delete/$idDbt</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/debt/delete/{idDbt}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/debt/delete/{idDbt}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/debt/delete/{idDbt}</code></p>
-<!-- END_d06a4c66001e43c3e04a7eaf9b1775cf -->
-<h1>Fee</h1>
-<!-- START_3ba780166bd2a9cd5b1123ea63559bed -->
-<h2>Search Fee</h2>
-<p>Search Fee | Exemplo: api/v1/fee/$idFee</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/fee/{idFee}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/fee/{idFee}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/fee/{idFee}</code></p>
-<p><code>HEAD api/v1/fee/{idFee}</code></p>
-<!-- END_3ba780166bd2a9cd5b1123ea63559bed -->
-<!-- START_5b68964e02d2af0cc88533c8bc9f35c3 -->
-<h2>Create Fee</h2>
-<p>Create Fee | Exemplo: api/v1/fee/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/fee/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/fee/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/fee/create</code></p>
-<!-- END_5b68964e02d2af0cc88533c8bc9f35c3 -->
-<!-- START_cea98791d04c06bfa42f75578368c1e9 -->
-<h2>Update Fee</h2>
-<p>Update Fee | Exemplo: api/v1/fee/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/fee/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/fee/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/fee/update</code></p>
-<!-- END_cea98791d04c06bfa42f75578368c1e9 -->
-<!-- START_4e5cb9dafc1abc078dace61694409d59 -->
-<h2>Remove Fee</h2>
-<p>Remove Fee | Exemplo: api/v1/fee/delete/$idFee</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/fee/delete/{idFee}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/fee/delete/{idFee}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/fee/delete/{idFee}</code></p>
-<!-- END_4e5cb9dafc1abc078dace61694409d59 -->
-<h1>Financial</h1>
-<!-- START_c344eb6e0f5c466c2e886e2bd8f9d028 -->
-<h2>Financial Statement IUGU</h2>
-<p>Financial Statement | Exemplo: api/v1/financial/financialStatement</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/financial/financialStatement" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/financial/financialStatement",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/financial/financialStatement</code></p>
-<p><code>HEAD api/v1/financial/financialStatement</code></p>
-<!-- END_c344eb6e0f5c466c2e886e2bd8f9d028 -->
-<!-- START_768efb1fcbf451b474c23f996126db6d -->
-<h2>Invoice Statement IUGU</h2>
-<p>Invoice Statement | Exemplo: api/v1/financial/invoiceStatement</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/financial/invoiceStatement" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/financial/invoiceStatement",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/financial/invoiceStatement</code></p>
-<p><code>HEAD api/v1/financial/invoiceStatement</code></p>
-<!-- END_768efb1fcbf451b474c23f996126db6d -->
-<h1>Intermediator</h1>
-<!-- START_2b96aba35a93cd398e8c8d1eb2a6287b -->
-<h2>Search Intermediator</h2>
-<p>Search a intermediator | Exemplo: api/v1/intermediator/$idInt</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/intermediator/{idInt}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/intermediator/{idInt}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/intermediator/{idInt}</code></p>
-<p><code>HEAD api/v1/intermediator/{idInt}</code></p>
-<!-- END_2b96aba35a93cd398e8c8d1eb2a6287b -->
-<!-- START_bf92705f0471c7a95634a57d4e2240c0 -->
-<h2>Create Intermediator</h2>
-<p>Create a intermediator | Exemplo: api/v1/intermediator/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/intermediator/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/intermediator/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/intermediator/create</code></p>
-<!-- END_bf92705f0471c7a95634a57d4e2240c0 -->
-<!-- START_d6c140324e1c82d3fc6258ff47793bbd -->
-<h2>Update Intermediator</h2>
-<p>Update a intermediator | Exemplo: api/v1/intermediator/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/intermediator/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/intermediator/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/intermediator/update</code></p>
-<!-- END_d6c140324e1c82d3fc6258ff47793bbd -->
-<!-- START_b5c245f28f69c725f41029c6de094522 -->
-<h2>Remover Intermediator</h2>
-<p>Remover a intermediator | Exemplo: api/v1/intermediator/delete/$idInt</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/intermediator/delete/{idInt}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/intermediator/delete/{idInt}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/intermediator/delete/{idInt}</code></p>
-<!-- END_b5c245f28f69c725f41029c6de094522 -->
-<h1>IntermediatorMethod</h1>
-<!-- START_2dd768a75a3556d300168dc137d6683e -->
-<h2>Search Intermediator Method</h2>
-<p>Search Intermediator Method | Exemplo: api/v1/intermediatorMethod/$idImt</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/intermediatorMethod/{idImt}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/intermediatorMethod/{idImt}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">{
-    "imt_intermediator_id": 1,
-    "imt_title": "Cartão Crédito",
-    "imt_type": "creditcard",
-    "imt_fixed": "0.70",
-    "imt_variable": "2.51"
-}</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/intermediatorMethod/{idImt}</code></p>
-<p><code>HEAD api/v1/intermediatorMethod/{idImt}</code></p>
-<!-- END_2dd768a75a3556d300168dc137d6683e -->
-<!-- START_a392277ae45ce2596e44c03ab0186811 -->
-<h2>Create Intermediator Method</h2>
-<p>Create Intermediator Method | Exemplo: api/v1/intermediatorMethod/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/intermediatorMethod/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/intermediatorMethod/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/intermediatorMethod/create</code></p>
-<!-- END_a392277ae45ce2596e44c03ab0186811 -->
-<!-- START_56dcd6f94a6da16d7ae24b1bd0faa4e4 -->
-<h2>Update Intermediator Method</h2>
-<p>Update Intermediator Method | Exemplo: api/v1/intermediatorMethod/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/intermediatorMethod/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/intermediatorMethod/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/intermediatorMethod/update</code></p>
-<!-- END_56dcd6f94a6da16d7ae24b1bd0faa4e4 -->
-<!-- START_3f8e20a0e452bfa33f4f2ecea62a80fb -->
-<h2>Remove Intermediator Method</h2>
-<p>Remove Intermediator Method | Exemplo: api/v1/intermediatorMethod/delete/$idImt</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/intermediatorMethod/delete/{idImt}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/intermediatorMethod/delete/{idImt}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/intermediatorMethod/delete/{idImt}</code></p>
-<!-- END_3f8e20a0e452bfa33f4f2ecea62a80fb -->
-<h1>Invoice</h1>
-<!-- START_b9cc5f70da9eb05fe28b329b3d5fb284 -->
-<h2>Generate Invoice pelo IUGU</h2>
-<p>Generate a invoice | Example: api/v1/invoice/create/$idPgm</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/invoice/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/invoice/create",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/invoice/create</code></p>
-<p><code>HEAD api/v1/invoice/create</code></p>
-<!-- END_b9cc5f70da9eb05fe28b329b3d5fb284 -->
-<!-- START_518d4d0c7adc74a37168d6fd38a0a74f -->
-<h2>Search Invoice</h2>
-<p>Search a invoice | Example: api/v1/invoice/list/</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/invoice/list" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/invoice/list",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/invoice/list</code></p>
-<p><code>HEAD api/v1/invoice/list</code></p>
-<!-- END_518d4d0c7adc74a37168d6fd38a0a74f -->
-<!-- START_5e58299571a105951a507b73fedbc9ca -->
-<h2>Capturar Invoice</h2>
-<p>Capturar a invoice | Example: api/v1/invoice/capture/$idInvoice</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/invoice/capture/{idInvoice}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/invoice/capture/{idInvoice}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/invoice/capture/{idInvoice}</code></p>
-<p><code>HEAD api/v1/invoice/capture/{idInvoice}</code></p>
-<!-- END_5e58299571a105951a507b73fedbc9ca -->
-<!-- START_f6ff3830ecf6ebed207ea7b9a3c7b16f -->
-<h2>Repay Invoice</h2>
-<p>Repay a invoice | Example: api/v1/invoice/refund/$idInvoice</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/invoice/refund/{idInvoice}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/invoice/refund/{idInvoice}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/invoice/refund/{idInvoice}</code></p>
-<p><code>HEAD api/v1/invoice/refund/{idInvoice}</code></p>
-<!-- END_f6ff3830ecf6ebed207ea7b9a3c7b16f -->
-<!-- START_3968766f6547b99710d772a6ff4afd10 -->
-<h2>Cancel Invoice</h2>
-<p>Cancel a invoice | Example: api/v1/invoice/cancel/$idInvoice</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/invoice/cancel/{idInvoice}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/invoice/cancel/{idInvoice}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/invoice/cancel/{idInvoice}</code></p>
-<p><code>HEAD api/v1/invoice/cancel/{idInvoice}</code></p>
-<!-- END_3968766f6547b99710d772a6ff4afd10 -->
-<!-- START_6593a1eaffad21ecf8b38ea39ff812bc -->
-<h2>Generate Second Way Invoice</h2>
-<p>Generate a second way invoice | Example: api/v1/invoice/generateSecondWay/$idInvoice</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/invoice/generateSecondWay/{idInvoice}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/invoice/generateSecondWay/{idInvoice}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/invoice/generateSecondWay/{idInvoice}</code></p>
-<p><code>HEAD api/v1/invoice/generateSecondWay/{idInvoice}</code></p>
-<!-- END_6593a1eaffad21ecf8b38ea39ff812bc -->
-<!-- START_94dc2ec1abac9af3b2615bc927282143 -->
-<h2>Search Invoice</h2>
-<p>Search a invoice | Example: api/v1/invoice/search/$idInvoice</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/invoice/search/{idInvoice}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/invoice/search/{idInvoice}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/invoice/search/{idInvoice}</code></p>
-<p><code>HEAD api/v1/invoice/search/{idInvoice}</code></p>
-<!-- END_94dc2ec1abac9af3b2615bc927282143 -->
-<!-- START_73bfd1ac522677d80b5441e2a9a3fd05 -->
-<h2>Send Email Invoice</h2>
-<p>Send a email invoice | Example: api/v1/invoice/sendEmail/$idInvoice/$to</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/invoice/sendEmail/{idInvoice}/{to}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/invoice/sendEmail/{idInvoice}/{to}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/invoice/sendEmail/{idInvoice}/{to}</code></p>
-<p><code>HEAD api/v1/invoice/sendEmail/{idInvoice}/{to}</code></p>
-<!-- END_73bfd1ac522677d80b5441e2a9a3fd05 -->
-<h1>Item</h1>
-<!-- START_6c668e0c76a37c8c533ce1cbd57f5be9 -->
-<h2>Search Item</h2>
-<p>Search Item | Exemplo: api/v1/item/$idOit</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/item/{idOit}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/item/{idOit}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">{
-    "oit_pedido": 1,
-    "oit_titulo": "Reserva Piso Inferior Mesa 3",
-    "oit_tipo": "reservas",
-    "oit_tipo_id": 848490,
-    "oit_quantidade": 1,
-    "oit_valor": "100.00"
-}</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/item/{idOit}</code></p>
-<p><code>HEAD api/v1/item/{idOit}</code></p>
-<!-- END_6c668e0c76a37c8c533ce1cbd57f5be9 -->
-<!-- START_f581f5c26bb97a508fa71f985a5a1d55 -->
-<h2>Create Item</h2>
-<p>Create Item | Exemplo: api/v1/item/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/item/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/item/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/item/create</code></p>
-<!-- END_f581f5c26bb97a508fa71f985a5a1d55 -->
-<!-- START_39ac5fc0c8de4965b3db9a05f2e0998e -->
-<h2>Update Item</h2>
-<p>Update Item | Exemplo: api/v1/item/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/item/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/item/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/item/update</code></p>
-<!-- END_39ac5fc0c8de4965b3db9a05f2e0998e -->
-<!-- START_eb629f70320f5d264b78f923d4071aee -->
-<h2>Remover Item</h2>
-<p>Remover Item | Exemplo: api/v1/item/delete/$idOit</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/item/delete/{idOit}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/item/delete/{idOit}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/item/delete/{idOit}</code></p>
-<!-- END_eb629f70320f5d264b78f923d4071aee -->
-<h1>Order</h1>
-<!-- START_05fff884b6129629b310db52ef026ec1 -->
-<h2>Search Order</h2>
-<p>Search a order | Exemplo: api/v1/orders/1</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/order/{idOrd}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/order/{idOrd}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/order/{idOrd}</code></p>
-<p><code>HEAD api/v1/order/{idOrd}</code></p>
-<!-- END_05fff884b6129629b310db52ef026ec1 -->
-<!-- START_262c865f050dbacf61b46826616ffa9c -->
-<h2>Create Order</h2>
-<p>Create a order | Exemplo: api/v1/itens/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/order/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/order/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/order/create</code></p>
-<!-- END_262c865f050dbacf61b46826616ffa9c -->
-<!-- START_a60ba0cfb8a0105aabf31c0df624d71d -->
-<h2>Update Order</h2>
-<p>Update a Order | Exemplo: api/v1/orders/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/order/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/order/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/order/update</code></p>
-<!-- END_a60ba0cfb8a0105aabf31c0df624d71d -->
-<!-- START_9d6dfa5f3a7712313bd8f2544294b7dc -->
-<h2>Remove Order</h2>
-<p>Remove Order | Exemplo: api/v1/orders/delete/1</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/order/delete/{idOrd}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/order/delete/{idOrd}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/order/delete/{idOrd}</code></p>
-<!-- END_9d6dfa5f3a7712313bd8f2544294b7dc -->
-<h1>Payment</h1>
-<!-- START_129beed18021e943cc0307e09faa9589 -->
-<h2>Search Payment</h2>
-<p>Search Payment | Example: api/v1/payment/$idPgm</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/payment/{idPgm}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/payment/{idPgm}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">{
-    "pgm_local": 2,
-    "pgm_carteira": 501,
-    "pgm_pedido": 1,
-    "pgm_valor": "3.00",
-    "pgm_parcelas": 1,
-    "pgm_parcelas_pagas": 0,
-    "pgm_status": "",
-    "pgm_pagador_nome": "Leonardo Filipe Bento",
-    "pgm_pagador_email": "lonok@msn.com",
-    "pgm_pagador_celular": "47996546929",
-    "pgm_pagador_cpf": "04314101946",
-    "pgm_pagador_genero": "Masculino",
-    "pgm_pagador_nascimento": "0000-00-00",
-    "pgm_pagador_razao": "",
-    "pgm_pagador_cnpj": "",
-    "pgm_metodo": "boleto",
-    "pgm_intermediario": "iugu",
-    "pgm_intermediario_code": "CECB9C843C88406F9667D1F8191F27EA",
-    "pgm_intermediario_status": "",
-    "pgm_intermediario_taxa": "0.00",
-    "pgm_intermediario_fixo": "1.98",
-    "pgm_intermediario_variavel": "0.00",
-    "pgm_intermediario_total": "0.00",
-    "pgm_intermediario_disponivel": "0.00",
-    "pgm_boleto_url": "https:\/\/faturas.iugu.com\/cecb9c84-3c88-406f-9667-d1f8191f27ea-baac?bs=true",
-    "pgm_boleto_digitavel": "2379338128 50003844920 41000050801 7 72310000000300",
-    "pgm_cartao_metodo": "CrÃ©dit",
-    "pgm_cartao_bandeira": "",
-    "pgm_cartao_numero": "",
-    "pgm_cartao_mes": "",
-    "pgm_cartao_ano": 0,
-    "pgm_cartao_nome": "",
-    "pgm_cartao_codigo": 0,
-    "pgm_cartao_recobrancas": 0,
-    "pgm_endereco_cep": "88302060",
-    "pgm_endereco_cidade": 4208203,
-    "pgm_endereco_logradouro": "Rua Jose Raimundo De Oliveira",
-    "pgm_endereco_numero": "129",
-    "pgm_endereco_bairro": "Centro",
-    "pgm_endereco_complemento": "Casa",
-    "pgm_comissao_custo": "0.00",
-    "pgm_comissao_taxa": "0.00",
-    "pgm_comissao_fixo": "8.02",
-    "pgm_comissao_variavel": "0.00",
-    "pgm_comissao_total": "0.00",
-    "pgm_comissao_paga": "",
-    "pgm_criado_em": "2017-07-25 18:11:00",
-    "pgm_pago_em": "0000-00-00 00:00:00",
-    "pgm_cliente_taxa": "0.00",
-    "pgm_cliente_liquido": "0.00",
-    "pgm_disponivel_futuro": "3.00",
-    "pgm_disponivel_liberado": "0.00",
-    "pgm_disponivel_intermediario": "0.00",
-    "pgm_disponivel_empresa": "0.00",
-    "pgm_disponivel_cliente": "0.00"
-}</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/payment/{idPgm}</code></p>
-<p><code>HEAD api/v1/payment/{idPgm}</code></p>
-<!-- END_129beed18021e943cc0307e09faa9589 -->
-<!-- START_79e940e840c2f261662c5de93a3d5326 -->
-<h2>Create Payment</h2>
-<p>Create Payment | Example: api/v1/payment/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/payment/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/payment/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/payment/create</code></p>
-<!-- END_79e940e840c2f261662c5de93a3d5326 -->
-<!-- START_d1dfbece2581639fa570bb1710bd46c9 -->
-<h2>Update Payment</h2>
-<p>Update Payment | Example: api/v1/payment/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/payment/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/payment/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/payment/update</code></p>
-<!-- END_d1dfbece2581639fa570bb1710bd46c9 -->
-<!-- START_bafe42541ca9860adceda3b971d73fd1 -->
-<h2>Remove Payment</h2>
-<p>Remove Payment | Example: api/v1/payment/delete/$idPrc</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/payment/delete/{idRcb}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/payment/delete/{idRcb}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/payment/delete/{idRcb}</code></p>
-<!-- END_bafe42541ca9860adceda3b971d73fd1 -->
-<!-- START_bba748ae64b505774962ad9ee23f64b2 -->
-<h2>Generate Pay per Ticket</h2>
-<p>Generate a ticket | Example: api/v1/payment/ticket/$idPgm</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/payment/ticket/{idPgm}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/payment/ticket/{idPgm}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/payment/ticket/{idPgm}</code></p>
-<p><code>HEAD api/v1/payment/ticket/{idPgm}</code></p>
-<!-- END_bba748ae64b505774962ad9ee23f64b2 -->
-<!-- START_046d0c44ce1cf418d2cdc91e0bd1f8c9 -->
-<h2>Generate payment by Card</h2>
-<p>Generate a ticket | Example: api/v1/payment/card/$idPgm</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/payment/card/{idPgm}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/payment/card/{idPgm}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/payment/card/{idPgm}</code></p>
-<p><code>HEAD api/v1/payment/card/{idPgm}</code></p>
-<!-- END_046d0c44ce1cf418d2cdc91e0bd1f8c9 -->
-<!-- START_5345f5fbe8001484dcb75f455aac7176 -->
-<h2>Generate Pagament per ticket legal person</h2>
-<p>Generate a pagament | Example: api/v1/payment/ticket/legalPerson/$idPgm</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/payment/ticket/legalPerson/{idPgm}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/payment/ticket/legalPerson/{idPgm}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/payment/ticket/legalPerson/{idPgm}</code></p>
-<p><code>HEAD api/v1/payment/ticket/legalPerson/{idPgm}</code></p>
-<!-- END_5345f5fbe8001484dcb75f455aac7176 -->
-<!-- START_c8687a96254255a8508e98bea6f2a313 -->
-<h2>Set address per ticket legal person</h2>
-<p>Set a address for ticket | Example: api/v1/payment/ticket/setAddress/$idPgm/$idTransaction</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/payment/ticket/setTicketAddress/{idPgm}/{idTransaction}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/payment/ticket/setTicketAddress/{idPgm}/{idTransaction}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/payment/ticket/setTicketAddress/{idPgm}/{idTransaction}</code></p>
-<p><code>HEAD api/v1/payment/ticket/setTicketAddress/{idPgm}/{idTransaction}</code></p>
-<!-- END_c8687a96254255a8508e98bea6f2a313 -->
-<h1>Receivable</h1>
-<!-- START_03ef1c65a7836b616aafb18ae8730d9c -->
-<h2>Search Receivable</h2>
-<p>Search Receivable | Example: api/v1/payment/$idRcb</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/receivable/{idRcb}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/receivable/{idRcb}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/receivable/{idRcb}</code></p>
-<p><code>HEAD api/v1/receivable/{idRcb}</code></p>
-<!-- END_03ef1c65a7836b616aafb18ae8730d9c -->
-<!-- START_a0590eacccd44767bd8e28ba4e89628e -->
-<h2>Create Receivable</h2>
-<p>Create Receivable | Example: api/v1/receivable/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/receivable/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/receivable/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/receivable/create</code></p>
-<!-- END_a0590eacccd44767bd8e28ba4e89628e -->
-<!-- START_08724e3692b3123ae49a0258270ccf3b -->
-<h2>Update Receivable</h2>
-<p>Update Receivable | Example: api/v1/receivable/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/receivable/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/receivable/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/receivable/update</code></p>
-<!-- END_08724e3692b3123ae49a0258270ccf3b -->
-<!-- START_7758dce119cd7f62915a146715a56e1e -->
-<h2>Remove Receivable</h2>
-<p>Remove Receivable | Example: api/v1/receivable/delete/$idPrc</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/receivable/delete/{idRcb}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/receivable/delete/{idRcb}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/receivable/delete/{idRcb}</code></p>
-<!-- END_7758dce119cd7f62915a146715a56e1e -->
-<h1>Transaction</h1>
-<!-- START_9fbdd347b65b46077f2f706df9b5d98b -->
-<h2>Update Transaction GerenciaNet</h2>
-<p>Update a transaction | Example: api/v1/transaction/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/transaction/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transaction/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/transaction/create</code></p>
-<!-- END_9fbdd347b65b46077f2f706df9b5d98b -->
-<!-- START_3802ac0326ba58d174117432372dad4f -->
-<h2>Update Transaction GerenciaNet</h2>
-<p>Update a transaction | Example: api/v1/transaction/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/transaction/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transaction/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/transaction/update</code></p>
-<!-- END_3802ac0326ba58d174117432372dad4f -->
-<!-- START_af03eb5e92a9a5cb5f2cf04cd0d0ca8a -->
-<h2>Consult Notification Transaction GerenciaNet</h2>
-<p>Consult a notification | Example: api/v1/transaction/consult/$idTransaction</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/transaction/consult" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transaction/consult",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/transaction/consult</code></p>
-<p><code>HEAD api/v1/transaction/consult</code></p>
-<!-- END_af03eb5e92a9a5cb5f2cf04cd0d0ca8a -->
-<!-- START_3d0879aa623b290b55411dde0a56ce59 -->
-<h2>Detail Transaction GerenciaNet</h2>
-<p>Detail a transaction | Example: api/v1/transaction/detail/$idTransaction</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/transaction/detail/{idTransaction}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transaction/detail/{idTransaction}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/transaction/detail/{idTransaction}</code></p>
-<p><code>HEAD api/v1/transaction/detail/{idTransaction}</code></p>
-<!-- END_3d0879aa623b290b55411dde0a56ce59 -->
-<!-- START_feaeb5787fb88e07f4a042342c5808ec -->
-<h2>Cancel Transaction GerenciaNet</h2>
-<p>Cancel a transaction | Example: api/v1/transaction/cancel/$idTransaction</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/transaction/cancel/{idTransaction}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transaction/cancel/{idTransaction}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/transaction/cancel/{idTransaction}</code></p>
-<p><code>HEAD api/v1/transaction/cancel/{idTransaction}</code></p>
-<!-- END_feaeb5787fb88e07f4a042342c5808ec -->
-<h1>Transfer</h1>
-<!-- START_e1d7ed8a93adb454e553488b2f887e4e -->
-<h2>List transfer IUGU</h2>
-<p>List a transfer | Example: api/v1/transfer/list/</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/transfer/list" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transfer/list",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/transfer/list</code></p>
-<p><code>HEAD api/v1/transfer/list</code></p>
-<!-- END_e1d7ed8a93adb454e553488b2f887e4e -->
-<!-- START_80dc877bd220c9ff51b59f265686c55a -->
-<h2>List Bank Transfer IUGU</h2>
-<p>List bank transfer | Example: api/v1/transfer/listBankTransfers/</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/transfer/listBankTransfers" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transfer/listBankTransfers",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/transfer/listBankTransfers</code></p>
-<p><code>HEAD api/v1/transfer/listBankTransfers</code></p>
-<!-- END_80dc877bd220c9ff51b59f265686c55a -->
-<!-- START_9084bf82033fd700972154d051eb8680 -->
-<h2>Search Bank Transfer IUGU</h2>
-<p>Search a bank transfer | Example: api/v1/transfer/searchBankTransfer/</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/transfer/searchBankTransfer" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transfer/searchBankTransfer",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/transfer/searchBankTransfer</code></p>
-<p><code>HEAD api/v1/transfer/searchBankTransfer</code></p>
-<!-- END_9084bf82033fd700972154d051eb8680 -->
-<!-- START_5b30cb4debeccebd82160740db97a5b8 -->
-<h2>Generate Transfer IUGU</h2>
-<p>Generate a transfer | Example: api/v1/transfer/transfer/$idAccount/$value</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/transfer/transfer/{idAccount}/{value}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transfer/transfer/{idAccount}/{value}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/transfer/transfer/{idAccount}/{value}</code></p>
-<p><code>HEAD api/v1/transfer/transfer/{idAccount}/{value}</code></p>
-<!-- END_5b30cb4debeccebd82160740db97a5b8 -->
-<!-- START_7f3a731657b77398859e7f821fbfb96f -->
-<h2>Search transfer IUGU</h2>
-<p>Search transfer | Example: api/v1/transfer/search/$idTransfer</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/transfer/search/{idTransfer}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/transfer/search/{idTransfer}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/transfer/search/{idTransfer}</code></p>
-<p><code>HEAD api/v1/transfer/search/{idTransfer}</code></p>
-<!-- END_7f3a731657b77398859e7f821fbfb96f -->
-<h1>Wallet</h1>
-<!-- START_26746381cf12fe3560fbd68b34160e21 -->
-<h2>Search Wallet</h2>
-<p>Search a wallet | Exemplo: api/v1/wallet/$idWal</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/wallet/{idWal}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/wallet/{idWal}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/wallet/{idWal}</code></p>
-<p><code>HEAD api/v1/wallet/{idWal}</code></p>
-<!-- END_26746381cf12fe3560fbd68b34160e21 -->
-<!-- START_5b171233e93edba36ff4bba81a0103f4 -->
-<h2>Create Wallet</h2>
-<p>Create a wallet | Exemplo: api/v1/wallet/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/wallet/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/wallet/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/wallet/create</code></p>
-<!-- END_5b171233e93edba36ff4bba81a0103f4 -->
-<!-- START_618b5c971bcf257219ab33c52174f8a2 -->
-<h2>Update Wallet</h2>
-<p>Update a wallet | Exemplo: api/v1/wallet/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/wallet/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/wallet/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/wallet/update</code></p>
-<!-- END_618b5c971bcf257219ab33c52174f8a2 -->
-<!-- START_85a94a6273359f94e94236ba67091070 -->
-<h2>Delete Wallet</h2>
-<p>Delete Wallet | Exemplo: api/v1/wallet/delete/$idWal</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/wallet/delete/{idWal}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/wallet/delete/{idWal}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/wallet/delete/{idWal}</code></p>
-<!-- END_85a94a6273359f94e94236ba67091070 -->
-<h1>Withdrawal</h1>
-<!-- START_430b5f0d0723e55683a308295d10a353 -->
-<h2>Search Withdrawal</h2>
-<p>Search a withdrawal | Exemplo: api/v1/withdrawal/$idSaq</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/withdrawal/{idSaq}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/withdrawal/{idSaq}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/withdrawal/{idSaq}</code></p>
-<p><code>HEAD api/v1/withdrawal/{idSaq}</code></p>
-<!-- END_430b5f0d0723e55683a308295d10a353 -->
-<!-- START_d07528525e57fd85d8d202dbdcbe41fe -->
-<h2>Withdraw of Withdrawal</h2>
-<p>Withdraw of withdrawal | Exemplo: api/v1/withdrawal/withdraw/$idSaq</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET "http://localhost/api/v1/withdrawal/withdraw/{idSaq}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/withdrawal/withdraw/{idSaq}",
-    "method": "GET",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<blockquote>
-<p>Example response:</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/v1/withdrawal/withdraw/{idSaq}</code></p>
-<p><code>HEAD api/v1/withdrawal/withdraw/{idSaq}</code></p>
-<!-- END_d07528525e57fd85d8d202dbdcbe41fe -->
-<!-- START_4491a48953a3fff1da7d0d1d0208f7ca -->
-<h2>Update Withdrawal</h2>
-<p>Update a withdrawal | Exemplo: api/v1/withdrawal/update</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/withdrawal/update" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/withdrawal/update",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/withdrawal/update</code></p>
-<!-- END_4491a48953a3fff1da7d0d1d0208f7ca -->
-<!-- START_36c359174914f1de26235d95e7b96a67 -->
-<h2>Create Withdrawal</h2>
-<p>Create a withdrawal | Exemplo: api/v1/withdrawal/create</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/v1/withdrawal/create" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/withdrawal/create",
-    "method": "POST",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/v1/withdrawal/create</code></p>
-<!-- END_36c359174914f1de26235d95e7b96a67 -->
-<!-- START_87657f24a912fef4f3163e46a510b9f1 -->
-<h2>Remover Withdrawal</h2>
-<p>Remover a withdrawal | Exemplo: api/v1/withdrawal/delete/$idSaq</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/v1/withdrawal/delete/{idSaq}" \
--H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost/api/v1/withdrawal/delete/{idSaq}",
-    "method": "DELETE",
-    "headers": {
-        "accept": "application/json"
-    }
-}
-
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE api/v1/withdrawal/delete/{idSaq}</code></p>
-<!-- END_87657f24a912fef4f3163e46a510b9f1 -->
-      </div>
-      <div class="dark-box">
-                        <div class="lang-selector">
-                                    <a href="#" data-language-name="bash">bash</a>
-                                    <a href="#" data-language-name="javascript">javascript</a>
-                              </div>
-                </div>
-    </div>
-  </body>
+<meta charset="utf-8">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>API Reference</title>
+
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/all.js"></script>
+
+
+<script>
+	$(function() {
+		setupLanguages([ "bash", "javascript" ]);
+	});
+</script>
+</head>
+
+<body class="">
+	<a href="#" id="nav-button"> <span> NAV <img
+			src="images/navbar.png" />
+	</span>
+	</a>
+	<div class="tocify-wrapper">
+		<img src="images/logo.png" />
+		<div class="lang-selector">
+			<a href="#" data-language-name="bash">bash</a> <a href="#"
+				data-language-name="javascript">javascript</a>
+		</div>
+		<div class="search">
+			<input type="text" class="search" id="input-search"
+				placeholder="Search">
+		</div>
+		<ul class="search-results"></ul>
+		<div id="toc"></div>
+		<ul class="toc-footer">
+			<li><a href='http://github.com/mpociot/documentarian'>Documentation
+					Powered by Documentarian</a></li>
+		</ul>
+	</div>
+	<div class="page-wrapper">
+		<div class="dark-box"></div>
+		<div class="content">
+			<!-- START_INFO -->
+			<h1>Info</h1>
+			<p>
+				Welcome to the generated API reference. <a
+					href="http://localhost/docs/collection.json">Get Postman
+					Collection</a>
+			</p>
+			<!-- END_INFO -->
+			<h1>Contest</h1>
+			<!-- START_b1313b6371954d24fafd7ef13a8d213d -->
+			<h2>Dispute Contest IUGU</h2>
+			<p>Dispute Contest | Exemplo: api/v1/contest/dispute/</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/contest/dispute"\
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/contest/dispute",
+				    "method": "POST",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{
+				    "id": "D5F4DC1583BC4B19A77814A2C5ABC092",
+				    "invoice_id": "C4E1B42BBC5146ACAAB27B03ED5D34F8",
+				    "status": "contested_by_client",
+				    "expires_at": "2017-06-27"
+				}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/contest/dispute</code>
+			</p>
+			<!-- END_b1313b6371954d24fafd7ef13a8d213d -->
+			<!-- START_19ca24bb67a31858fde80b603205fd0a -->
+			<h2>Obey Contest IUGU</h2>
+			<p>Obey contest | Exemplo: api/v1/contest/obey/$idContestation</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/contest/obey/{idContestation}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/contest/obey/{idContestation}",
+				    "method": "GET",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{
+				  "id": "14B31AF16A254F3C9E22927989B879D8",
+				  "invoice_id": "C9FD4AB9603B4E919559ADD9082895B7",
+				  "status": "accepted",
+				  "expires_at": "2017-07-05"
+				}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/contest/obey/{idContestation}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/contest/obey/{idContestation}</code>
+			</p>
+			<!-- END_19ca24bb67a31858fde80b603205fd0a -->
+			<!-- START_8389bdceda54bf8364c7609a7bfdf480 -->
+			<h2>Search Contest IUGU</h2>
+			<p>Search Contest | Exemplo:
+				api/v1/contest/search/$idContestation</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/contest/search/{idContestation}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/contest/search/{idContestation}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{
+				  "id": "14B31AF16A254F3C9E22927989B879D8",
+				  "invoice_id": "C9FD4AB9603B4E919559ADD9082895B7",
+				  "status": "pending",
+				  "expires_at": "2017-07-05"
+				}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/contest/search/{idContestation}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/contest/search/{idContestation}</code>
+			</p>
+			<!-- END_8389bdceda54bf8364c7609a7bfdf480 -->
+			<!-- START_b622e2e595f29cd8a0e266d64f9b1154 -->
+			<h2>List Contest IUGU</h2>
+			<p>List a contest | Exemplo: api/v1/contest/list/$idContestation</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/contest/list" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/contest/list",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{
+				    "facets": {
+				        "pending": {
+				            "_type": "filter",
+				            "count": 2
+				        }
+				    },
+				    "items": [
+				        {
+				            "id": "14B31AF16A254F3C9E22927989B879D8",
+				            "invoice_id": "C9FD4AB9603B4E919559ADD9082895B7",
+				            "status": "pending",
+				            "expires_at": "2017-07-05"
+				        },
+				        {
+				            "id": "D5F4DC1583BC4B19A77814A2C5ABC092",
+				            "invoice_id": "C4E1B42BBC5146ACAAB27B03ED5D34F8",
+				            "status": "pending",
+				            "expires_at": "2017-06-27"
+				        }
+				    ]
+				}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/contest/list</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/contest/list</code>
+			</p>
+			<!-- END_b622e2e595f29cd8a0e266d64f9b1154 -->
+			<h1>Debt</h1>
+			<!-- START_74a7dfba4f54475f47ebf0d76a1f719a -->
+			<h2>Search Debt</h2>
+			<p>Search Debt | Exemplo: api/v1/debt/$idDbt</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/debt/{idDbt}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/debt/{idDbt}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{
+				  "dbt_order_id": "order_id",
+				  "dbt_value": "value",
+				  "dbt_value_quota": "value_quota",
+				  "value_fee": "value_fee",
+				  "dbt_due_at": "due_at",
+				  "dbt_accept_creditcard": "accept_creditcard",
+				  "dbt_accept_billet": "accept_billet"
+				}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/debt/{idDbt}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/debt/{idDbt}</code>
+			</p>
+			<!-- END_74a7dfba4f54475f47ebf0d76a1f719a -->
+			<!-- START_fe6f39b07ae556fa89e213cb57f2aa07 -->
+			<h2>Create Debt</h2>
+			<p>Create Debt | Exemplo: api/v1/debt/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/debt/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/debt/create",
+				    "method": "POST",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/debt/create</code>
+			</p>
+			<!-- END_fe6f39b07ae556fa89e213cb57f2aa07 -->
+			<!-- START_ca0d39d09ea55ce7847bc8145ef878de -->
+			<h2>Update Debt</h2>
+			<p>Update Debt | Exemplo: api/v1/debt/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/debt/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/debt/update",
+				    "method": "POST",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/debt/update</code>
+			</p>
+			<!-- END_ca0d39d09ea55ce7847bc8145ef878de -->
+			<!-- START_d06a4c66001e43c3e04a7eaf9b1775cf -->
+			<h2>Delete Debt</h2>
+			<p>Delete Debt | Exemplo: api/v1/debt/delete/$idDbt</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/debt/delete/{idDbt}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/debt/delete/{idDbt}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/debt/delete/{idDbt}</code>
+			</p>
+			<!-- END_d06a4c66001e43c3e04a7eaf9b1775cf -->
+			<h1>Fee</h1>
+			<!-- START_3ba780166bd2a9cd5b1123ea63559bed -->
+			<h2>Search Fee</h2>
+			<p>Search Fee | Exemplo: api/v1/fee/$idFee</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/fee/{idFee}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/fee/{idFee}",
+				    "method": "GET",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/fee/{idFee}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/fee/{idFee}</code>
+			</p>
+			<!-- END_3ba780166bd2a9cd5b1123ea63559bed -->
+			<!-- START_5b68964e02d2af0cc88533c8bc9f35c3 -->
+			<h2>Create Fee</h2>
+			<p>Create Fee | Exemplo: api/v1/fee/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/fee/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/fee/create",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/fee/create</code>
+			</p>
+			<!-- END_5b68964e02d2af0cc88533c8bc9f35c3 -->
+			<!-- START_cea98791d04c06bfa42f75578368c1e9 -->
+			<h2>Update Fee</h2>
+			<p>Update Fee | Exemplo: api/v1/fee/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/fee/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/fee/update",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/fee/update</code>
+			</p>
+			<!-- END_cea98791d04c06bfa42f75578368c1e9 -->
+			<!-- START_4e5cb9dafc1abc078dace61694409d59 -->
+			<h2>Remove Fee</h2>
+			<p>Remove Fee | Exemplo: api/v1/fee/delete/$idFee</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/fee/delete/{idFee}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/fee/delete/{idFee}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/fee/delete/{idFee}</code>
+			</p>
+			<!-- END_4e5cb9dafc1abc078dace61694409d59 -->
+			<h1>Financial</h1>
+			<!-- START_c344eb6e0f5c466c2e886e2bd8f9d028 -->
+			<h2>Financial Statement IUGU</h2>
+			<p>Financial Statement | Exemplo:
+				api/v1/financial/financialStatement</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/financial/financialStatement" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/financial/financialStatement",
+				    "method": "GET",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/financial/financialStatement</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/financial/financialStatement</code>
+			</p>
+			<!-- END_c344eb6e0f5c466c2e886e2bd8f9d028 -->
+			<!-- START_768efb1fcbf451b474c23f996126db6d -->
+			<h2>Invoice Statement IUGU</h2>
+			<p>Invoice Statement | Exemplo: api/v1/financial/invoiceStatement</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/financial/invoiceStatement" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/financial/invoiceStatement",
+				    "method": "GET",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/financial/invoiceStatement</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/financial/invoiceStatement</code>
+			</p>
+			<!-- END_768efb1fcbf451b474c23f996126db6d -->
+			<h1>Intermediator</h1>
+			<!-- START_2b96aba35a93cd398e8c8d1eb2a6287b -->
+			<h2>Search Intermediator</h2>
+			<p>Search a intermediator | Exemplo: api/v1/intermediator/$idInt</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/intermediator/{idInt}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/intermediator/{idInt}",
+				    "method": "GET",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/intermediator/{idInt}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/intermediator/{idInt}</code>
+			</p>
+			<!-- END_2b96aba35a93cd398e8c8d1eb2a6287b -->
+			<!-- START_bf92705f0471c7a95634a57d4e2240c0 -->
+			<h2>Create Intermediator</h2>
+			<p>Create a intermediator | Exemplo: api/v1/intermediator/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/intermediator/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/intermediator/create",
+				    "method": "POST",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/intermediator/create</code>
+			</p>
+			<!-- END_bf92705f0471c7a95634a57d4e2240c0 -->
+			<!-- START_d6c140324e1c82d3fc6258ff47793bbd -->
+			<h2>Update Intermediator</h2>
+			<p>Update a intermediator | Exemplo: api/v1/intermediator/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/intermediator/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/intermediator/update",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/intermediator/update</code>
+			</p>
+			<!-- END_d6c140324e1c82d3fc6258ff47793bbd -->
+			<!-- START_b5c245f28f69c725f41029c6de094522 -->
+			<h2>Remover Intermediator</h2>
+			<p>Remover a intermediator | Exemplo:
+				api/v1/intermediator/delete/$idInt</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/intermediator/delete/{idInt}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/intermediator/delete/{idInt}",
+				    "method": "DELETE",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/intermediator/delete/{idInt}</code>
+			</p>
+			<!-- END_b5c245f28f69c725f41029c6de094522 -->
+			<h1>IntermediatorMethod</h1>
+			<!-- START_2dd768a75a3556d300168dc137d6683e -->
+			<h2>Search Intermediator Method</h2>
+			<p>Search Intermediator Method | Exemplo:
+				api/v1/intermediatorMethod/$idImt</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/intermediatorMethod/{idImt}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/intermediatorMethod/{idImt}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/intermediatorMethod/{idImt}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/intermediatorMethod/{idImt}</code>
+			</p>
+			<!-- END_2dd768a75a3556d300168dc137d6683e -->
+			<!-- START_a392277ae45ce2596e44c03ab0186811 -->
+			<h2>Create Intermediator Method</h2>
+			<p>Create Intermediator Method | Exemplo:
+				api/v1/intermediatorMethod/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/intermediatorMethod/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/intermediatorMethod/create",
+				    "method": "POST",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/intermediatorMethod/create</code>
+			</p>
+			<!-- END_a392277ae45ce2596e44c03ab0186811 -->
+			<!-- START_56dcd6f94a6da16d7ae24b1bd0faa4e4 -->
+			<h2>Update Intermediator Method</h2>
+			<p>Update Intermediator Method | Exemplo:
+				api/v1/intermediatorMethod/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/intermediatorMethod/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/intermediatorMethod/update",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/intermediatorMethod/update</code>
+			</p>
+			<!-- END_56dcd6f94a6da16d7ae24b1bd0faa4e4 -->
+			<!-- START_3f8e20a0e452bfa33f4f2ecea62a80fb -->
+			<h2>Remove Intermediator Method</h2>
+			<p>Remove Intermediator Method | Exemplo:
+				api/v1/intermediatorMethod/delete/$idImt</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/intermediatorMethod/delete/{idImt}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/intermediatorMethod/delete/{idImt}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/intermediatorMethod/delete/{idImt}</code>
+			</p>
+			<!-- END_3f8e20a0e452bfa33f4f2ecea62a80fb -->
+			<h1>Invoice</h1>
+			<!-- START_b9cc5f70da9eb05fe28b329b3d5fb284 -->
+			<h2>Generate Invoice pelo IUGU</h2>
+			<p>Generate a invoice | Example: api/v1/invoice/create/$idPgm</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/invoice/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/invoice/create",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/invoice/create</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/invoice/create</code>
+			</p>
+			<!-- END_b9cc5f70da9eb05fe28b329b3d5fb284 -->
+			<!-- START_518d4d0c7adc74a37168d6fd38a0a74f -->
+			<h2>Search Invoice</h2>
+			<p>Search a invoice | Example: api/v1/invoice/list/</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/invoice/list" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/invoice/list",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/invoice/list</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/invoice/list</code>
+			</p>
+			<!-- END_518d4d0c7adc74a37168d6fd38a0a74f -->
+			<!-- START_5e58299571a105951a507b73fedbc9ca -->
+			<h2>Capturar Invoice</h2>
+			<p>Capturar a invoice | Example:
+				api/v1/invoice/capture/$idInvoice</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/invoice/capture/{idInvoice}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/invoice/capture/{idInvoice}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/invoice/capture/{idInvoice}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/invoice/capture/{idInvoice}</code>
+			</p>
+			<!-- END_5e58299571a105951a507b73fedbc9ca -->
+			<!-- START_f6ff3830ecf6ebed207ea7b9a3c7b16f -->
+			<h2>Repay Invoice</h2>
+			<p>Repay a invoice | Example: api/v1/invoice/refund/$idInvoice</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/invoice/refund/{idInvoice}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/invoice/refund/{idInvoice}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/invoice/refund/{idInvoice}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/invoice/refund/{idInvoice}</code>
+			</p>
+			<!-- END_f6ff3830ecf6ebed207ea7b9a3c7b16f -->
+			<!-- START_3968766f6547b99710d772a6ff4afd10 -->
+			<h2>Cancel Invoice</h2>
+			<p>Cancel a invoice | Example: api/v1/invoice/cancel/$idInvoice</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/invoice/cancel/{idInvoice}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/invoice/cancel/{idInvoice}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/invoice/cancel/{idInvoice}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/invoice/cancel/{idInvoice}</code>
+			</p>
+			<!-- END_3968766f6547b99710d772a6ff4afd10 -->
+			<!-- START_6593a1eaffad21ecf8b38ea39ff812bc -->
+			<h2>Generate Second Way Invoice</h2>
+			<p>Generate a second way invoice | Example:
+				api/v1/invoice/generateSecondWay/$idInvoice</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/invoice/generateSecondWay/{idInvoice}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/invoice/generateSecondWay/{idInvoice}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/invoice/generateSecondWay/{idInvoice}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/invoice/generateSecondWay/{idInvoice}</code>
+			</p>
+			<!-- END_6593a1eaffad21ecf8b38ea39ff812bc -->
+			<!-- START_94dc2ec1abac9af3b2615bc927282143 -->
+			<h2>Search Invoice</h2>
+			<p>Search a invoice | Example: api/v1/invoice/search/$idInvoice</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/invoice/search/{idInvoice}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/invoice/search/{idInvoice}",
+				    "method": "GET",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/invoice/search/{idInvoice}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/invoice/search/{idInvoice}</code>
+			</p>
+			<!-- END_94dc2ec1abac9af3b2615bc927282143 -->
+			<!-- START_73bfd1ac522677d80b5441e2a9a3fd05 -->
+			<h2>Send Email Invoice</h2>
+			<p>Send a email invoice | Example:
+				api/v1/invoice/sendEmail/$idInvoice/$to</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/invoice/sendEmail/{idInvoice}/{to}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/invoice/sendEmail/{idInvoice}/{to}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/invoice/sendEmail/{idInvoice}/{to}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/invoice/sendEmail/{idInvoice}/{to}</code>
+			</p>
+			<!-- END_73bfd1ac522677d80b5441e2a9a3fd05 -->
+			<h1>Item</h1>
+			<!-- START_6c668e0c76a37c8c533ce1cbd57f5be9 -->
+			<h2>Search Item</h2>
+			<p>Search Item | Exemplo: api/v1/item/$idOit</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/item/{idOit}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/item/{idOit}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/item/{idOit}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/item/{idOit}</code>
+			</p>
+			<!-- END_6c668e0c76a37c8c533ce1cbd57f5be9 -->
+			<!-- START_f581f5c26bb97a508fa71f985a5a1d55 -->
+			<h2>Create Item</h2>
+			<p>Create Item | Exemplo: api/v1/item/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/item/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/item/create",
+				    "method": "POST",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/item/create</code>
+			</p>
+			<!-- END_f581f5c26bb97a508fa71f985a5a1d55 -->
+			<!-- START_39ac5fc0c8de4965b3db9a05f2e0998e -->
+			<h2>Update Item</h2>
+			<p>Update Item | Exemplo: api/v1/item/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/item/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/item/update",
+				    "method": "POST",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/item/update</code>
+			</p>
+			<!-- END_39ac5fc0c8de4965b3db9a05f2e0998e -->
+			<!-- START_eb629f70320f5d264b78f923d4071aee -->
+			<h2>Remover Item</h2>
+			<p>Remover Item | Exemplo: api/v1/item/delete/$idOit</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/item/delete/{idOit}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/item/delete/{idOit}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/item/delete/{idOit}</code>
+			</p>
+			<!-- END_eb629f70320f5d264b78f923d4071aee -->
+			<h1>Order</h1>
+			<!-- START_05fff884b6129629b310db52ef026ec1 -->
+			<h2>Search Order</h2>
+			<p>Search a order | Exemplo: api/v1/orders/1</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/order/{idOrd}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/order/{idOrd}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/order/{idOrd}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/order/{idOrd}</code>
+			</p>
+			<!-- END_05fff884b6129629b310db52ef026ec1 -->
+			<!-- START_262c865f050dbacf61b46826616ffa9c -->
+			<h2>Create Order</h2>
+			<p>Create a order | Exemplo: api/v1/itens/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/order/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/order/create",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/order/create</code>
+			</p>
+			<!-- END_262c865f050dbacf61b46826616ffa9c -->
+			<!-- START_a60ba0cfb8a0105aabf31c0df624d71d -->
+			<h2>Update Order</h2>
+			<p>Update a Order | Exemplo: api/v1/orders/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/order/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+				var settings = {
+				    "async": true,
+				    "crossDomain": true,
+				    "url": "http://localhost/api/v1/order/update",
+				    "method": "POST",
+				    "headers": {
+				        "accept": "application/json"
+				    }
+				}
+				
+				$.ajax(settings).done(function (response) {
+				    console.log(response);
+				});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/order/update</code>
+			</p>
+			<!-- END_a60ba0cfb8a0105aabf31c0df624d71d -->
+			<!-- START_9d6dfa5f3a7712313bd8f2544294b7dc -->
+			<h2>Remove Order</h2>
+			<p>Remove Order | Exemplo: api/v1/orders/delete/1</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/order/delete/{idOrd}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/order/delete/{idOrd}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/order/delete/{idOrd}</code>
+			</p>
+			<!-- END_9d6dfa5f3a7712313bd8f2544294b7dc -->
+			<h1>Payment</h1>
+			<!-- START_129beed18021e943cc0307e09faa9589 -->
+			<h2>Search Payment</h2>
+			<p>Search Payment | Example: api/v1/payment/$idPgm</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/payment/{idPgm}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/payment/{idPgm}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/payment/{idPgm}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/payment/{idPgm}</code>
+			</p>
+			<!-- END_129beed18021e943cc0307e09faa9589 -->
+			<!-- START_79e940e840c2f261662c5de93a3d5326 -->
+			<h2>Create Payment</h2>
+			<p>Create Payment | Example: api/v1/payment/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/payment/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/payment/create",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/payment/create</code>
+			</p>
+			<!-- END_79e940e840c2f261662c5de93a3d5326 -->
+			<!-- START_d1dfbece2581639fa570bb1710bd46c9 -->
+			<h2>Update Payment</h2>
+			<p>Update Payment | Example: api/v1/payment/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/payment/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/payment/update",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/payment/update</code>
+			</p>
+			<!-- END_d1dfbece2581639fa570bb1710bd46c9 -->
+			<!-- START_bafe42541ca9860adceda3b971d73fd1 -->
+			<h2>Remove Payment</h2>
+			<p>Remove Payment | Example: api/v1/payment/delete/$idPrc</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/payment/delete/{idRcb}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/payment/delete/{idRcb}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/payment/delete/{idRcb}</code>
+			</p>
+			<!-- END_bafe42541ca9860adceda3b971d73fd1 -->
+			<!-- START_bba748ae64b505774962ad9ee23f64b2 -->
+			<h2>Generate Pay per Ticket</h2>
+			<p>Generate a ticket | Example: api/v1/payment/ticket/$idPgm</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/payment/ticket/{idPgm}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/payment/ticket/{idPgm}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/payment/ticket/{idPgm}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/payment/ticket/{idPgm}</code>
+			</p>
+			<!-- END_bba748ae64b505774962ad9ee23f64b2 -->
+			<!-- START_046d0c44ce1cf418d2cdc91e0bd1f8c9 -->
+			<h2>Generate payment by Card</h2>
+			<p>Generate a ticket | Example: api/v1/payment/card/$idPgm</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/payment/card/{idPgm}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/payment/card/{idPgm}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/payment/card/{idPgm}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/payment/card/{idPgm}</code>
+			</p>
+			<!-- END_046d0c44ce1cf418d2cdc91e0bd1f8c9 -->
+			<!-- START_5345f5fbe8001484dcb75f455aac7176 -->
+			<h2>Generate Pagament per ticket legal person</h2>
+			<p>Generate a pagament | Example:
+				api/v1/payment/ticket/legalPerson/$idPgm</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/payment/ticket/legalPerson/{idPgm}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/payment/ticket/legalPerson/{idPgm}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/payment/ticket/legalPerson/{idPgm}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/payment/ticket/legalPerson/{idPgm}</code>
+			</p>
+			<!-- END_5345f5fbe8001484dcb75f455aac7176 -->
+			<!-- START_c8687a96254255a8508e98bea6f2a313 -->
+			<h2>Set address per ticket legal person</h2>
+			<p>Set a address for ticket | Example:
+				api/v1/payment/ticket/setAddress/$idPgm/$idTransaction</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/payment/ticket/setTicketAddress/{idPgm}/{idTransaction}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/payment/ticket/setTicketAddress/{idPgm}/{idTransaction}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET
+				api/v1/payment/ticket/setTicketAddress/{idPgm}/{idTransaction}</code>
+			</p>
+			<p>
+				<code>HEAD
+					api/v1/payment/ticket/setTicketAddress/{idPgm}/{idTransaction}</code>
+			</p>
+			<!-- END_c8687a96254255a8508e98bea6f2a313 -->
+			<h1>Receivable</h1>
+			<!-- START_03ef1c65a7836b616aafb18ae8730d9c -->
+			<h2>Search Receivable</h2>
+			<p>Search Receivable | Example: api/v1/payment/$idRcb</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/receivable/{idRcb}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/receivable/{idRcb}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/receivable/{idRcb}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/receivable/{idRcb}</code>
+			</p>
+			<!-- END_03ef1c65a7836b616aafb18ae8730d9c -->
+			<!-- START_a0590eacccd44767bd8e28ba4e89628e -->
+			<h2>Create Receivable</h2>
+			<p>Create Receivable | Example: api/v1/receivable/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/receivable/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/receivable/create",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/receivable/create</code>
+			</p>
+			<!-- END_a0590eacccd44767bd8e28ba4e89628e -->
+			<!-- START_08724e3692b3123ae49a0258270ccf3b -->
+			<h2>Update Receivable</h2>
+			<p>Update Receivable | Example: api/v1/receivable/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/receivable/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/receivable/update",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/receivable/update</code>
+			</p>
+			<!-- END_08724e3692b3123ae49a0258270ccf3b -->
+			<!-- START_7758dce119cd7f62915a146715a56e1e -->
+			<h2>Remove Receivable</h2>
+			<p>Remove Receivable | Example: api/v1/receivable/delete/$idPrc</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/receivable/delete/{idRcb}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/receivable/delete/{idRcb}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/receivable/delete/{idRcb}</code>
+			</p>
+			<!-- END_7758dce119cd7f62915a146715a56e1e -->
+			<h1>Transaction</h1>
+			<!-- START_9fbdd347b65b46077f2f706df9b5d98b -->
+			<h2>Update Transaction GerenciaNet</h2>
+			<p>Update a transaction | Example: api/v1/transaction/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/transaction/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transaction/create",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/transaction/create</code>
+			</p>
+			<!-- END_9fbdd347b65b46077f2f706df9b5d98b -->
+			<!-- START_3802ac0326ba58d174117432372dad4f -->
+			<h2>Update Transaction GerenciaNet</h2>
+			<p>Update a transaction | Example: api/v1/transaction/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/transaction/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transaction/update",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/transaction/update</code>
+			</p>
+			<!-- END_3802ac0326ba58d174117432372dad4f -->
+			<!-- START_af03eb5e92a9a5cb5f2cf04cd0d0ca8a -->
+			<h2>Consult Notification Transaction GerenciaNet</h2>
+			<p>Consult a notification | Example:
+				api/v1/transaction/consult/$idTransaction</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/transaction/consult" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transaction/consult",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/transaction/consult</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/transaction/consult</code>
+			</p>
+			<!-- END_af03eb5e92a9a5cb5f2cf04cd0d0ca8a -->
+			<!-- START_3d0879aa623b290b55411dde0a56ce59 -->
+			<h2>Detail Transaction GerenciaNet</h2>
+			<p>Detail a transaction | Example:
+				api/v1/transaction/detail/$idTransaction</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/transaction/detail/{idTransaction}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transaction/detail/{idTransaction}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/transaction/detail/{idTransaction}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/transaction/detail/{idTransaction}</code>
+			</p>
+			<!-- END_3d0879aa623b290b55411dde0a56ce59 -->
+			<!-- START_feaeb5787fb88e07f4a042342c5808ec -->
+			<h2>Cancel Transaction GerenciaNet</h2>
+			<p>Cancel a transaction | Example:
+				api/v1/transaction/cancel/$idTransaction</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/transaction/cancel/{idTransaction}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transaction/cancel/{idTransaction}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/transaction/cancel/{idTransaction}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/transaction/cancel/{idTransaction}</code>
+			</p>
+			<!-- END_feaeb5787fb88e07f4a042342c5808ec -->
+			<h1>Transfer</h1>
+			<!-- START_e1d7ed8a93adb454e553488b2f887e4e -->
+			<h2>List transfer IUGU</h2>
+			<p>List a transfer | Example: api/v1/transfer/list/</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/transfer/list" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transfer/list",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/transfer/list</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/transfer/list</code>
+			</p>
+			<!-- END_e1d7ed8a93adb454e553488b2f887e4e -->
+			<!-- START_80dc877bd220c9ff51b59f265686c55a -->
+			<h2>List Bank Transfer IUGU</h2>
+			<p>List bank transfer | Example:
+				api/v1/transfer/listBankTransfers/</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/transfer/listBankTransfers" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transfer/listBankTransfers",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/transfer/listBankTransfers</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/transfer/listBankTransfers</code>
+			</p>
+			<!-- END_80dc877bd220c9ff51b59f265686c55a -->
+			<!-- START_9084bf82033fd700972154d051eb8680 -->
+			<h2>Search Bank Transfer IUGU</h2>
+			<p>Search a bank transfer | Example:
+				api/v1/transfer/searchBankTransfer/</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/transfer/searchBankTransfer" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transfer/searchBankTransfer",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/transfer/searchBankTransfer</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/transfer/searchBankTransfer</code>
+			</p>
+			<!-- END_9084bf82033fd700972154d051eb8680 -->
+			<!-- START_5b30cb4debeccebd82160740db97a5b8 -->
+			<h2>Generate Transfer IUGU</h2>
+			<p>Generate a transfer | Example:
+				api/v1/transfer/transfer/$idAccount/$value</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/transfer/transfer/{idAccount}/{value}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transfer/transfer/{idAccount}/{value}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/transfer/transfer/{idAccount}/{value}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/transfer/transfer/{idAccount}/{value}</code>
+			</p>
+			<!-- END_5b30cb4debeccebd82160740db97a5b8 -->
+			<!-- START_7f3a731657b77398859e7f821fbfb96f -->
+			<h2>Search transfer IUGU</h2>
+			<p>Search transfer | Example: api/v1/transfer/search/$idTransfer</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/transfer/search/{idTransfer}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/transfer/search/{idTransfer}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/transfer/search/{idTransfer}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/transfer/search/{idTransfer}</code>
+			</p>
+			<!-- END_7f3a731657b77398859e7f821fbfb96f -->
+			<h1>Wallet</h1>
+			<!-- START_26746381cf12fe3560fbd68b34160e21 -->
+			<h2>Search Wallet</h2>
+			<p>Search a wallet | Exemplo: api/v1/wallet/$idWal</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/wallet/{idWal}" \
+					-H "Accept: application/json"</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/wallet/{idWal}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/wallet/{idWal}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/wallet/{idWal}</code>
+			</p>
+			<!-- END_26746381cf12fe3560fbd68b34160e21 -->
+			<!-- START_5b171233e93edba36ff4bba81a0103f4 -->
+			<h2>Create Wallet</h2>
+			<p>Create a wallet | Exemplo: api/v1/wallet/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/wallet/create" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/wallet/create",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/wallet/create</code>
+			</p>
+			<!-- END_5b171233e93edba36ff4bba81a0103f4 -->
+			<!-- START_618b5c971bcf257219ab33c52174f8a2 -->
+			<h2>Update Wallet</h2>
+			<p>Update a wallet | Exemplo: api/v1/wallet/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/wallet/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/wallet/update",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/wallet/update</code>
+			</p>
+			<!-- END_618b5c971bcf257219ab33c52174f8a2 -->
+			<!-- START_85a94a6273359f94e94236ba67091070 -->
+			<h2>Delete Wallet</h2>
+			<p>Delete Wallet | Exemplo: api/v1/wallet/delete/$idWal</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/wallet/delete/{idWal}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/wallet/delete/{idWal}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/wallet/delete/{idWal}</code>
+			</p>
+			<!-- END_85a94a6273359f94e94236ba67091070 -->
+			<h1>Withdrawal</h1>
+			<!-- START_430b5f0d0723e55683a308295d10a353 -->
+			<h2>Search Withdrawal</h2>
+			<p>Search a withdrawal | Exemplo: api/v1/withdrawal/$idSaq</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/withdrawal/{idSaq}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/withdrawal/{idSaq}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+					{
+					  "dbt_order_id": "order_id",
+					  "dbt_value": "value",
+					  "dbt_value_quota": "value_quota",
+					  "value_fee": "value_fee",
+					  "dbt_due_at": "due_at",
+					  "dbt_accept_creditcard": "accept_creditcard",
+					  "dbt_accept_billet": "accept_billet"
+					}
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/withdrawal/{idSaq}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/withdrawal/{idSaq}</code>
+			</p>
+			<!-- END_430b5f0d0723e55683a308295d10a353 -->
+			<!-- START_d07528525e57fd85d8d202dbdcbe41fe -->
+			<h2>Withdraw of Withdrawal</h2>
+			<p>Withdraw of withdrawal | Exemplo:
+				api/v1/withdrawal/withdraw/$idSaq</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X GET "http://localhost/api/v1/withdrawal/withdraw/{idSaq}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/withdrawal/withdraw/{idSaq}",
+					    "method": "GET",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">null</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>GET api/v1/withdrawal/withdraw/{idSaq}</code>
+			</p>
+			<p>
+				<code>HEAD api/v1/withdrawal/withdraw/{idSaq}</code>
+			</p>
+			<!-- END_d07528525e57fd85d8d202dbdcbe41fe -->
+			<!-- START_4491a48953a3fff1da7d0d1d0208f7ca -->
+			<h2>Update Withdrawal</h2>
+			<p>Update a withdrawal | Exemplo: api/v1/withdrawal/update</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/withdrawal/update" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/withdrawal/update",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/withdrawal/update</code>
+			</p>
+			<!-- END_4491a48953a3fff1da7d0d1d0208f7ca -->
+			<!-- START_36c359174914f1de26235d95e7b96a67 -->
+			<h2>Create Withdrawal</h2>
+			<p>Create a withdrawal | Exemplo: api/v1/withdrawal/create</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X POST "http://localhost/api/v1/withdrawal/create" \
+					-H "Accept: application/json"</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/withdrawal/create",
+					    "method": "POST",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>POST api/v1/withdrawal/create</code>
+			</p>
+			<!-- END_36c359174914f1de26235d95e7b96a67 -->
+			<!-- START_87657f24a912fef4f3163e46a510b9f1 -->
+			<h2>Remover Withdrawal</h2>
+			<p>Remover a withdrawal | Exemplo:
+				api/v1/withdrawal/delete/$idSaq</p>
+			<blockquote>
+				<p>Example request:</p>
+			</blockquote>
+			<pre>
+				<code class="language-bash">
+					curl -X DELETE "http://localhost/api/v1/withdrawal/delete/{idSaq}" \
+					-H "Accept: application/json"
+				</code>
+			</pre>
+			<pre>
+				<code class="language-javascript">
+					var settings = {
+					    "async": true,
+					    "crossDomain": true,
+					    "url": "http://localhost/api/v1/withdrawal/delete/{idSaq}",
+					    "method": "DELETE",
+					    "headers": {
+					        "accept": "application/json"
+					    }
+					}
+					
+					$.ajax(settings).done(function (response) {
+					    console.log(response);
+					});
+				</code>
+			</pre>
+			<blockquote>
+				<p>Example response:</p>
+			</blockquote>
+			<pre>
+				<code class="language-json">
+				{ "response": "true || fasle" }
+				</code>
+			</pre>
+			<h3>HTTP Request</h3>
+			<p>
+				<code>DELETE api/v1/withdrawal/delete/{idSaq}</code>
+			</p>
+			<!-- END_87657f24a912fef4f3163e46a510b9f1 -->
+		</div>
+		<div class="dark-box">
+			<div class="lang-selector">
+				<a href="#" data-language-name="bash">bash</a> <a href="#"
+					data-language-name="javascript">javascript</a>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

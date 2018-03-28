@@ -62,12 +62,12 @@ class DebtController extends Controller {
 	}
 
 	/**
-	 * Remove Debt
+	 * Delete Debt
 	 *
-	 * Remove Debt | Exemplo: api/v1/debt/delete/$idDbt
+	 * Delete Debt | Exemplo: api/v1/debt/delete/$idDbt
 	 *
 	 * @param number $idDbt
-     * @return Response
+     * @return true |false
 	 */
 	public function delete($idDbt)
 	{
