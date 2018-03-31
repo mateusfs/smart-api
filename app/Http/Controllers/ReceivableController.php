@@ -21,6 +21,19 @@ class ReceivableController extends Controller {
 	 */
     public function index($idRcb) 
 	{
+        
+	    if(request('wallet')){
+	        return Receivable::where ( 'prc_carteira', '==', request('wallet'))->firstOrFail ();
+	    }
+	    
+	    if(request('value')){
+	        return Receivable::where ( 'prc_valor', '>=', request('value'))->firstOrFail ();
+	    }
+	    
+	    if(request('status')){
+	        return Receivable::where ( 'prc_status', '==', request('status'))->firstOrFail ();
+	    }
+	    
 		return Receivable::where ( 'rcb_id', $idRcb)->firstOrFail ();
 	}
 	

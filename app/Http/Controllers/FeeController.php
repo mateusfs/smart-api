@@ -21,6 +21,19 @@ class FeeController extends Controller {
 	 * @return Response
 	 */
 	public function index($idFee) {
+	    
+	    if(request('createdAt')){
+	        return Fee::where ( 'fee_created_at', '>=', request('createdAt'))->firstOrFail ();
+	    }
+	    
+	    if(request('value')){
+	        return Fee::where ( 'fee_value', '>=', request('value'))->firstOrFail ();
+	    }
+	    
+	    if(request('to')){
+	        return Fee::where ( 'fee_to', request('to'))->firstOrFail ();
+	    }
+	    
 		return Fee::where ( 'fee_id', $idFee)->firstOrFail ();
 	}
 

@@ -23,6 +23,18 @@ class WalletController extends Controller
      */
 	public function index($idWal)
 	{
+	    if(request('title')){
+	        return Wallet::where ( 'wal_title', '==', request('title'))->firstOrFail ();
+	    }
+	    
+	    if(request('key')){
+	        return Wallet::where ( 'wal_key', '==', request('key'))->firstOrFail ();
+	    }
+	    
+	    if(request('intermediary')){
+	        return Wallet::where ( 'wal_intermediary', '>=', request('intermediary'))->firstOrFail ();
+	    }
+	    
 	    return Wallet::where('wal_id', $idWal)->firstOrFail();
 	}
 	

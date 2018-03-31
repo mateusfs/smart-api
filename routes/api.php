@@ -27,7 +27,7 @@ Route::prefix('v1')->group(function () {
  		/**
  		 *  Debt
  		 */
- 	    Route::get('debt/{idDbt}', 'DebtController@index');
+ 	    Route::get('debt/{idDbt?}/{dueAt?}/{value?}/{acceptBillet?}', 'DebtController@index');
  	    Route::post('debt/create', 'DebtController@create');
  	    Route::post('debt/update', 'DebtController@update');
  	    Route::delete('debt/delete/{idDbt}', 'DebtController@delete');
@@ -35,7 +35,7 @@ Route::prefix('v1')->group(function () {
  	    /**
  	     *  Fee
  	     */
- 	    Route::get('fee/{idFee}', 'FeeController@index');
+ 	    Route::get('fee/{idFee?}/{createdAt?}/{value?}/{to?}', 'FeeController@index');
  	    Route::post('fee/create', 'FeeController@create');
  	    Route::post('fee/update', 'FeeController@update');
  	    Route::delete('fee/delete/{idFee}', 'FeeController@delete');
@@ -49,7 +49,7 @@ Route::prefix('v1')->group(function () {
  	    /**
  	     *  Intermediator
  	     */
- 	    Route::get('intermediator/{idInt}', 'IntermediatorController@index');
+ 	    Route::get('intermediator/{idInt?}/{title?}', 'IntermediatorController@index');
  	    Route::post('intermediator/create', 'IntermediatorController@create');
  	    Route::post('intermediator/update', 'IntermediatorController@update');
  	    Route::delete('intermediator/delete/{idInt}', 'IntermediatorController@delete');
@@ -57,7 +57,7 @@ Route::prefix('v1')->group(function () {
  	    /**
  	     *  IntermediatorMethod
  	     */
- 	    Route::get('intermediatorMethod/{idImt}', 'IntermediatorMethodController@index');
+ 	    Route::get('intermediatorMethod/{idImt?}/{intermediatorId?}/{title?}/{type?}/{variable?}', 'IntermediatorMethodController@index');
  	    Route::post('intermediatorMethod/create', 'IntermediatorMethodController@create');
  	    Route::post('intermediatorMethod/update', 'IntermediatorMethodController@update');
  	    Route::delete('intermediatorMethod/delete/{idImt}', 'IntermediatorMethodController@delete');
@@ -69,7 +69,7 @@ Route::prefix('v1')->group(function () {
  	    Route::get('invoice/list/', 'InvoiceController@list');
  	    Route::get('invoice/capture/{idInvoice}', 'InvoiceController@capture');
  	    Route::get('invoice/refund/{idInvoice}', 'InvoiceController@refund');
- 	    Route::get('invoice/cancel/{idInvoice}', 'InvoiceController@cancel');
+ 	    Route::put('invoice/cancel/{idInvoice}', 'InvoiceController@cancel');
  	    Route::get('invoice/generateSecondWay/{idInvoice}', 'InvoiceController@generateSecondWay');
  	    Route::get('invoice/search/{idInvoice}', 'InvoiceController@search');
  	    Route::get('invoice/sendEmail/{idInvoice}/{to}', 'InvoiceController@sendEmail');
@@ -77,7 +77,7 @@ Route::prefix('v1')->group(function () {
  	    /**
  	     *  Item
  	     */
-     	Route::get('item/{idOit}', 'ItemController@index');
+     	Route::get('item/{idOit?}/{order?}/{title?}/{type?}/{variable?}', 'ItemController@index');
      	Route::post('item/create', 'ItemController@create');
      	Route::post('item/update', 'ItemController@update');
      	Route::delete('item/delete/{idOit}', 'ItemController@delete');
@@ -85,7 +85,7 @@ Route::prefix('v1')->group(function () {
      	/**
      	 *  Order
      	 */
-     	Route::get('order/{idOrd}', 'OrderController@index');
+     	Route::get('order/{idOrd?}/{wallet?}/{status?}/{maturity?}', 'OrderController@index');
      	Route::post('order/create', 'OrderController@create');
      	Route::post('order/update', 'OrderController@update');
      	Route::delete('order/delete/{idOrd}', 'OrderController@delete');
@@ -93,7 +93,7 @@ Route::prefix('v1')->group(function () {
      	/**
      	 *  Payment
      	 */
-     	Route::get('payment/{idPgm}', 'PaymentController@index');
+     	Route::get('payment/{idPgm?}/{wallet?}/{order?}/{value?}/{paymentName?}', 'PaymentController@index');
      	Route::post('payment/create', 'PaymentController@create');
      	Route::post('payment/update', 'PaymentController@update');
      	Route::delete('payment/delete/{idRcb}', 'PaymentController@delete');
@@ -105,7 +105,7 @@ Route::prefix('v1')->group(function () {
      	/**
      	 *  Receivable
      	 */
-     	Route::get('receivable/{idRcb}', 'ReceivableController@index');
+     	Route::get('receivable/{idRcb?}/{wallet?}/{value?}/{status?}', 'ReceivableController@index');
      	Route::post('receivable/create', 'ReceivableController@create');
      	Route::post('receivable/update', 'ReceivableController@update');
      	Route::delete('receivable/delete/{idRcb}', 'ReceivableController@delete');
@@ -131,7 +131,7 @@ Route::prefix('v1')->group(function () {
 	 	/**
 	 	 *  Wallet
 	 	 */
-	 	Route::get('wallet/{idWal}', 'WalletController@index');
+	 	Route::get('wallet/{idWal?}/{title?}/{key?}/{intermediary?}', 'WalletController@index');
 	 	Route::post('wallet/create', 'WalletController@create');
 	 	Route::post('wallet/update', 'WalletController@update');
 	 	Route::delete('wallet/delete/{idWal}', 'WalletController@delete');
@@ -140,7 +140,7 @@ Route::prefix('v1')->group(function () {
 	 	/**
 	 	 *  Withdrawal
 	 	 */
-	 	Route::get('withdrawal/{idSaq}', 'WithdrawalController@index');
+	 	Route::get('withdrawal/{idSaq?}/{wallet?}/{value?}/{status?}', 'WithdrawalController@index');
 	 	Route::get('withdrawal/withdraw/{idSaq}', 'WithdrawalController@withdraw');
 	 	Route::post('withdrawal/update', 'WithdrawalController@update');
 	 	Route::post('withdrawal/create', 'WithdrawalController@create');

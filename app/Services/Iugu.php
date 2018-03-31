@@ -67,7 +67,7 @@ class Iugu extends Model
                 $items = $this->getItems($debt->pgm_pagador_razao, 1, $debt->pgm_valor);
 
                 if($formaDePamanto && $items){
-                    $result = self::cobrancaDireta($debts, '', $token, $formaDePamanto['id'], true, $idCustomer, $fatura['id'], $debt->pgm_pagador_email, $debt->pgm_parcelas, null, 5, $items);
+                    $result = self::directBilling($debts, '', $token, $formaDePamanto['id'], true, $idCustomer, $fatura['id'], $debt->pgm_pagador_email, $debt->pgm_parcelas, null, 5, $items);
                 }
 
                 return $result;

@@ -26,6 +26,18 @@ class WithdrawalController extends Controller
      */
     public function index($idSaq)
 	{
+	    if(request('wallet')){
+	        return Withdrawal::where ( 'saq_carteira', '==', request('wallet'))->firstOrFail ();
+	    }
+	    
+	    if(request('value')){
+	        return Withdrawal::where ( 'saq_valor', '==', request('value'))->firstOrFail ();
+	    }
+	    
+	    if(request('status')){
+	        return Withdrawal::where ( 'saq_status', '>=', request('status'))->firstOrFail ();
+	    }
+	    
 	    return Withdrawal::where('saq_id', $idSaq)->firstOrFail();
 	}
 	

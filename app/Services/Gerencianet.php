@@ -15,11 +15,18 @@ class Gerencianet extends Model
      *
      * Create a transaction by GerenciaNet
      */
-    public static function createTransaction($nome, $quantidade, $valor)
+    public static function createTransaction($name, $amount, $value)
     {
         try {
             $api = new Gerencianet(self::getOptions());
-            $charge = $api->createCharge([], self::getBody($nome, $quantidade, $valor));
+            
+            $body = [
+                'name' => $name, // nome do item, produto ou servi�o
+                'amount' => $amount, // quantidade
+                'value' => $value // valor (1000 = R$ 10,00)
+            ];
+            
+            $charge = $api->createCharge([], $body);
 
             return $charge;
         } catch (GerencianetException $e) {

@@ -23,6 +23,18 @@ class OrderController extends Controller
      */
     public function index($idOrd)
 	{
+	    if(request('wallet')){
+	        return Order::where ( 'ord_carteira', '==', request('wallet'))->firstOrFail ();
+	    }
+	    
+	    if(request('status')){
+	        return Order::where ( 'ord_status', '==', request('status'))->firstOrFail ();
+	    }
+	    
+	    if(request('maturity')){
+	        return Order::where ( 'ord_vencimento', '>=', request('maturity'))->firstOrFail ();
+	    }
+	    
 	    return Order::where('ord_id', $idOrd)->firstOrFail();
 	}
 	

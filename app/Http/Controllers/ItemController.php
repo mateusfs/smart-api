@@ -23,6 +23,22 @@ class ItemController extends Controller
      */
 	public function index($idOit)
 	{
+	    if(request('order')){
+	        return Item::where ( 'oit_pedido', '==', request('order'))->firstOrFail ();
+	    }
+	    
+	    if(request('title')){
+	        return Item::where ( 'oit_titulo', '==', request('title'))->firstOrFail ();
+	    }
+	    
+	    if(request('type')){
+	        return Item::where ( 'oit_tipo', '==', request('type'))->firstOrFail ();
+	    }
+	    
+	    if(request('value')){
+	        return Item::where ( 'oit_valor', '==', request('value'))->firstOrFail ();
+	    }
+	    
 	    return Item::where('oit_id', $idOit)->firstOrFail();
 	}
 	

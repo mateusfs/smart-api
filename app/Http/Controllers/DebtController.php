@@ -19,8 +19,21 @@ class DebtController extends Controller {
 	 * @param number $idDbt
 	 * @return Response
 	 */
-	public function index($idDbt) {
-		return Debt::where ( 'dbt_id', $idDbt)->firstOrFail ();
+	public function index() {
+	    
+	    if(request('dueAt')){
+	        return Debt::where ( 'dbt_due_at', '>=', request('dueAt'))->firstOrFail ();
+	    }
+	    
+	    if(request('value')){
+	        return Debt::where ( 'dbt_value', '>=', request('value'))->firstOrFail ();
+	    }
+	    
+	    if(request('acceptBillet')){
+	        return Debt::where ( 'dbt_accept_billet', '1')->firstOrFail ();
+	    }
+	    	    
+	    return Debt::where ( 'dbt_id', request('idDbt'))->firstOrFail ();
 	}
 
 	/**

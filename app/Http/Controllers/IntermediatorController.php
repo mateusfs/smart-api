@@ -23,6 +23,10 @@ class IntermediatorController extends Controller
      */
 	public function index($idInt)
 	{
+	    if(request('title')){
+	        return Intermediator::where ( 'int_title', '==', request('title'))->firstOrFail ();
+	    }
+	    
 		return Intermediator::where('int_id', $idInt)->firstOrFail();
 	}
 	
@@ -66,9 +70,9 @@ class IntermediatorController extends Controller
 	
 	
 	/**
-	 * Remover Intermediator
+	 * Delete Intermediator
 	 *
-	 * Remover a intermediator | Exemplo: api/v1/intermediator/delete/$idInt
+	 * Delete a intermediator | Exemplo: api/v1/intermediator/delete/$idInt
 	 *
      * @param number $idInt
 	 * @return Response

@@ -24,6 +24,22 @@ class PaymentController extends Controller {
 	 */
     public function index($idPgm) 
 	{
+	    if(request('wallet')){
+	        return Payment::where ( 'pgm_carteira', '==', request('wallet'))->firstOrFail ();
+	    }
+	    
+	    if(request('order')){
+	        return Payment::where ( 'pgm_pedido', '>=', request('order'))->firstOrFail ();
+	    }
+	    
+	    if(request('value')){
+	        return Payment::where ( 'pgm_valor', '==', request('value'))->firstOrFail ();
+	    }
+	    
+	    if(request('paymentName')){
+	        return Payment::where ( 'pgm_pagador_nome', '==', request('paymentName'))->firstOrFail ();
+	    }
+	    
 		return Payment::where ( 'pgm_id', $idPgm)->firstOrFail ();
 	}
 	
@@ -141,7 +157,7 @@ class PaymentController extends Controller {
 	    {
 	        if (Parameter::getIsGerenciaNet())
 	        {
-	        	$result = Gerencianet::issueOfCorporateTaxes($receivable, 5);
+	        	$result = Gerencianet::issueTicketLegalPerson($receivable);
 	        }
 	    }
 	    
@@ -171,12 +187,12 @@ class PaymentController extends Controller {
 	    {
 	        if (Parameter::getIsIugu())
 	        {
-	        	$result = Iugu::emetirCartao($receivable);
+	        	$result = Iugu::issueCard($receivable);
 	        }
 	        
 	        if (Parameter::getIsGerenciaNet())
 	        {
-	        	$result = Gerencianet::pagarCartao($receivable);
+	        	$result = Gerencianet::payCard($receivable);
 	        }
 	    }
 	    

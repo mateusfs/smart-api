@@ -23,13 +23,13 @@ class TransactionController extends Controller
     public function create(Request $resquest)
     {
         
-        $nome = $resquest->nome;
-        $quantidade = $resquest->quantidade;
-        $valor = $resquest->valor;
+        $name = $resquest->name;
+        $aumont = $resquest->aumont;
+        $value = $resquest->value;
         
-        if ($nome && $quantidade && $valor) {
+        if ($name && $aumont && $value) {
             if (Parameter::getIsGerenciaNet()) {
-                $result = Gerencianet::criarTransaction($nome, $quantidade, $valor);
+                $result = Gerencianet::createTransaction($name, $amount, $value);
             }
             
         }
@@ -39,7 +39,7 @@ class TransactionController extends Controller
             return $result;
         }
         
-        return response()->json(["error" => "Transaction Id is required"], 403);
+        return response()->json(["error" => "Transaction name, aumont and value is required"], 403);
     }
     
     

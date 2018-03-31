@@ -20,6 +20,24 @@ class IntermediatorMethodController extends Controller {
 	 * @return Response
 	 */
 	public function index($idImt) {
+	    
+	    
+	    if(request('intermediatorId')){
+	        return IntermediatorMethod::where ( 'imt_intermediator_id', '==', request('intermediatorId'))->firstOrFail ();
+	    }
+	    
+	    if(request('title')){
+	        return IntermediatorMethod::where ( 'imt_title', '==', request('title'))->firstOrFail ();
+	    }
+	    
+	    if(request('type')){
+	        return IntermediatorMethod::where ( 'imt_type', '==', request('type'))->firstOrFail ();
+	    }
+	    
+	    if(request('variable')){
+	        return IntermediatorMethod::where ( 'imt_variable', '==', request('type'))->firstOrFail ();
+	    }
+	    
 		return IntermediatorMethod::where ( 'imt_id', $idImt)->firstOrFail ();
 	}
 
